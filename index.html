@@ -7,301 +7,481 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fdf6f3;color:#2c2c2a;min-height:100vh}
-header{background:#fff;border-bottom:2px solid #e8d5cc;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-header img{height:90px;width:auto}
-header span{font-size:12px;color:#9a7a72;background:#fdf0eb;padding:4px 12px;border-radius:20px;border:1px solid #e8d5cc}
-.container{max-width:1150px;margin:0 auto;padding:24px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;color:#2c2c2a;min-height:100vh}
+header{background:#fff;border-bottom:1px solid #e0dfd8;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+header h1{font-size:18px;font-weight:600;color:#2c2c2a}
+header span{font-size:12px;color:#888780;background:#f1efe8;padding:4px 10px;border-radius:20px}
+.container{max-width:1100px;margin:0 auto;padding:24px}
 .tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap}
-.tab{font-size:12px;padding:6px 16px;border-radius:20px;border:1px solid #d4b5aa;background:#fff;color:#9a7a72;cursor:pointer;transition:all .15s;font-weight:500}
-.tab:hover{background:#fdf0eb;border-color:#c4957f}
-.tab.active{background:#C4786A;color:#fff;border-color:#C4786A}
+.tab{font-size:12px;padding:6px 16px;border-radius:8px;border:1px solid #d3d1c7;background:#fff;color:#5f5e5a;cursor:pointer;transition:all .15s;font-weight:500}
+.tab:hover{background:#f1efe8}
+.tab.active{background:#185FA5;color:#fff;border-color:#185FA5}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
-.kpi-grid-5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
-.kpi{background:#fff;border:1px solid #e8d5cc;border-radius:12px;padding:14px 16px}
-.kpi-label{font-size:11px;color:#b08880;margin-bottom:5px}
-.kpi-value{font-size:21px;font-weight:600;color:#2c2c2a;line-height:1.2}
-.kpi-sub{font-size:11px;color:#c4a89f;margin-top:3px}
-.kpi.accent{border-left:3px solid #C4786A}
+.kpi{background:#fff;border:1px solid #e0dfd8;border-radius:10px;padding:14px 16px}
+.kpi-label{font-size:11px;color:#888780;margin-bottom:5px}
+.kpi-value{font-size:22px;font-weight:600;color:#2c2c2a}
+.kpi-sub{font-size:11px;color:#b4b2a9;margin-top:3px}
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.25rem}
 .chart-grid.full{grid-template-columns:1fr}
-.box{background:#fff;border:1px solid #e8d5cc;border-radius:12px;padding:18px}
+.box{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:18px}
 .box-title{font-size:13px;font-weight:600;color:#2c2c2a;margin-bottom:3px}
-.box-sub{font-size:11px;color:#c4a89f;margin-bottom:12px}
-.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:11px;color:#7a6a65}
+.box-sub{font-size:11px;color:#b4b2a9;margin-bottom:12px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:11px;color:#5f5e5a}
 .leg{display:flex;align-items:center;gap:4px}
 .leg-sq{width:9px;height:9px;border-radius:2px;flex-shrink:0}
-.filter-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;background:#fff;border:1px solid #e8d5cc;border-radius:12px;padding:10px 16px}
-.filter-row label{font-size:12px;color:#9a7a72;font-weight:500}
-.filter-row select{font-size:12px;padding:5px 10px;border-radius:20px;border:1px solid #d4b5aa;background:#fdf6f3;color:#2c2c2a;cursor:pointer}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.25rem}
-.compare-box{background:#fff;border:1px solid #e8d5cc;border-radius:12px;padding:16px}
-.compare-title{font-size:12px;font-weight:600;color:#C4786A;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #fdf0eb}
-.compare-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #fdf6f3;font-size:12px}
-.compare-row:last-child{border-bottom:none}
-.compare-label{color:#9a7a72}
-.compare-val{font-weight:600;color:#2c2c2a}
-.compare-delta{font-size:11px;padding:2px 7px;border-radius:12px;margin-left:8px}
-.delta-up{background:#eaf3de;color:#27500A}
-.delta-dn{background:#fceae8;color:#922}
-.delta-eq{background:#fdf0eb;color:#9a7a72}
+.filter-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;background:#fff;border:1px solid #e0dfd8;border-radius:10px;padding:10px 14px}
+.filter-row label{font-size:12px;color:#5f5e5a;font-weight:500}
+.filter-row select{font-size:12px;padding:5px 10px;border-radius:8px;border:1px solid #d3d1c7;background:#f5f5f3;color:#2c2c2a;cursor:pointer}
 .pdv-table{width:100%;border-collapse:collapse;font-size:12px}
-.pdv-table th{text-align:left;padding:7px 10px;font-weight:600;color:#b08880;border-bottom:1px solid #e8d5cc;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
-.pdv-table td{padding:8px 10px;border-bottom:1px solid #fdf0eb;color:#2c2c2a}
+.pdv-table th{text-align:left;padding:7px 10px;font-weight:600;color:#888780;border-bottom:1px solid #e0dfd8;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.pdv-table td{padding:8px 10px;border-bottom:1px solid #f1efe8;color:#2c2c2a}
 .pdv-table tr:last-child td{border-bottom:none}
-.pdv-table tbody tr:hover{background:#fdf6f3}
+.pdv-table tbody tr:hover{background:#f9f9f7}
 .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
-.badge-sbc{background:#fde8e4;color:#8B3A2A}
-.badge-santana{background:#e8f0e4;color:#3A5A2A}
-.badge-mooca{background:#fdf0e0;color:#7A4A10}
-.badge-vila{background:#f5e8f0;color:#6A2A5A}
-footer{text-align:center;padding:20px;font-size:11px;color:#c4a89f;margin-top:4px;border-top:1px solid #e8d5cc;background:#fff;display:flex;align-items:center;justify-content:center;gap:10px}
-footer img{height:28px;opacity:.5}
-@media(max-width:760px){.kpi-grid,.kpi-grid-5{grid-template-columns:1fr 1fr}.chart-grid,.compare-grid{grid-template-columns:1fr}header{padding:12px 16px}.container{padding:16px}}
+.badge-sbc{background:#E6F1FB;color:#0C447C}
+.badge-santana{background:#EAF3DE;color:#27500A}
+.badge-mooca{background:#FAEEDA;color:#633806}
+.badge-vila{background:#FBEAF0;color:#72243E}
+footer{text-align:center;padding:24px;font-size:11px;color:#b4b2a9;margin-top:8px}
+@media(max-width:700px){.kpi-grid{grid-template-columns:1fr 1fr}.chart-grid{grid-template-columns:1fr}header{padding:12px 16px}.container{padding:16px}}
 </style>
 </head>
 <body>
 <header>
-  <img src="data:image/png;base64,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" alt="Allegrini" />
-  <span>Dashboard de Performance · Atualizado: Abr/26</span>
+  <h1>Allegrini — Dashboard de Performance</h1>
+  <span>Atualizado: Abr/26</span>
 </header>
 <div class="container">
-<div class="tabs">
-  <button class="tab active" onclick="setTab('pdv',this)">PDVs</button>
-  <button class="tab" onclick="setTab('campanha',this)">Campanha Geral</button>
-  <button class="tab" onclick="setTab('faturamento',this)">Faturamento</button>
-  <button class="tab" onclick="setTab('vendas',this)">Vendas</button>
-  <button class="tab" onclick="setTab('comparativo',this)">Comparativo de Períodos</button>
-  <button class="tab" onclick="setTab('geral',this)">Meta Ads Geral</button>
+  <div class="tabs">
+    <button class="tab active" onclick="setTab('pdv',this)">PDVs — Leads e Investimento</button>
+    <button class="tab" onclick="setTab('faturamento',this)">Faturamento</button>
+    <button class="tab" onclick="setTab('vendas',this)">Vendas</button>
+    <button class="tab" onclick="setTab('geral',this)">Geral — Meta Ads</button>
+  </div>
+
+  <!-- PDV -->
+  <div id="panel-pdv">
+    <div class="filter-row">
+      <label>Mês:</label>
+      <select id="pdv-mes" onchange="updatePDV()">
+        <option value="all">Todos os meses</option>
+        <option value="0">Jul/25</option><option value="1">Ago/25</option>
+        <option value="2">Set/25</option><option value="3">Out/25</option>
+        <option value="4">Nov/25</option><option value="5">Dez/25</option>
+        <option value="6">Jan/26</option><option value="7">Fev/26</option>
+        <option value="8">Mar/26</option>
+      </select>
+      <label>Métrica:</label>
+      <select id="pdv-metric" onchange="updatePDV()">
+        <option value="leads">Leads</option>
+        <option value="inv">Investimento</option>
+        <option value="fat">Faturamento</option>
+        <option value="vendas">Vendas</option>
+      </select>
+    </div>
+    <div class="kpi-grid" id="pdv-kpis"></div>
+    <div class="chart-grid">
+      <div class="box">
+        <p class="box-title">Leads por PDV</p>
+        <p class="box-sub" id="pdv-leads-sub">campanha Meta Ads por loja</p>
+        <div class="legend">
+          <span class="leg"><span class="leg-sq" style="background:#378ADD"></span>SBC</span>
+          <span class="leg"><span class="leg-sq" style="background:#639922"></span>Santana</span>
+          <span class="leg"><span class="leg-sq" style="background:#BA7517"></span>Mooca</span>
+          <span class="leg"><span class="leg-sq" style="background:#D4537E"></span>Vila Olímpia</span>
+        </div>
+        <div style="position:relative;height:240px"><canvas id="c-pdv-leads" role="img" aria-label="Leads por PDV"></canvas></div>
+      </div>
+      <div class="box">
+        <p class="box-title">Investimento por PDV (R$)</p>
+        <p class="box-sub" id="pdv-inv-sub">Meta Ads por loja</p>
+        <div class="legend">
+          <span class="leg"><span class="leg-sq" style="background:#378ADD"></span>SBC</span>
+          <span class="leg"><span class="leg-sq" style="background:#639922"></span>Santana</span>
+          <span class="leg"><span class="leg-sq" style="background:#BA7517"></span>Mooca</span>
+          <span class="leg"><span class="leg-sq" style="background:#D4537E"></span>Vila Olímpia</span>
+        </div>
+        <div style="position:relative;height:240px"><canvas id="c-pdv-inv" role="img" aria-label="Investimento por PDV"></canvas></div>
+      </div>
+    </div>
+    <div class="box">
+      <p class="box-title" style="margin-bottom:12px">Resumo por PDV — <span id="tabela-mes-label">todos os meses</span></p>
+      <table class="pdv-table" id="pdv-summary-table"></table>
+    </div>
+  </div>
+
+  <!-- FATURAMENTO -->
+  <div id="panel-faturamento" style="display:none">
+    <div class="filter-row">
+      <label>Período:</label>
+      <select id="fat-mes" onchange="updateFaturamento()">
+        <option value="all">Todos os meses</option>
+        <option value="0">Jul/25</option><option value="1">Ago/25</option>
+        <option value="2">Set/25</option><option value="3">Out/25</option>
+        <option value="4">Nov/25</option><option value="5">Dez/25</option>
+        <option value="6">Jan/26</option><option value="7">Fev/26</option>
+        <option value="8">Mar/26</option>
+      </select>
+    </div>
+    <div class="kpi-grid" id="fat-kpis"></div>
+    <div class="chart-grid full">
+      <div class="box">
+        <p class="box-title">Faturamento Kommo vs Planilha (R$)</p>
+        <p class="box-sub" id="fat-comp-sub">Jul/25 → Mar/26</p>
+        <div class="legend">
+          <span class="leg"><span class="leg-sq" style="background:#185FA5"></span>Kommo</span>
+          <span class="leg"><span class="leg-sq" style="background:#1D9E75"></span>Planilha</span>
+        </div>
+        <div style="position:relative;height:280px"><canvas id="c-fat-comp" role="img" aria-label="Faturamento Kommo vs Planilha"></canvas></div>
+      </div>
+    </div>
+    <div class="chart-grid">
+      <div class="box">
+        <p class="box-title">Faturamento Kommo por PDV</p>
+        <p class="box-sub" id="fat-pdv-sub">empilhado por loja</p>
+        <div class="legend">
+          <span class="leg"><span class="leg-sq" style="background:#378ADD"></span>SBC</span>
+          <span class="leg"><span class="leg-sq" style="background:#639922"></span>Santana</span>
+          <span class="leg"><span class="leg-sq" style="background:#BA7517"></span>Mooca</span>
+          <span class="leg"><span class="leg-sq" style="background:#D4537E"></span>Vila Olímpia</span>
+        </div>
+        <div style="position:relative;height:240px"><canvas id="c-fat-pdv" role="img" aria-label="Faturamento por PDV empilhado"></canvas></div>
+      </div>
+      <div class="box">
+        <p class="box-title">Participação % por PDV</p>
+        <p class="box-sub" id="fat-pie-sub">faturamento Kommo acumulado</p>
+        <div style="position:relative;height:240px"><canvas id="c-fat-pie" role="img" aria-label="Share faturamento por PDV"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VENDAS -->
+  <div id="panel-vendas" style="display:none">
+    <div class="filter-row">
+      <label>Período:</label>
+      <select id="vendas-mes" onchange="updateVendas()">
+        <option value="all">Todos os meses</option>
+        <option value="0">Jul/25</option><option value="1">Ago/25</option>
+        <option value="2">Set/25</option><option value="3">Out/25</option>
+        <option value="4">Nov/25</option><option value="5">Dez/25</option>
+        <option value="6">Jan/26</option><option value="7">Fev/26</option>
+        <option value="8">Mar/26</option>
+      </select>
+    </div>
+    <div class="kpi-grid" id="vendas-kpis"></div>
+    <div class="chart-grid full">
+      <div class="box">
+        <p class="box-title">Vendas Kommo vs Planilha</p>
+        <p class="box-sub" id="vendas-comp-sub">Jul/25 → Mar/26</p>
+        <div class="legend">
+          <span class="leg"><span class="leg-sq" style="background:#185FA5"></span>Vendas Kommo</span>
+          <span class="leg"><span class="leg-sq" style="background:#1D9E75"></span>Vendas Planilha</span>
+        </div>
+        <div style="position:relative;height:260px"><canvas id="c-vendas-comp" role="img" aria-label="Vendas Kommo vs Planilha"></canvas></div>
+      </div>
+    </div>
+    <div class="chart-grid">
+      <div class="box">
+        <p class="box-title">Vendas Kommo por PDV</p>
+        <p class="box-sub" id="vendas-pdv-sub">empilhado por loja</p>
+        <div class="legend">
+          <span class="leg"><span class="leg-sq" style="background:#378ADD"></span>SBC</span>
+          <span class="leg"><span class="leg-sq" style="background:#639922"></span>Santana</span>
+          <span class="leg"><span class="leg-sq" style="background:#BA7517"></span>Mooca</span>
+          <span class="leg"><span class="leg-sq" style="background:#D4537E"></span>Vila Olímpia</span>
+        </div>
+        <div style="position:relative;height:240px"><canvas id="c-vendas-pdv" role="img" aria-label="Vendas por PDV empilhadas"></canvas></div>
+      </div>
+      <div class="box">
+        <p class="box-title">Resumo por PDV</p>
+        <p class="box-sub" id="vendas-table-sub">vendas Kommo + ticket médio</p>
+        <table class="pdv-table" id="vendas-table"></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- GERAL -->
+  <div id="panel-geral" style="display:none">
+    <div class="filter-row">
+      <label>Período:</label>
+      <select id="geral-mes" onchange="updateGeral()">
+        <option value="all">Todos os meses (Jul/24 → Mar/26)</option>
+        <option value="12">A partir de Jul/25</option>
+        <option value="15">A partir de Out/25</option>
+        <option value="18">A partir de Jan/26</option>
+        <option value="g0">Jul/24</option><option value="g1">Ago/24</option>
+        <option value="g2">Set/24</option><option value="g3">Out/24</option>
+        <option value="g4">Nov/24</option><option value="g5">Dez/24</option>
+        <option value="g6">Jan/25</option><option value="g7">Fev/25</option>
+        <option value="g8">Mar/25</option><option value="g9">Abr/25</option>
+        <option value="g10">Mai/25</option><option value="g11">Jun/25</option>
+        <option value="g12">Jul/25</option><option value="g13">Ago/25</option>
+        <option value="g14">Set/25</option><option value="g15">Out/25</option>
+        <option value="g16">Nov/25</option><option value="g17">Dez/25</option>
+        <option value="g18">Jan/26</option><option value="g19">Fev/26</option>
+        <option value="g20">Mar/26</option>
+      </select>
+    </div>
+    <div class="kpi-grid" id="geral-kpis"></div>
+    <div class="chart-grid">
+      <div class="box">
+        <p class="box-title">Investimento Meta Ads (R$)</p>
+        <p class="box-sub" id="g-inv-sub">todos os meses</p>
+        <div style="position:relative;height:230px"><canvas id="c-g-inv" role="img" aria-label="Investimento geral"></canvas></div>
+      </div>
+      <div class="box">
+        <p class="box-title">Leads totais gerados</p>
+        <p class="box-sub" id="g-leads-sub">todos os meses</p>
+        <div style="position:relative;height:230px"><canvas id="c-g-leads" role="img" aria-label="Leads gerais"></canvas></div>
+      </div>
+    </div>
+    <div class="chart-grid">
+      <div class="box">
+        <p class="box-title">CPL — Custo por Lead (R$)</p>
+        <p class="box-sub" id="g-cpl-sub">todos os meses</p>
+        <div style="position:relative;height:230px"><canvas id="c-g-cpl" role="img" aria-label="CPL geral"></canvas></div>
+      </div>
+      <div class="box">
+        <p class="box-title">ROAS</p>
+        <p class="box-sub" id="g-roas-sub">Jul/25 → Mar/26</p>
+        <div style="position:relative;height:230px"><canvas id="c-g-roas" role="img" aria-label="ROAS geral"></canvas></div>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- PDV -->
-<div id="panel-pdv">
-  <div class="filter-row"><label>Mês:</label><select id="pdv-mes" onchange="updatePDV()"><option value="all">Todos os meses</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select></div>
-  <div class="kpi-grid" id="pdv-kpis"></div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">Leads por PDV</p><p class="box-sub">Meta Ads por loja</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>SBC</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Santana</span><span class="leg"><span class="leg-sq" style="background:#C4A882"></span>Mooca</span><span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Vila Olímpia</span></div><div style="position:relative;height:240px"><canvas id="c-pdv-leads" role="img" aria-label="Leads por PDV"></canvas></div></div>
-    <div class="box"><p class="box-title">Investimento por PDV (R$)</p><p class="box-sub">Meta Ads por loja</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>SBC</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Santana</span><span class="leg"><span class="leg-sq" style="background:#C4A882"></span>Mooca</span><span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Vila Olímpia</span></div><div style="position:relative;height:240px"><canvas id="c-pdv-inv" role="img" aria-label="Investimento por PDV"></canvas></div></div>
-  </div>
-  <div class="box"><p class="box-title" style="margin-bottom:12px">Resumo por PDV — <span id="tabela-mes-label">todos os meses</span></p><table class="pdv-table" id="pdv-summary-table"></table></div>
-</div>
-<!-- CAMPANHA GERAL -->
-<div id="panel-campanha" style="display:none">
-  <div class="filter-row"><label>Mês:</label><select id="cg-mes" onchange="updateCampanha()"><option value="all">Todos os meses</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select></div>
-  <div class="kpi-grid-5" id="cg-kpis"></div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">Investimento — Geral vs PDVs (R$)</p><p class="box-sub">comparativo por mês</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>Campanha Geral</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>PDVs</span></div><div style="position:relative;height:250px"><canvas id="c-cg-inv" role="img" aria-label="Investimento geral vs PDVs"></canvas></div></div>
-    <div class="box"><p class="box-title">Leads — Geral vs PDVs</p><p class="box-sub">comparativo por mês</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>Campanha Geral</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>PDVs</span></div><div style="position:relative;height:250px"><canvas id="c-cg-leads" role="img" aria-label="Leads geral vs PDVs"></canvas></div></div>
-  </div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">CPL — Campanha Geral (R$)</p><p class="box-sub">custo por lead</p><div style="position:relative;height:220px"><canvas id="c-cg-cpl" role="img" aria-label="CPL campanha geral"></canvas></div></div>
-    <div class="box"><p class="box-title">Participação do investimento (%)</p><p class="box-sub">campanha geral vs PDVs</p><div style="position:relative;height:220px"><canvas id="c-cg-pie" role="img" aria-label="Share investimento"></canvas></div></div>
-  </div>
-</div>
-<!-- FATURAMENTO -->
-<div id="panel-faturamento" style="display:none">
-  <div class="filter-row"><label>Mês:</label><select id="fat-mes" onchange="updateFaturamento()"><option value="all">Todos os meses</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select></div>
-  <div class="kpi-grid" id="fat-kpis"></div>
-  <div class="chart-grid full"><div class="box"><p class="box-title">Faturamento Kommo vs Planilha (R$)</p><p class="box-sub" id="fat-comp-sub">Jul/25 → Mar/26</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>Kommo</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Planilha</span></div><div style="position:relative;height:280px"><canvas id="c-fat-comp" role="img" aria-label="Faturamento Kommo vs Planilha"></canvas></div></div></div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">Faturamento Kommo por PDV</p><p class="box-sub" id="fat-pdv-sub">empilhado por loja</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>SBC</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Santana</span><span class="leg"><span class="leg-sq" style="background:#C4A882"></span>Mooca</span><span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Vila Olímpia</span></div><div style="position:relative;height:240px"><canvas id="c-fat-pdv" role="img" aria-label="Faturamento por PDV"></canvas></div></div>
-    <div class="box"><p class="box-title">Participação % por PDV</p><p class="box-sub" id="fat-pie-sub">faturamento Kommo</p><div style="position:relative;height:240px"><canvas id="c-fat-pie" role="img" aria-label="Share faturamento"></canvas></div></div>
-  </div>
-</div>
-<!-- VENDAS -->
-<div id="panel-vendas" style="display:none">
-  <div class="filter-row"><label>Mês:</label><select id="vendas-mes" onchange="updateVendas()"><option value="all">Todos os meses</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select></div>
-  <div class="kpi-grid" id="vendas-kpis"></div>
-  <div class="chart-grid full"><div class="box"><p class="box-title">Vendas Kommo vs Planilha</p><p class="box-sub" id="vendas-comp-sub">Jul/25 → Mar/26</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>Vendas Kommo</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Vendas Planilha</span></div><div style="position:relative;height:260px"><canvas id="c-vendas-comp" role="img" aria-label="Vendas Kommo vs Planilha"></canvas></div></div></div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">Vendas Kommo por PDV</p><p class="box-sub" id="vendas-pdv-sub">empilhado por loja</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>SBC</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Santana</span><span class="leg"><span class="leg-sq" style="background:#C4A882"></span>Mooca</span><span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Vila Olímpia</span></div><div style="position:relative;height:240px"><canvas id="c-vendas-pdv" role="img" aria-label="Vendas por PDV"></canvas></div></div>
-    <div class="box"><p class="box-title">Resumo por PDV</p><p class="box-sub">vendas Kommo + ticket médio</p><table class="pdv-table" id="vendas-table"></table></div>
-  </div>
-</div>
-<!-- COMPARATIVO -->
-<div id="panel-comparativo" style="display:none">
-  <div class="filter-row"><label>Período A:</label><select id="cmp-a" onchange="updateComparativo()"><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option></select><label>vs Período B:</label><select id="cmp-b" onchange="updateComparativo()"><option value="5">Dez/25</option><option value="4">Nov/25</option><option value="3">Out/25</option><option value="7">Fev/26</option><option value="6">Jan/26</option><option value="8">Mar/26</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option></select></div>
-  <div class="kpi-grid" id="cmp-kpis"></div>
-  <div class="compare-grid"><div class="compare-box"><p class="compare-title" id="cmp-title-a">Período A</p><div id="cmp-detail-a"></div></div><div class="compare-box"><p class="compare-title" id="cmp-title-b">Período B</p><div id="cmp-detail-b"></div></div></div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">Leads — A vs B por PDV</p><p class="box-sub" id="cmp-leads-sub">comparativo</p><div style="position:relative;height:240px"><canvas id="c-cmp-leads" role="img" aria-label="Leads comparativo"></canvas></div></div>
-    <div class="box"><p class="box-title">Investimento — A vs B (R$)</p><p class="box-sub" id="cmp-inv-sub">comparativo</p><div style="position:relative;height:240px"><canvas id="c-cmp-inv" role="img" aria-label="Investimento comparativo"></canvas></div></div>
-  </div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">Faturamento Kommo — A vs B</p><p class="box-sub">por PDV</p><div style="position:relative;height:220px"><canvas id="c-cmp-fat" role="img" aria-label="Faturamento comparativo"></canvas></div></div>
-    <div class="box"><p class="box-title">Vendas Kommo — A vs B</p><p class="box-sub">por PDV</p><div style="position:relative;height:220px"><canvas id="c-cmp-vendas" role="img" aria-label="Vendas comparativo"></canvas></div></div>
-  </div>
-</div>
-<!-- GERAL -->
-<div id="panel-geral" style="display:none">
-  <div class="filter-row"><label>Período:</label><select id="geral-mes" onchange="updateGeral()"><option value="all">Todos (Jul/24 → Mar/26)</option><option value="12">A partir de Jul/25</option><option value="15">A partir de Out/25</option><option value="18">A partir de Jan/26</option><option value="g0">Jul/24</option><option value="g1">Ago/24</option><option value="g2">Set/24</option><option value="g3">Out/24</option><option value="g4">Nov/24</option><option value="g5">Dez/24</option><option value="g6">Jan/25</option><option value="g7">Fev/25</option><option value="g8">Mar/25</option><option value="g9">Abr/25</option><option value="g10">Mai/25</option><option value="g11">Jun/25</option><option value="g12">Jul/25</option><option value="g13">Ago/25</option><option value="g14">Set/25</option><option value="g15">Out/25</option><option value="g16">Nov/25</option><option value="g17">Dez/25</option><option value="g18">Jan/26</option><option value="g19">Fev/26</option><option value="g20">Mar/26</option></select></div>
-  <div class="kpi-grid" id="geral-kpis"></div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">Investimento Meta Ads (R$)</p><p class="box-sub" id="g-inv-sub">total por mês</p><div style="position:relative;height:230px"><canvas id="c-g-inv" role="img" aria-label="Investimento geral"></canvas></div></div>
-    <div class="box"><p class="box-title">Leads totais gerados</p><p class="box-sub" id="g-leads-sub">total por mês</p><div style="position:relative;height:230px"><canvas id="c-g-leads" role="img" aria-label="Leads gerais"></canvas></div></div>
-  </div>
-  <div class="chart-grid">
-    <div class="box"><p class="box-title">CPL — Custo por Lead (R$)</p><p class="box-sub" id="g-cpl-sub">por mês</p><div style="position:relative;height:230px"><canvas id="c-g-cpl" role="img" aria-label="CPL geral"></canvas></div></div>
-    <div class="box"><p class="box-title">ROAS</p><p class="box-sub" id="g-roas-sub">Jul/25 em diante</p><div style="position:relative;height:230px"><canvas id="c-g-roas" role="img" aria-label="ROAS geral"></canvas></div></div>
-  </div>
-</div>
-</div>
-<footer><img src="data:image/png;base64,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" alt="Allegrini" /> Dashboard de Performance · Meta Ads + Kommo CRM</footer>
+<footer>Allegrini Dashboard · Dados: Meta Ads + Kommo CRM · Gerado com Claude (Anthropic)</footer>
+
 <script>
-const gc="rgba(0,0,0,0.06)",tc="#b08880";
-const MESES=["Jul/25","Ago/25","Set/25","Out/25","Nov/25","Dez/25","Jan/26","Fev/26","Mar/26"];
-const COLORS={SBC:"#C4786A",Santana:"#7A9E7E",Mooca:"#C4A882",Vila:"#9E7A9E"};
+const gc='rgba(0,0,0,0.07)', tc='#888780';
+
+const pdvMeses=['Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
 const PDV={
-  SBC:{inv:[2051.75,2140.71,1006.92,1437,1659,1516,1153.91,1342.44,1572.24],leads:[112,61,26,134,68,147,98,36,52],fat:[58593,13564,23542,14730,32597,34355,8957,25485,34258],vendas:[10,5,6,5,15,9,2,8,11]},
-  Santana:{inv:[1998.91,1761.69,131.87,1445.42,1478,1530.41,1208.94,1343.12,1452.9],leads:[23,20,1,54,26,81,41,21,24],fat:[58636,53492,7957,35313,24122,42988,7409,32638,28796],vendas:[12,20,4,8,6,9,4,6,8]},
-  Mooca:{inv:[1981.47,2207.6,730.18,1634.81,1828,1534.61,1144,1343.12,1329.12],leads:[103,134,16,152,105,126,117,43,31],fat:[36035,9113,38513,69373,28355,88844,15222,55225,44050],vendas:[5,6,8,17,2,23,6,15,12]},
-  Vila:{inv:[2024,2164.32,282.02,1428,1672,1532.82,1217,1049.52,1511.09],leads:[70,45,2,94,49,124,90,14,37],fat:[25768,2487,25776,14581,8345,9147,9147,46223,32037],vendas:[7,1,8,3,1,3,3,10,5]}
+  SBC:    {inv:[2051.75,2140.71,1006.92,1437,1659,1516,1153.91,1342.44,1572.24],leads:[112,61,26,134,68,147,98,36,52],fat:[58593,13564,23542,14730,32597,34355,8957,25485,34258],vendas:[10,5,6,5,15,9,2,8,11],color:'#378ADD'},
+  Santana:{inv:[1998.91,1761.69,131.87,1445.42,1478,1530.41,1208.94,1343.12,1452.9],leads:[23,20,1,54,26,81,41,21,24],fat:[58636,53492,7957,35313,24122,42988,7409,32638,28796],vendas:[12,20,4,8,6,9,4,6,8],color:'#639922'},
+  Mooca:  {inv:[1981.47,2207.6,730.18,1634.81,1828,1534.61,1144,1343.12,1329.12],leads:[103,134,16,152,105,126,117,43,31],fat:[36035,9113,38513,69373,28355,88844,15222,55225,44050],vendas:[5,6,8,17,2,23,6,15,12],color:'#BA7517'},
+  Vila:   {inv:[2024,2164.32,282.02,1428,1672,1532.82,1217,1049.52,1511.09],leads:[70,45,2,94,49,124,90,14,37],fat:[25768,2487,25776,14581,8345,9147,9147,46223,32037],vendas:[7,1,8,3,1,3,3,10,5],color:'#D4537E'}
 };
-const PDVKEYS=["SBC","Santana","Mooca","Vila"];
-const BADGES={SBC:"badge-sbc",Santana:"badge-santana",Mooca:"badge-mooca",Vila:"badge-vila"};
-const PDVLABELS={SBC:"SBC",Santana:"Santana",Mooca:"Mooca",Vila:"Vila Olímpia"};
-const CG={inv:[2051.75,2140.71,1006.92,6018.52,5200,6277,2513,4592.83,3415.27],leads:[112,61,26,845,474,1087,201,231,235]};
-const fatPlanMeses=["Fev/25","Mar/25","Abr/25","Mai/25","Jun/25","Jul/25","Out/25","Nov/25","Dez/25","Jan/26","Fev/26","Mar/26"];
+
+const fatPlanMeses=['Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
 const fatPlanValores=[289103.59,310392.86,272496.82,347055.19,418313.99,582317.05,991238.62,1013833.58,469300.25,1052255.12,972762.51,887423.42];
-const vendasPlanMeses=["Out/25","Nov/25","Dez/25","Jan/26","Fev/26","Mar/26"];
+const vendasPlanMeses=['Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
 const vendasPlanValores=[281,310,159,290,259,244];
-const geralMeses=["Jul/24","Ago/24","Set/24","Out/24","Nov/24","Dez/24","Jan/25","Fev/25","Mar/25","Abr/25","Mai/25","Jun/25","Jul/25","Ago/25","Set/25","Out/25","Nov/25","Dez/25","Jan/26","Fev/26","Mar/26"];
+
+const geralMeses=['Jul/24','Ago/24','Set/24','Out/24','Nov/24','Dez/24','Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
 const geralInv=[6316.76,7222.55,6817.90,6459.55,5817.07,3043.09,4119.33,5844.66,7890.04,6800.40,14484.05,15196.75,15723.73,17459.88,9851.19,14033.29,14947.68,14452.44,10293.69,11863.82,11932.27];
 const geralLeads=[369,338,374,867,824,219,230,379,686,509,506,432,997,428,412,1285,735,1577,563,355,382];
 const geralCPL=[17.12,21.37,18.23,7.45,7.06,13.90,17.91,15.42,11.50,13.36,28.62,35.18,15.77,40.79,23.91,10.92,20.34,9.16,18.28,33.42,31.24];
 const geralROAS=[null,null,null,null,null,null,null,null,null,null,null,null,11.39,4.50,9.72,9.55,6.25,12.13,3.96,13.45,11.66];
+
 const charts={};
 function mk(id,type,labels,datasets,opts={}){
   if(charts[id])charts[id].destroy();
-  const scales=type==="pie"||type==="doughnut"?{}:{x:{ticks:{color:tc,font:{size:10},maxRotation:45,autoSkip:false},grid:{color:gc}},y:{ticks:{color:tc,font:{size:10},callback:opts.yfmt||(v=>v)},grid:{color:gc}}};
-  charts[id]=new Chart(document.getElementById(id),{type,data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:opts.tooltip||{}},scales,...(opts.extra||{})}});
+  const scales=type==='pie'||type==='doughnut'?{}:{
+    x:{ticks:{color:tc,font:{size:10},maxRotation:45,autoSkip:false},grid:{color:gc}},
+    y:{ticks:{color:tc,font:{size:10},callback:opts.yfmt||(v=>v)},grid:{color:gc}}
+  };
+  charts[id]=new Chart(document.getElementById(id),{
+    type,data:{labels,datasets},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:opts.tooltip||{}},scales,...(opts.extra||{})}
+  });
 }
-const fmtBRL=v=>v==null?"-":"R$ "+Math.round(v).toLocaleString("pt-BR");
-const fmtN=v=>v==null?"-":Math.round(v).toLocaleString("pt-BR");
-const fmtK=v=>{if(!v)return"R$ 0";return v>=1000000?"R$"+(v/1000000).toFixed(2)+"M":"R$"+(v/1000).toFixed(0)+"k"};
-const pdvTotal=(key,i)=>PDVKEYS.reduce((s,k)=>s+PDV[k][key][i],0);
-const col=(k,a)=>COLORS[k]+(a||"");
+
+function fmtBRL(v){if(v==null)return'-';return'R$ '+Math.round(v).toLocaleString('pt-BR')}
+function fmtN(v){if(v==null)return'-';return Math.round(v).toLocaleString('pt-BR')}
+function fmtK(v){if(v==null)return'';return v>=1000000?'R$'+(v/1000000).toFixed(1)+'M':'R$'+(v/1000).toFixed(0)+'k'}
+
+// ========== PDV ==========
 function updatePDV(){
-  const mi=document.getElementById("pdv-mes").value,all=mi==="all";
-  const labels=all?MESES:[MESES[+mi]];
-  const get=(k,key)=>all?PDV[k][key]:[PDV[k][key][+mi]];
-  mk("c-pdv-leads","bar",labels,PDVKEYS.map(k=>({label:k,data:get(k,"leads"),backgroundColor:col(k,"99"),borderColor:col(k),borderWidth:1,borderRadius:4})),{yfmt:fmtN});
-  mk("c-pdv-inv","bar",labels,PDVKEYS.map(k=>({label:k,data:get(k,"inv"),backgroundColor:col(k,"99"),borderColor:col(k),borderWidth:1,borderRadius:4})),{yfmt:v=>"R$"+(v>=1000?(v/1000).toFixed(0)+"k":v)});
-  const totals=PDVKEYS.map(k=>all?{leads:PDV[k].leads.reduce((a,b)=>a+b,0),inv:PDV[k].inv.reduce((a,b)=>a+b,0),fat:PDV[k].fat.reduce((a,b)=>a+b,0),vendas:PDV[k].vendas.reduce((a,b)=>a+b,0)}:{leads:PDV[k].leads[+mi],inv:PDV[k].inv[+mi],fat:PDV[k].fat[+mi],vendas:PDV[k].vendas[+mi]});
+  const mi=document.getElementById('pdv-mes').value;
+  const all=mi==='all';
+  const labels=all?pdvMeses:[pdvMeses[parseInt(mi)]];
+  const get=arr=>all?arr:[arr[parseInt(mi)]];
+  mk('c-pdv-leads','bar',labels,[
+    {label:'SBC',data:get(PDV.SBC.leads),backgroundColor:'#378ADD99',borderColor:'#378ADD',borderWidth:1,borderRadius:3},
+    {label:'Santana',data:get(PDV.Santana.leads),backgroundColor:'#63992299',borderColor:'#639922',borderWidth:1,borderRadius:3},
+    {label:'Mooca',data:get(PDV.Mooca.leads),backgroundColor:'#BA751799',borderColor:'#BA7517',borderWidth:1,borderRadius:3},
+    {label:'Vila',data:get(PDV.Vila.leads),backgroundColor:'#D4537E99',borderColor:'#D4537E',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtN});
+  mk('c-pdv-inv','bar',labels,[
+    {label:'SBC',data:get(PDV.SBC.inv),backgroundColor:'#378ADD99',borderColor:'#378ADD',borderWidth:1,borderRadius:3},
+    {label:'Santana',data:get(PDV.Santana.inv),backgroundColor:'#63992299',borderColor:'#639922',borderWidth:1,borderRadius:3},
+    {label:'Mooca',data:get(PDV.Mooca.inv),backgroundColor:'#BA751799',borderColor:'#BA7517',borderWidth:1,borderRadius:3},
+    {label:'Vila',data:get(PDV.Vila.inv),backgroundColor:'#D4537E99',borderColor:'#D4537E',borderWidth:1,borderRadius:3},
+  ],{yfmt:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)});
+
+  const keys=['SBC','Santana','Mooca','Vila'];
+  const totals=keys.map(k=>{
+    const d=PDV[k];
+    if(all)return{leads:d.leads.reduce((a,b)=>a+b,0),inv:d.inv.reduce((a,b)=>a+b,0),fat:d.fat.reduce((a,b)=>a+b,0),vendas:d.vendas.reduce((a,b)=>a+b,0)};
+    const i=parseInt(mi);
+    return{leads:d.leads[i],inv:d.inv[i],fat:d.fat[i],vendas:d.vendas[i]};
+  });
   const tL=totals.reduce((a,b)=>a+b.leads,0),tI=totals.reduce((a,b)=>a+b.inv,0),tF=totals.reduce((a,b)=>a+b.fat,0),tV=totals.reduce((a,b)=>a+b.vendas,0);
-  const sub=all?"acumulado":"mês selecionado";
-  document.getElementById("pdv-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Leads PDV</div><div class="kpi-value">${fmtN(tL)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Investimento</div><div class="kpi-value">${fmtBRL(tI)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Fat. Kommo</div><div class="kpi-value">${fmtK(tF)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Vendas Kommo</div><div class="kpi-value">${fmtN(tV)}</div><div class="kpi-sub">${sub}</div></div>`;
-  document.getElementById("tabela-mes-label").textContent=all?"todos os meses":MESES[+mi];
-  const rows=PDVKEYS.map((k,i)=>{const d=totals[i];const cpl=d.inv>0&&d.leads>0?"R$"+(d.inv/d.leads).toFixed(0):"-";const roas=d.inv>0&&d.fat>0?(d.fat/d.inv).toFixed(1)+"x":"-";return`<tr><td><span class="badge ${BADGES[k]}">${PDVLABELS[k]}</span></td><td>${fmtN(d.leads)}</td><td>${fmtBRL(d.inv)}</td><td>${cpl}</td><td>${fmtN(d.vendas)}</td><td>${fmtBRL(d.fat)}</td><td>${roas}</td></tr>`;}).join("");
-  document.getElementById("pdv-summary-table").innerHTML=`<thead><tr><th>PDV</th><th>Leads</th><th>Investimento</th><th>CPL</th><th>Vendas</th><th>Fat. Kommo</th><th>ROAS</th></tr></thead><tbody>${rows}</tbody>`;
+  const sub=all?'acumulado':'mês selecionado';
+  document.getElementById('pdv-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Total leads PDV</div><div class="kpi-value">${fmtN(tL)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Total investido</div><div class="kpi-value">${fmtBRL(tI)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Faturamento Kommo</div><div class="kpi-value">${fmtBRL(tF)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Vendas Kommo</div><div class="kpi-value">${fmtN(tV)}</div><div class="kpi-sub">${sub}</div></div>`;
+  document.getElementById('tabela-mes-label').textContent=all?'todos os meses':pdvMeses[parseInt(mi)];
+  const badges={SBC:'badge-sbc',Santana:'badge-santana',Mooca:'badge-mooca',Vila:'badge-vila'};
+  const rows=keys.map((k,i)=>{
+    const d=totals[i];
+    const cpl=d.inv>0&&d.leads>0?'R$ '+(d.inv/d.leads).toFixed(0):'-';
+    const roas=d.inv>0&&d.fat>0?(d.fat/d.inv).toFixed(1)+'x':'-';
+    return`<tr><td><span class="badge ${badges[k]}">${k==='Vila'?'Vila Olímpia':k}</span></td><td>${fmtN(d.leads)}</td><td>${fmtBRL(d.inv)}</td><td>${cpl}</td><td>${fmtN(d.vendas)}</td><td>${fmtBRL(d.fat)}</td><td>${roas}</td></tr>`;
+  }).join('');
+  document.getElementById('pdv-summary-table').innerHTML=`<thead><tr><th>PDV</th><th>Leads</th><th>Investimento</th><th>CPL</th><th>Vendas</th><th>Fat. Kommo</th><th>ROAS</th></tr></thead><tbody>${rows}</tbody>`;
 }
-function updateCampanha(){
-  const mi=document.getElementById("cg-mes").value,all=mi==="all";
-  const labels=all?MESES:[MESES[+mi]];
-  const get=arr=>all?arr:[arr[+mi]];
-  const pdvLeads=MESES.map((_,i)=>pdvTotal("leads",i));
-  const pdvInv=MESES.map((_,i)=>pdvTotal("inv",i));
-  mk("c-cg-inv","bar",labels,[{label:"Geral",data:get(CG.inv),backgroundColor:"#C4786A99",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:"PDVs",data:get(pdvInv),backgroundColor:"#7A9E7E99",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:v=>"R$"+(v>=1000?(v/1000).toFixed(0)+"k":v)});
-  mk("c-cg-leads","bar",labels,[{label:"Geral",data:get(CG.leads),backgroundColor:"#C4786A99",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:"PDVs",data:get(pdvLeads),backgroundColor:"#7A9E7E99",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtN});
-  const cgCPL=CG.inv.map((inv,i)=>CG.leads[i]>0?+(inv/CG.leads[i]).toFixed(2):null);
-  mk("c-cg-cpl","line",MESES,[{data:cgCPL,borderColor:"#C4786A",backgroundColor:"#C4786A22",fill:true,tension:.4,pointRadius:3,pointBackgroundColor:"#C4786A"}],{yfmt:v=>v!=null?"R$"+v.toFixed(0):""});
-  const tCGi=all?CG.inv.reduce((a,b)=>a+b,0):CG.inv[+mi];
-  const tPi=all?pdvInv.reduce((a,b)=>a+b,0):pdvInv[+mi];
-  mk("c-cg-pie","doughnut",["Campanha Geral","PDVs"],[{data:[tCGi,tPi],backgroundColor:["#C4786A","#7A9E7E"],borderColor:"#fdf6f3",borderWidth:2}],{tooltip:{callbacks:{label:ctx=>{const t=tCGi+tPi;return ctx.label+": "+fmtBRL(ctx.raw)+" ("+((ctx.raw/t)*100).toFixed(1)+"%)"}}}});
-  const tCGl=all?CG.leads.reduce((a,b)=>a+b,0):CG.leads[+mi];
-  const tPl=all?pdvLeads.reduce((a,b)=>a+b,0):pdvLeads[+mi];
-  const cpl=tCGl>0?(tCGi/tCGl).toFixed(2):"-";
-  const sub=all?"acumulado":"mês selecionado";
-  document.getElementById("cg-kpis").innerHTML=`<div class="kpi accent"><div class="kpi-label">Investimento Geral</div><div class="kpi-value">${fmtBRL(tCGi)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi accent"><div class="kpi-label">Leads Campanha Geral</div><div class="kpi-value">${fmtN(tCGl)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi accent"><div class="kpi-label">CPL Campanha Geral</div><div class="kpi-value">R$ ${cpl}</div><div class="kpi-sub">custo por lead</div></div><div class="kpi"><div class="kpi-label">Investimento PDVs</div><div class="kpi-value">${fmtBRL(tPi)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Leads PDVs</div><div class="kpi-value">${fmtN(tPl)}</div><div class="kpi-sub">${sub}</div></div>`;
-}
+
+// ========== FATURAMENTO ==========
 function updateFaturamento(){
-  const mi=document.getElementById("fat-mes").value,all=mi==="all";
-  const labels=all?MESES:[MESES[+mi]];
-  const get=arr=>all?arr:[arr[+mi]];
-  const kommoTotal=MESES.map((_,i)=>PDVKEYS.reduce((s,k)=>s+PDV[k].fat[i],0));
-  const planAligned=MESES.map(m=>{const pi=fatPlanMeses.indexOf(m);return pi>=0?fatPlanValores[pi]:null;});
-  mk("c-fat-comp","bar",labels,[{label:"Kommo",data:get(kommoTotal),backgroundColor:"#C4786Abb",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:"Planilha",data:get(planAligned),backgroundColor:"#7A9E7Ebb",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtK});
-  mk("c-fat-pdv","bar",labels,PDVKEYS.map(k=>({label:k,data:get(PDV[k].fat),backgroundColor:col(k,"99"),borderColor:col(k),borderWidth:1,borderRadius:4,stack:"s"})),{extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10},callback:fmtK},grid:{color:gc}}}}});
-  const totPDV=PDVKEYS.map(k=>all?PDV[k].fat.reduce((a,b)=>a+b,0):PDV[k].fat[+mi]);
-  mk("c-fat-pie","doughnut",["SBC","Santana","Mooca","Vila Olímpia"],[{data:totPDV,backgroundColor:["#C4786A","#7A9E7E","#C4A882","#9E7A9E"],borderColor:"#fdf6f3",borderWidth:2}],{tooltip:{callbacks:{label:ctx=>{const t=totPDV.reduce((a,b)=>a+b,0);return ctx.label+": "+fmtBRL(ctx.raw)+" ("+((ctx.raw/t)*100).toFixed(1)+"%)"}}}});
-  const tK=all?kommoTotal.reduce((a,b)=>a+b,0):kommoTotal[+mi];
-  const tP=all?planAligned.filter(v=>v!=null).reduce((a,b)=>a+b,0):(planAligned[+mi]||0);
-  const sub=all?"Jul/25 → Mar/26":MESES[+mi];
-  document.getElementById("fat-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Fat. Kommo</div><div class="kpi-value">${fmtK(tK)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Fat. Planilha</div><div class="kpi-value">${tP>0?fmtK(tP):"-"}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Mooca</div><div class="kpi-sub">${fmtK(PDV.Mooca.fat.reduce((a,b)=>a+b,0))} acum.</div></div><div class="kpi"><div class="kpi-label">Melhor mês</div><div class="kpi-value">Jul/25</div><div class="kpi-sub">${fmtK(kommoTotal[0])}</div></div>`;
-  document.getElementById("fat-comp-sub").textContent=sub;
-  document.getElementById("fat-pdv-sub").textContent="empilhado — "+sub;
-  document.getElementById("fat-pie-sub").textContent="participação — "+sub;
+  const mi=document.getElementById('fat-mes').value;
+  const all=mi==='all';
+  const labels=all?pdvMeses:[pdvMeses[parseInt(mi)]];
+  const get=arr=>all?arr:[arr[parseInt(mi)]];
+
+  const kommoTotal=pdvMeses.map((_,i)=>PDV.SBC.fat[i]+PDV.Santana.fat[i]+PDV.Mooca.fat[i]+PDV.Vila.fat[i]);
+  const planAligned=pdvMeses.map(m=>{const pi=fatPlanMeses.indexOf(m);return pi>=0?fatPlanValores[pi]:null;});
+
+  const kommoFiltered=all?kommoTotal:[kommoTotal[parseInt(mi)]];
+  const planFiltered=all?planAligned:[planAligned[parseInt(mi)]];
+
+  mk('c-fat-comp','bar',labels,[
+    {label:'Kommo',data:kommoFiltered,backgroundColor:'#185FA5bb',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+    {label:'Planilha',data:planFiltered,backgroundColor:'#1D9E75bb',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtK});
+
+  mk('c-fat-pdv','bar',labels,[
+    {label:'SBC',data:get(PDV.SBC.fat),backgroundColor:'#378ADD99',borderColor:'#378ADD',borderWidth:1,borderRadius:3,stack:'s'},
+    {label:'Santana',data:get(PDV.Santana.fat),backgroundColor:'#63992299',borderColor:'#639922',borderWidth:1,borderRadius:3,stack:'s'},
+    {label:'Mooca',data:get(PDV.Mooca.fat),backgroundColor:'#BA751799',borderColor:'#BA7517',borderWidth:1,borderRadius:3,stack:'s'},
+    {label:'Vila',data:get(PDV.Vila.fat),backgroundColor:'#D4537E99',borderColor:'#D4537E',borderWidth:1,borderRadius:3,stack:'s'},
+  ],{extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10},callback:fmtK},grid:{color:gc}}}}});
+
+  const totPDV=['SBC','Santana','Mooca','Vila'].map(k=>{
+    if(all)return PDV[k].fat.reduce((a,b)=>a+b,0);
+    return PDV[k].fat[parseInt(mi)];
+  });
+  mk('c-fat-pie','doughnut',['SBC','Santana','Mooca','Vila Olímpia'],[{data:totPDV,backgroundColor:['#378ADD','#639922','#BA7517','#D4537E'],borderColor:'#fff',borderWidth:2}],
+    {tooltip:{callbacks:{label:ctx=>{const t=totPDV.reduce((a,b)=>a+b,0);return ctx.label+': '+fmtBRL(ctx.raw)+' ('+((ctx.raw/t)*100).toFixed(1)+'%)'}}}});
+
+  const tK=kommoFiltered.reduce((a,b)=>a+(b||0),0);
+  const tP=planFiltered.reduce((a,b)=>a+(b||0),0);
+  const sub=all?'Jul/25 → Mar/26':pdvMeses[parseInt(mi)];
+  document.getElementById('fat-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Fat. Kommo</div><div class="kpi-value">${fmtK(tK)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Fat. Planilha</div><div class="kpi-value">${fmtK(tP)||'-'}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Mooca</div><div class="kpi-sub">${fmtK(PDV.Mooca.fat.reduce((a,b)=>a+b,0))} acum.</div></div>
+    <div class="kpi"><div class="kpi-label">ROAS Kommo</div><div class="kpi-value">${tK>0&&geralInv.slice(12).reduce((a,b)=>a+b,0)>0?(tK/geralInv.slice(12).reduce((a,b)=>a+b,0)).toFixed(1)+'x':'-'}</div><div class="kpi-sub">fat/investimento</div></div>`;
+  const subLabel=all?'todos os meses':pdvMeses[parseInt(mi)];
+  document.getElementById('fat-comp-sub').textContent=subLabel;
+  document.getElementById('fat-pdv-sub').textContent='empilhado — '+subLabel;
+  document.getElementById('fat-pie-sub').textContent='participação — '+subLabel;
 }
+
+// ========== VENDAS ==========
 function updateVendas(){
-  const mi=document.getElementById("vendas-mes").value,all=mi==="all";
-  const labels=all?MESES:[MESES[+mi]];
-  const get=arr=>all?arr:[arr[+mi]];
-  const kommoTotal=MESES.map((_,i)=>PDVKEYS.reduce((s,k)=>s+PDV[k].vendas[i],0));
-  const planAligned=MESES.map(m=>{const pi=vendasPlanMeses.indexOf(m);return pi>=0?vendasPlanValores[pi]:null;});
-  mk("c-vendas-comp","bar",labels,[{label:"Kommo",data:get(kommoTotal),backgroundColor:"#C4786Abb",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:"Planilha",data:get(planAligned),backgroundColor:"#7A9E7Ebb",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtN});
-  mk("c-vendas-pdv","bar",labels,PDVKEYS.map(k=>({label:k,data:get(PDV[k].vendas),backgroundColor:col(k,"99"),borderColor:col(k),borderWidth:1,borderRadius:4,stack:"s"})),{extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}}}}});
-  const tK=all?kommoTotal.reduce((a,b)=>a+b,0):kommoTotal[+mi];
-  const tP=all?vendasPlanValores.reduce((a,b)=>a+b,0):(planAligned[+mi]||0);
-  const sub=all?"Jul/25 → Mar/26":MESES[+mi];
-  document.getElementById("vendas-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Vendas Kommo</div><div class="kpi-value">${fmtN(tK)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Vendas Planilha</div><div class="kpi-value">${tP>0?fmtN(tP):"-"}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Santana</div><div class="kpi-sub">${fmtN(PDV.Santana.vendas.reduce((a,b)=>a+b,0))} acum.</div></div><div class="kpi"><div class="kpi-label">Melhor mês</div><div class="kpi-value">Nov/25</div><div class="kpi-sub">${fmtN(kommoTotal[4])} vendas</div></div>`;
-  document.getElementById("vendas-comp-sub").textContent=sub;
-  document.getElementById("vendas-pdv-sub").textContent="empilhado — "+sub;
-  const rows=PDVKEYS.map(k=>{const tV=all?PDV[k].vendas.reduce((a,b)=>a+b,0):PDV[k].vendas[+mi];const tF=all?PDV[k].fat.reduce((a,b)=>a+b,0):PDV[k].fat[+mi];return`<tr><td><span class="badge ${BADGES[k]}">${PDVLABELS[k]}</span></td><td>${fmtN(tV)}</td><td>${fmtBRL(tF)}</td><td>${tV>0?fmtBRL(tF/tV):"-"}</td></tr>`;}).join("");
-  document.getElementById("vendas-table").innerHTML=`<thead><tr><th>PDV</th><th>Vendas</th><th>Fat. Kommo</th><th>Ticket Médio</th></tr></thead><tbody>${rows}</tbody>`;
+  const mi=document.getElementById('vendas-mes').value;
+  const all=mi==='all';
+  const labels=all?pdvMeses:[pdvMeses[parseInt(mi)]];
+  const get=arr=>all?arr:[arr[parseInt(mi)]];
+
+  const kommoTotal=pdvMeses.map((_,i)=>PDV.SBC.vendas[i]+PDV.Santana.vendas[i]+PDV.Mooca.vendas[i]+PDV.Vila.vendas[i]);
+  const planAligned=pdvMeses.map(m=>{const pi=vendasPlanMeses.indexOf(m);return pi>=0?vendasPlanValores[pi]:null;});
+  const kommoFiltered=all?kommoTotal:[kommoTotal[parseInt(mi)]];
+  const planFiltered=all?planAligned:[planAligned[parseInt(mi)]];
+
+  mk('c-vendas-comp','bar',labels,[
+    {label:'Kommo',data:kommoFiltered,backgroundColor:'#185FA5bb',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+    {label:'Planilha',data:planFiltered,backgroundColor:'#1D9E75bb',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtN});
+
+  mk('c-vendas-pdv','bar',labels,[
+    {label:'SBC',data:get(PDV.SBC.vendas),backgroundColor:'#378ADD99',borderColor:'#378ADD',borderWidth:1,borderRadius:3,stack:'s'},
+    {label:'Santana',data:get(PDV.Santana.vendas),backgroundColor:'#63992299',borderColor:'#639922',borderWidth:1,borderRadius:3,stack:'s'},
+    {label:'Mooca',data:get(PDV.Mooca.vendas),backgroundColor:'#BA751799',borderColor:'#BA7517',borderWidth:1,borderRadius:3,stack:'s'},
+    {label:'Vila',data:get(PDV.Vila.vendas),backgroundColor:'#D4537E99',borderColor:'#D4537E',borderWidth:1,borderRadius:3,stack:'s'},
+  ],{extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}}}}});
+
+  const tK=kommoFiltered.reduce((a,b)=>a+(b||0),0);
+  const tP=planFiltered.filter(v=>v!=null).reduce((a,b)=>a+b,0);
+  const sub=all?'Jul/25 → Mar/26':pdvMeses[parseInt(mi)];
+  document.getElementById('vendas-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Vendas Kommo</div><div class="kpi-value">${fmtN(tK)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Vendas Planilha</div><div class="kpi-value">${tP>0?fmtN(tP):'-'}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Santana</div><div class="kpi-sub">${fmtN(PDV.Santana.vendas.reduce((a,b)=>a+b,0))} acum.</div></div>
+    <div class="kpi"><div class="kpi-label">Melhor mês</div><div class="kpi-value">Nov/25</div><div class="kpi-sub">${fmtN(PDV.SBC.vendas[4]+PDV.Santana.vendas[4]+PDV.Mooca.vendas[4]+PDV.Vila.vendas[4])} vendas</div></div>`;
+  document.getElementById('vendas-comp-sub').textContent=sub;
+  document.getElementById('vendas-pdv-sub').textContent='empilhado — '+sub;
+  document.getElementById('vendas-table-sub').textContent='ticket médio — '+sub;
+
+  const keys=['SBC','Santana','Mooca','Vila'];
+  const badges={SBC:'badge-sbc',Santana:'badge-santana',Mooca:'badge-mooca',Vila:'badge-vila'};
+  const rows=keys.map(k=>{
+    const tV=all?PDV[k].vendas.reduce((a,b)=>a+b,0):PDV[k].vendas[parseInt(mi)];
+    const tF=all?PDV[k].fat.reduce((a,b)=>a+b,0):PDV[k].fat[parseInt(mi)];
+    const ticket=tV>0?fmtBRL(tF/tV):'-';
+    return`<tr><td><span class="badge ${badges[k]}">${k==='Vila'?'Vila Olímpia':k}</span></td><td>${fmtN(tV)}</td><td>${fmtBRL(tF)}</td><td>${ticket}</td></tr>`;
+  }).join('');
+  document.getElementById('vendas-table').innerHTML=`<thead><tr><th>PDV</th><th>Vendas Kommo</th><th>Fat. Kommo</th><th>Ticket Médio</th></tr></thead><tbody>${rows}</tbody>`;
 }
-function delta(a,b){if(!a||!b)return"";const pct=((a-b)/b*100).toFixed(1);const cls=a>b?"delta-up":a<b?"delta-dn":"delta-eq";return`<span class="compare-delta ${cls}">${a>b?"+":""}${pct}%</span>`;}
-function detailRows(i){const tL=pdvTotal("leads",i)+CG.leads[i];const tI=pdvTotal("inv",i)+CG.inv[i];const tF=pdvTotal("fat",i);const tV=pdvTotal("vendas",i);return{leads:tL,inv:tI,fat:tF,vendas:tV,cpl:tL>0?(tI/tL).toFixed(0):"-"};}
-function renderDetail(elId,data,vs){
-  const rows=[["Investimento total",fmtBRL(data.inv),vs?delta(data.inv,vs.inv):""],["Leads totais",fmtN(data.leads),vs?delta(data.leads,vs.leads):""],["CPL","R$ "+data.cpl,vs?delta(vs.cpl,data.cpl):""],["Vendas Kommo",fmtN(data.vendas),vs?delta(data.vendas,vs.vendas):""],["Fat. Kommo",fmtBRL(data.fat),vs?delta(data.fat,vs.fat):""]];
-  document.getElementById(elId).innerHTML=rows.map(r=>`<div class="compare-row"><span class="compare-label">${r[0]}</span><span class="compare-val">${r[1]}${r[2]}</span></div>`).join("");
-}
-function updateComparativo(){
-  const ia=+document.getElementById("cmp-a").value,ib=+document.getElementById("cmp-b").value;
-  const la=MESES[ia],lb=MESES[ib];
-  document.getElementById("cmp-title-a").textContent="Período A — "+la;
-  document.getElementById("cmp-title-b").textContent="Período B — "+lb;
-  const da=detailRows(ia),db=detailRows(ib);
-  renderDetail("cmp-detail-a",da,db);renderDetail("cmp-detail-b",db,da);
-  const pdvLabels=PDVKEYS.map(k=>PDVLABELS[k]);
-  mk("c-cmp-leads","bar",pdvLabels,[{label:la,data:PDVKEYS.map(k=>PDV[k].leads[ia]),backgroundColor:"#C4786A99",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:lb,data:PDVKEYS.map(k=>PDV[k].leads[ib]),backgroundColor:"#7A9E7E99",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtN});
-  mk("c-cmp-inv","bar",pdvLabels,[{label:la,data:PDVKEYS.map(k=>PDV[k].inv[ia]),backgroundColor:"#C4786A99",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:lb,data:PDVKEYS.map(k=>PDV[k].inv[ib]),backgroundColor:"#7A9E7E99",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:v=>"R$"+(v>=1000?(v/1000).toFixed(0)+"k":v)});
-  mk("c-cmp-fat","bar",pdvLabels,[{label:la,data:PDVKEYS.map(k=>PDV[k].fat[ia]),backgroundColor:"#C4786A99",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:lb,data:PDVKEYS.map(k=>PDV[k].fat[ib]),backgroundColor:"#7A9E7E99",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtK});
-  mk("c-cmp-vendas","bar",pdvLabels,[{label:la,data:PDVKEYS.map(k=>PDV[k].vendas[ia]),backgroundColor:"#C4786A99",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:lb,data:PDVKEYS.map(k=>PDV[k].vendas[ib]),backgroundColor:"#7A9E7E99",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtN});
-  document.getElementById("cmp-leads-sub").textContent=la+" (terracota) vs "+lb+" (verde)";
-  document.getElementById("cmp-inv-sub").textContent=la+" (terracota) vs "+lb+" (verde)";
-  document.getElementById("cmp-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Leads A (${la})</div><div class="kpi-value">${fmtN(da.leads)}</div><div class="kpi-sub">vs B: ${fmtN(db.leads)} ${delta(da.leads,db.leads)}</div></div><div class="kpi"><div class="kpi-label">Investimento A (${la})</div><div class="kpi-value">${fmtBRL(da.inv)}</div><div class="kpi-sub">vs B: ${fmtBRL(db.inv)} ${delta(da.inv,db.inv)}</div></div><div class="kpi"><div class="kpi-label">Fat. Kommo A (${la})</div><div class="kpi-value">${fmtK(da.fat)}</div><div class="kpi-sub">vs B: ${fmtK(db.fat)} ${delta(da.fat,db.fat)}</div></div><div class="kpi"><div class="kpi-label">Vendas A (${la})</div><div class="kpi-value">${fmtN(da.vendas)}</div><div class="kpi-sub">vs B: ${fmtN(db.vendas)} ${delta(da.vendas,db.vendas)}</div></div>`;
-}
+
+// ========== GERAL ==========
 function updateGeral(){
-  const v=document.getElementById("geral-mes").value;
-  let idxs,sub;
-  if(v==="all"){idxs=geralMeses.map((_,i)=>i);sub="Jul/24 → Mar/26";}
-  else if(!v.startsWith("g")){const from=+v;idxs=geralMeses.map((_,i)=>i).filter(i=>i>=from);sub=geralMeses[from]+" → Mar/26";}
-  else{const i=+v.slice(1);idxs=[i];sub=geralMeses[i];}
+  const v=document.getElementById('geral-mes').value;
+  let idxs, sub;
+  if(v==='all'){idxs=geralMeses.map((_,i)=>i);sub='Jul/24 → Mar/26';}
+  else if(!v.startsWith('g')){const from=parseInt(v);idxs=geralMeses.map((_,i)=>i).filter(i=>i>=from);sub=geralMeses[from]+' → Mar/26';}
+  else{const i=parseInt(v.slice(1));idxs=[i];sub=geralMeses[i];}
+
   const labels=idxs.map(i=>geralMeses[i]);
-  const inv=idxs.map(i=>geralInv[i]),leads=idxs.map(i=>geralLeads[i]),cpl=idxs.map(i=>geralCPL[i]);
-  const ri=idxs.filter(i=>geralROAS[i]!=null);
-  mk("c-g-inv","bar",labels,[{data:inv,backgroundColor:"#C4786Abb",borderColor:"#C4786A",borderWidth:1,borderRadius:4}],{yfmt:fmtK});
-  mk("c-g-leads","bar",labels,[{data:leads,backgroundColor:"#7A9E7Ebb",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtN});
-  mk("c-g-cpl","line",labels,[{data:cpl,borderColor:"#C4A882",backgroundColor:"#C4A88222",fill:true,tension:.4,pointRadius:3,pointBackgroundColor:"#C4A882"}],{yfmt:v=>"R$"+v.toFixed(0)});
-  if(ri.length)mk("c-g-roas","line",ri.map(i=>geralMeses[i]),[{data:ri.map(i=>geralROAS[i]),borderColor:"#9E7A9E",backgroundColor:"#9E7A9E22",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#9E7A9E"}],{yfmt:v=>v!=null?v.toFixed(1)+"x":""});
-  const tI=inv.reduce((a,b)=>a+b,0),tL=leads.reduce((a,b)=>a+b,0),rd=ri.map(i=>geralROAS[i]);
-  document.getElementById("geral-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Total investido</div><div class="kpi-value">${fmtK(tI)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Total leads</div><div class="kpi-value">${fmtN(tL)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">CPL médio</div><div class="kpi-value">R$ ${tL>0?(tI/tL).toFixed(2):"-"}</div><div class="kpi-sub">custo por lead</div></div><div class="kpi"><div class="kpi-label">ROAS médio</div><div class="kpi-value">${rd.length?(rd.reduce((a,b)=>a+b,0)/rd.length).toFixed(2)+"x":"-"}</div><div class="kpi-sub">onde disponível</div></div>`;
-  ["g-inv-sub","g-leads-sub","g-cpl-sub","g-roas-sub"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=sub;});
+  const inv=idxs.map(i=>geralInv[i]);
+  const leads=idxs.map(i=>geralLeads[i]);
+  const cpl=idxs.map(i=>geralCPL[i]);
+  const roasIdxs=idxs.filter(i=>geralROAS[i]!=null);
+  const roasLabels=roasIdxs.map(i=>geralMeses[i]);
+  const roasData=roasIdxs.map(i=>geralROAS[i]);
+
+  mk('c-g-inv','bar',labels,[{data:inv,backgroundColor:'#185FA5bb',borderColor:'#185FA5',borderWidth:1,borderRadius:3}],{yfmt:fmtK});
+  mk('c-g-leads','bar',labels,[{data:leads,backgroundColor:'#1D9E75bb',borderColor:'#1D9E75',borderWidth:1,borderRadius:3}],{yfmt:fmtN});
+  mk('c-g-cpl','line',labels,[{data:cpl,borderColor:'#D85A30',backgroundColor:'#D85A3022',fill:true,tension:.4,pointRadius:3,pointBackgroundColor:'#D85A30'}],{yfmt:v=>'R$'+v.toFixed(0)});
+  if(roasLabels.length>0){
+    mk('c-g-roas','line',roasLabels,[{data:roasData,borderColor:'#534AB7',backgroundColor:'#534AB722',fill:true,tension:.4,pointRadius:4,pointBackgroundColor:'#534AB7'}],{yfmt:v=>v!=null?v.toFixed(1)+'x':''});
+  }
+
+  const tI=inv.reduce((a,b)=>a+b,0),tL=leads.reduce((a,b)=>a+b,0);
+  const avgCPL=tL>0?(tI/tL).toFixed(2):'-';
+  const avgR=roasData.length>0?(roasData.reduce((a,b)=>a+b,0)/roasData.length).toFixed(2):'-';
+  document.getElementById('geral-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Total investido</div><div class="kpi-value">${fmtK(tI)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Total leads</div><div class="kpi-value">${fmtN(tL)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">CPL médio</div><div class="kpi-value">R$ ${avgCPL}</div><div class="kpi-sub">custo por lead</div></div>
+    <div class="kpi"><div class="kpi-label">ROAS médio</div><div class="kpi-value">${avgR!=='-'?avgR+'x':'-'}</div><div class="kpi-sub">onde disponível</div></div>`;
+  ['g-inv-sub','g-leads-sub','g-cpl-sub','g-roas-sub'].forEach(id=>document.getElementById(id).textContent=sub);
 }
-const built={};
+
+// ========== TABS ==========
+const built={pdv:false,fat:false,vendas:false,geral:false};
 function setTab(tab,btn){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  btn.classList.add("active");
-  ["pdv","campanha","faturamento","vendas","comparativo","geral"].forEach(p=>{document.getElementById("panel-"+p).style.display=p===tab?"":"none";});
-  if(!built[tab]){built[tab]=true;setTimeout(()=>{
-    if(tab==="pdv")updatePDV();
-    if(tab==="campanha")updateCampanha();
-    if(tab==="faturamento")updateFaturamento();
-    if(tab==="vendas")updateVendas();
-    if(tab==="comparativo")updateComparativo();
-    if(tab==="geral")updateGeral();
-  },60);}
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-pdv').style.display=tab==='pdv'?'':'none';
+  document.getElementById('panel-faturamento').style.display=tab==='faturamento'?'':'none';
+  document.getElementById('panel-vendas').style.display=tab==='vendas'?'':'none';
+  document.getElementById('panel-geral').style.display=tab==='geral'?'':'none';
+  if(!built[tab]){
+    built[tab]=true;
+    setTimeout(()=>{
+      if(tab==='pdv')updatePDV();
+      if(tab==='faturamento')updateFaturamento();
+      if(tab==='vendas')updateVendas();
+      if(tab==='geral')updateGeral();
+    },60);
+  }
 }
-window.addEventListener("DOMContentLoaded",()=>{built.pdv=true;updatePDV();});
+
+window.addEventListener('DOMContentLoaded',()=>{built.pdv=true;updatePDV();});
 </script>
 </body>
 </html>
