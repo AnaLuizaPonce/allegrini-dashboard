@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allegrini — Dashboard de Performance</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;color:#2c2c2a;min-height:100vh}
+header{background:#fff;border-bottom:1px solid #e0dfd8;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+header h1{font-size:18px;font-weight:600}
+header span{font-size:12px;color:#888780;background:#f1efe8;padding:4px 10px;border-radius:20px}
+.container{max-width:1150px;margin:0 auto;padding:24px}
+.tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap}
+.tab{font-size:12px;padding:6px 16px;border-radius:8px;border:1px solid #d3d1c7;background:#fff;color:#5f5e5a;cursor:pointer;transition:all .15s;font-weight:500}
+.tab:hover{background:#f1efe8}
+.tab.active{background:#185FA5;color:#fff;border-color:#185FA5}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
+.kpi-grid-5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
+.kpi{background:#fff;border:1px solid #e0dfd8;border-radius:10px;padding:14px 16px}
+.kpi-label{font-size:11px;color:#888780;margin-bottom:5px}
+.kpi-value{font-size:21px;font-weight:600;color:#2c2c2a;line-height:1.2}
+.kpi-sub{font-size:11px;color:#b4b2a9;margin-top:3px}
+.kpi.accent{border-left:3px solid #185FA5}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.25rem}
+.chart-grid.full{grid-template-columns:1fr}
+.chart-grid.thirds{grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:1.25rem}
+.box{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:18px}
+.box-title{font-size:13px;font-weight:600;color:#2c2c2a;margin-bottom:3px}
+.box-sub{font-size:11px;color:#b4b2a9;margin-bottom:12px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:11px;color:#5f5e5a}
+.leg{display:flex;align-items:center;gap:4px}
+.leg-sq{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+.filter-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;background:#fff;border:1px solid #e0dfd8;border-radius:10px;padding:10px 16px}
+.filter-row label{font-size:12px;color:#5f5e5a;font-weight:500}
+.filter-row select{font-size:12px;padding:5px 10px;border-radius:8px;border:1px solid #d3d1c7;background:#f5f5f3;color:#2c2c2a;cursor:pointer}
+.divider{border:none;border-top:1px solid #e0dfd8;margin:4px 0 14px}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.25rem}
+.compare-box{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:16px}
+.compare-title{font-size:12px;font-weight:600;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #f1efe8}
+.compare-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f9f9f7;font-size:12px}
+.compare-row:last-child{border-bottom:none}
+.compare-label{color:#5f5e5a}
+.compare-val{font-weight:600;color:#2c2c2a}
+.compare-delta{font-size:11px;padding:2px 7px;border-radius:12px;margin-left:8px}
+.delta-up{background:#EAF3DE;color:#27500A}
+.delta-dn{background:#FCEBEB;color:#A32D2D}
+.delta-eq{background:#f1efe8;color:#888780}
+.pdv-table{width:100%;border-collapse:collapse;font-size:12px}
+.pdv-table th{text-align:left;padding:7px 10px;font-weight:600;color:#888780;border-bottom:1px solid #e0dfd8;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.pdv-table td{padding:8px 10px;border-bottom:1px solid #f1efe8;color:#2c2c2a}
+.pdv-table tr:last-child td{border-bottom:none}
+.pdv-table tbody tr:hover{background:#f9f9f7}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.badge-sbc{background:#E6F1FB;color:#0C447C}
+.badge-santana{background:#EAF3DE;color:#27500A}
+.badge-mooca{background:#FAEEDA;color:#633806}
+.badge-vila{background:#FBEAF0;color:#72243E}
+.badge-geral{background:#EEEDFE;color:#3C3489}
+.section-sep{font-size:11px;font-weight:600;color:#888780;text-transform:uppercase;letter-spacing:.07em;margin:0 0 10px;padding-top:4px}
+footer{text-align:center;padding:24px;font-size:11px;color:#b4b2a9;margin-top:4px}
+@media(max-width:760px){.kpi-grid,.kpi-grid-5{grid-template-columns:1fr 1fr}.chart-grid,.chart-grid.thirds,.compare-grid{grid-template-columns:1fr}header{padding:12px 16px}.container{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Allegrini — Dashboard de Performance</h1>
+  <span>Atualizado: Abr/26</span>
+</header>
+<div class="container">
+
+<div class="tabs">
+  <button class="tab active" onclick="setTab('pdv',this)">PDVs</button>
+  <button class="tab" onclick="setTab('campanha',this)">Campanha Geral</button>
+  <button class="tab" onclick="setTab('faturamento',this)">Faturamento</button>
+  <button class="tab" onclick="setTab('vendas',this)">Vendas</button>
+  <button class="tab" onclick="setTab('comparativo',this)">Comparativo de Períodos</button>
+  <button class="tab" onclick="setTab('geral',this)">Meta Ads Geral</button>
+</div>
+
+<!-- ===== PDV ===== -->
+<div id="panel-pdv">
+  <div class="filter-row">
+    <label>Mês:</label>
+    <select id="pdv-mes" onchange="updatePDV()">
+      <option value="all">Todos os meses</option>
+      <option value="0">Jul/25</option><option value="1">Ago/25</option>
+      <option value="2">Set/25</option><option value="3">Out/25</option>
+      <option value="4">Nov/25</option><option value="5">Dez/25</option>
+      <option value="6">Jan/26</option><option value="7">Fev/26</option>
+      <option value="8">Mar/26</option>
+    </select>
+  </div>
+  <div class="kpi-grid" id="pdv-kpis"></div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">Leads por PDV</p>
+      <p class="box-sub" id="pdv-leads-sub">campanha Meta Ads por loja</p>
+      <div class="legend">
+        <span class="leg"><span class="leg-sq" style="background:#378ADD"></span>SBC</span>
+        <span class="leg"><span class="leg-sq" style="background:#639922"></span>Santana</span>
+        <span class="leg"><span class="leg-sq" style="background:#BA7517"></span>Mooca</span>
+        <span class="leg"><span class="leg-sq" style="background:#D4537E"></span>Vila Olímpia</span>
+      </div>
+      <div style="position:relative;height:240px"><canvas id="c-pdv-leads" role="img" aria-label="Leads por PDV"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">Investimento por PDV (R$)</p>
+      <p class="box-sub" id="pdv-inv-sub">Meta Ads por loja</p>
+      <div class="legend">
+        <span class="leg"><span class="leg-sq" style="background:#378ADD"></span>SBC</span>
+        <span class="leg"><span class="leg-sq" style="background:#639922"></span>Santana</span>
+        <span class="leg"><span class="leg-sq" style="background:#BA7517"></span>Mooca</span>
+        <span class="leg"><span class="leg-sq" style="background:#D4537E"></span>Vila Olímpia</span>
+      </div>
+      <div style="position:relative;height:240px"><canvas id="c-pdv-inv" role="img" aria-label="Investimento por PDV"></canvas></div>
+    </div>
+  </div>
+  <div class="box">
+    <p class="box-title" style="margin-bottom:12px">Resumo por PDV — <span id="tabela-mes-label">todos os meses</span></p>
+    <table class="pdv-table" id="pdv-summary-table"></table>
+  </div>
+</div>
+
+<!-- ===== CAMPANHA GERAL ===== -->
+<div id="panel-campanha" style="display:none">
+  <div class="filter-row">
+    <label>Mês:</label>
+    <select id="cg-mes" onchange="updateCampanha()">
+      <option value="all">Todos os meses</option>
+      <option value="0">Jul/25</option><option value="1">Ago/25</option>
+      <option value="2">Set/25</option><option value="3">Out/25</option>
+      <option value="4">Nov/25</option><option value="5">Dez/25</option>
+      <option value="6">Jan/26</option><option value="7">Fev/26</option>
+      <option value="8">Mar/26</option>
+    </select>
+  </div>
+  <div class="kpi-grid-5" id="cg-kpis"></div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">Investimento — Geral vs PDVs (R$)</p>
+      <p class="box-sub" id="cg-inv-sub">comparativo por mês</p>
+      <div class="legend">
+        <span class="leg"><span class="leg-sq" style="background:#534AB7"></span>Campanha Geral</span>
+        <span class="leg"><span class="leg-sq" style="background:#185FA5"></span>Total PDVs</span>
+      </div>
+      <div style="position:relative;height:250px"><canvas id="c-cg-inv" role="img" aria-label="Investimento geral vs PDVs"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">Leads — Geral vs PDVs</p>
+      <p class="box-sub" id="cg-leads-sub">comparativo por mês</p>
+      <div class="legend">
+        <span class="leg"><span class="leg-sq" style="background:#534AB7"></span>Campanha Geral</span>
+        <span class="leg"><span class="leg-sq" style="background:#1D9E75"></span>Total PDVs</span>
+      </div>
+      <div style="position:relative;height:250px"><canvas id="c-cg-leads" role="img" aria-label="Leads geral vs PDVs"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">CPL — Campanha Geral (R$)</p>
+      <p class="box-sub">custo por lead da campanha geral</p>
+      <div style="position:relative;height:220px"><canvas id="c-cg-cpl" role="img" aria-label="CPL campanha geral"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">Participação do investimento (%)</p>
+      <p class="box-sub" id="cg-pie-sub">campanha geral vs PDVs</p>
+      <div style="position:relative;height:220px"><canvas id="c-cg-pie" role="img" aria-label="Share investimento geral vs PDVs"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FATURAMENTO ===== -->
+<div id="panel-faturamento" style="display:none">
+  <div class="filter-row">
+    <label>Mês:</label>
+    <select id="fat-mes" onchange="updateFaturamento()">
+      <option value="all">Todos os meses</option>
+      <option value="0">Jul/25</option><option value="1">Ago/25</option>
+      <option value="2">Set/25</option><option value="3">Out/25</option>
+      <option value="4">Nov/25</option><option value="5">Dez/25</option>
+      <option value="6">Jan/26</option><option value="7">Fev/26</option>
+      <option value="8">Mar/26</option>
+    </select>
+  </div>
+  <div class="kpi-grid" id="fat-kpis"></div>
+  <div class="chart-grid full">
+    <div class="box">
+      <p class="box-title">Faturamento Kommo vs Planilha (R$)</p>
+      <p class="box-sub" id="fat-comp-sub">Jul/25 → Mar/26</p>
+      <div class="legend">
+        <span class="leg"><span class="leg-sq" style="background:#185FA5"></span>Kommo</span>
+        <span class="leg"><span class="leg-sq" style="background:#1D9E75"></span>Planilha</span>
+      </div>
+      <div style="position:relative;height:280px"><canvas id="c-fat-comp" role="img" aria-label="Faturamento Kommo vs Planilha"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">Faturamento Kommo por PDV</p>
+      <p class="box-sub" id="fat-pdv-sub">empilhado por loja</p>
+      <div class="legend">
+        <span class="leg"><span class="leg-sq" style="background:#378ADD"></span>SBC</span>
+        <span class="leg"><span class="leg-sq" style="background:#639922"></span>Santana</span>
+        <span class="leg"><span class="leg-sq" style="background:#BA7517"></span>Mooca</span>
+        <span class="leg"><span class="leg-sq" style="background:#D4537E"></span>Vila Olímpia</span>
+      </div>
+      <div style="position:relative;height:240px"><canvas id="c-fat-pdv" role="img" aria-label="Faturamento por PDV empilhado"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">Participação % por PDV</p>
+      <p class="box-sub" id="fat-pie-sub">faturamento Kommo</p>
+      <div style="position:relative;height:240px"><canvas id="c-fat-pie" role="img" aria-label="Share faturamento por PDV"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VENDAS ===== -->
+<div id="panel-vendas" style="display:none">
+  <div class="filter-row">
+    <label>Mês:</label>
+    <select id="vendas-mes" onchange="updateVendas()">
+      <option value="all">Todos os meses</option>
+      <option value="0">Jul/25</option><option value="1">Ago/25</option>
+      <option value="2">Set/25</option><option value="3">Out/25</option>
+      <option value="4">Nov/25</option><option value="5">Dez/25</option>
+      <option value="6">Jan/26</option><option value="7">Fev/26</option>
+      <option value="8">Mar/26</option>
+    </select>
+  </div>
+  <div class="kpi-grid" id="vendas-kpis"></div>
+  <div class="chart-grid full">
+    <div class="box">
+      <p class="box-title">Vendas Kommo vs Planilha</p>
+      <p class="box-sub" id="vendas-comp-sub">Jul/25 → Mar/26</p>
+      <div class="legend">
+        <span class="leg"><span class="leg-sq" style="background:#185FA5"></span>Vendas Kommo</span>
+        <span class="leg"><span class="leg-sq" style="background:#1D9E75"></span>Vendas Planilha</span>
+      </div>
+      <div style="position:relative;height:260px"><canvas id="c-vendas-comp" role="img" aria-label="Vendas Kommo vs Planilha"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">Vendas Kommo por PDV</p>
+      <p class="box-sub" id="vendas-pdv-sub">empilhado por loja</p>
+      <div class="legend">
+        <span class="leg"><span class="leg-sq" style="background:#378ADD"></span>SBC</span>
+        <span class="leg"><span class="leg-sq" style="background:#639922"></span>Santana</span>
+        <span class="leg"><span class="leg-sq" style="background:#BA7517"></span>Mooca</span>
+        <span class="leg"><span class="leg-sq" style="background:#D4537E"></span>Vila Olímpia</span>
+      </div>
+      <div style="position:relative;height:240px"><canvas id="c-vendas-pdv" role="img" aria-label="Vendas por PDV empilhadas"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">Resumo por PDV</p>
+      <p class="box-sub" id="vendas-table-sub">vendas Kommo + ticket médio</p>
+      <table class="pdv-table" id="vendas-table"></table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COMPARATIVO ===== -->
+<div id="panel-comparativo" style="display:none">
+  <div class="filter-row">
+    <label>Período A:</label>
+    <select id="cmp-a" onchange="updateComparativo()">
+      <option value="6">Jan/26</option>
+      <option value="7">Fev/26</option>
+      <option value="8">Mar/26</option>
+      <option value="3">Out/25</option>
+      <option value="4">Nov/25</option>
+      <option value="5">Dez/25</option>
+      <option value="0">Jul/25</option>
+      <option value="1">Ago/25</option>
+      <option value="2">Set/25</option>
+    </select>
+    <label>vs Período B:</label>
+    <select id="cmp-b" onchange="updateComparativo()">
+      <option value="5">Dez/25</option>
+      <option value="4">Nov/25</option>
+      <option value="3">Out/25</option>
+      <option value="7">Fev/26</option>
+      <option value="6">Jan/26</option>
+      <option value="8">Mar/26</option>
+      <option value="0">Jul/25</option>
+      <option value="1">Ago/25</option>
+      <option value="2">Set/25</option>
+    </select>
+  </div>
+  <div class="kpi-grid" id="cmp-kpis"></div>
+  <div class="compare-grid">
+    <div class="compare-box">
+      <p class="compare-title" id="cmp-title-a">Período A</p>
+      <div id="cmp-detail-a"></div>
+    </div>
+    <div class="compare-box">
+      <p class="compare-title" id="cmp-title-b">Período B</p>
+      <div id="cmp-detail-b"></div>
+    </div>
+  </div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">Leads — A vs B por PDV</p>
+      <p class="box-sub" id="cmp-leads-sub">comparativo por loja</p>
+      <div style="position:relative;height:240px"><canvas id="c-cmp-leads" role="img" aria-label="Leads comparativo"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">Investimento — A vs B por PDV (R$)</p>
+      <p class="box-sub" id="cmp-inv-sub">comparativo por loja</p>
+      <div style="position:relative;height:240px"><canvas id="c-cmp-inv" role="img" aria-label="Investimento comparativo"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">Faturamento Kommo — A vs B (R$)</p>
+      <p class="box-sub">por PDV</p>
+      <div style="position:relative;height:220px"><canvas id="c-cmp-fat" role="img" aria-label="Faturamento comparativo"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">Vendas Kommo — A vs B</p>
+      <p class="box-sub">por PDV</p>
+      <div style="position:relative;height:220px"><canvas id="c-cmp-vendas" role="img" aria-label="Vendas comparativo"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GERAL META ADS ===== -->
+<div id="panel-geral" style="display:none">
+  <div class="filter-row">
+    <label>Período:</label>
+    <select id="geral-mes" onchange="updateGeral()">
+      <option value="all">Todos (Jul/24 → Mar/26)</option>
+      <option value="12">A partir de Jul/25</option>
+      <option value="15">A partir de Out/25</option>
+      <option value="18">A partir de Jan/26</option>
+      <option value="g0">Jul/24</option><option value="g1">Ago/24</option>
+      <option value="g2">Set/24</option><option value="g3">Out/24</option>
+      <option value="g4">Nov/24</option><option value="g5">Dez/24</option>
+      <option value="g6">Jan/25</option><option value="g7">Fev/25</option>
+      <option value="g8">Mar/25</option><option value="g9">Abr/25</option>
+      <option value="g10">Mai/25</option><option value="g11">Jun/25</option>
+      <option value="g12">Jul/25</option><option value="g13">Ago/25</option>
+      <option value="g14">Set/25</option><option value="g15">Out/25</option>
+      <option value="g16">Nov/25</option><option value="g17">Dez/25</option>
+      <option value="g18">Jan/26</option><option value="g19">Fev/26</option>
+      <option value="g20">Mar/26</option>
+    </select>
+  </div>
+  <div class="kpi-grid" id="geral-kpis"></div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">Investimento Meta Ads (R$)</p>
+      <p class="box-sub" id="g-inv-sub">total por mês</p>
+      <div style="position:relative;height:230px"><canvas id="c-g-inv" role="img" aria-label="Investimento geral"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">Leads totais gerados</p>
+      <p class="box-sub" id="g-leads-sub">total por mês</p>
+      <div style="position:relative;height:230px"><canvas id="c-g-leads" role="img" aria-label="Leads gerais"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-grid">
+    <div class="box">
+      <p class="box-title">CPL — Custo por Lead (R$)</p>
+      <p class="box-sub" id="g-cpl-sub">por mês</p>
+      <div style="position:relative;height:230px"><canvas id="c-g-cpl" role="img" aria-label="CPL geral"></canvas></div>
+    </div>
+    <div class="box">
+      <p class="box-title">ROAS</p>
+      <p class="box-sub" id="g-roas-sub">Jul/25 em diante</p>
+      <div style="position:relative;height:230px"><canvas id="c-g-roas" role="img" aria-label="ROAS geral"></canvas></div>
+    </div>
+  </div>
+</div>
+
+</div>
+<footer>Allegrini Dashboard · Meta Ads + Kommo CRM · Gerado com Claude (Anthropic)</footer>
+
+<script>
+const gc='rgba(0,0,0,0.07)',tc='#888780';
+const MESES=['Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
+
+const PDV={
+  SBC:    {inv:[2051.75,2140.71,1006.92,1437,1659,1516,1153.91,1342.44,1572.24],leads:[112,61,26,134,68,147,98,36,52],fat:[58593,13564,23542,14730,32597,34355,8957,25485,34258],vendas:[10,5,6,5,15,9,2,8,11],color:'#378ADD'},
+  Santana:{inv:[1998.91,1761.69,131.87,1445.42,1478,1530.41,1208.94,1343.12,1452.9],leads:[23,20,1,54,26,81,41,21,24],fat:[58636,53492,7957,35313,24122,42988,7409,32638,28796],vendas:[12,20,4,8,6,9,4,6,8],color:'#639922'},
+  Mooca:  {inv:[1981.47,2207.6,730.18,1634.81,1828,1534.61,1144,1343.12,1329.12],leads:[103,134,16,152,105,126,117,43,31],fat:[36035,9113,38513,69373,28355,88844,15222,55225,44050],vendas:[5,6,8,17,2,23,6,15,12],color:'#BA7517'},
+  Vila:   {inv:[2024,2164.32,282.02,1428,1672,1532.82,1217,1049.52,1511.09],leads:[70,45,2,94,49,124,90,14,37],fat:[25768,2487,25776,14581,8345,9147,9147,46223,32037],vendas:[7,1,8,3,1,3,3,10,5],color:'#D4537E'}
+};
+const PDVKEYS=['SBC','Santana','Mooca','Vila'];
+const BADGES={SBC:'badge-sbc',Santana:'badge-santana',Mooca:'badge-mooca',Vila:'badge-vila'};
+const PDVLABELS={SBC:'SBC',Santana:'Santana',Mooca:'Mooca',Vila:'Vila Olímpia'};
+
+// Campanha Geral (Jul/25→Mar/26 = indices 0..8)
+const CG={
+  inv:  [2051.75,2140.71,1006.92,6018.52,5200,6277,2513,4592.83,3415.27],
+  leads:[112,61,26,845,474,1087,201,231,235],
+  kommo:[555,220,414,1134,1033,null,null,null,null]
+};
+
+const fatPlanMeses=['Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
+const fatPlanValores=[289103.59,310392.86,272496.82,347055.19,418313.99,582317.05,991238.62,1013833.58,469300.25,1052255.12,972762.51,887423.42];
+const vendasPlanMeses=['Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
+const vendasPlanValores=[281,310,159,290,259,244];
+
+const geralMeses=['Jul/24','Ago/24','Set/24','Out/24','Nov/24','Dez/24','Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
+const geralInv=[6316.76,7222.55,6817.90,6459.55,5817.07,3043.09,4119.33,5844.66,7890.04,6800.40,14484.05,15196.75,15723.73,17459.88,9851.19,14033.29,14947.68,14452.44,10293.69,11863.82,11932.27];
+const geralLeads=[369,338,374,867,824,219,230,379,686,509,506,432,997,428,412,1285,735,1577,563,355,382];
+const geralCPL=[17.12,21.37,18.23,7.45,7.06,13.90,17.91,15.42,11.50,13.36,28.62,35.18,15.77,40.79,23.91,10.92,20.34,9.16,18.28,33.42,31.24];
+const geralROAS=[null,null,null,null,null,null,null,null,null,null,null,null,11.39,4.50,9.72,9.55,6.25,12.13,3.96,13.45,11.66];
+
+const charts={};
+function mk(id,type,labels,datasets,opts={}){
+  if(charts[id])charts[id].destroy();
+  const scales=type==='pie'||type==='doughnut'?{}:{
+    x:{ticks:{color:tc,font:{size:10},maxRotation:45,autoSkip:false},grid:{color:gc}},
+    y:{ticks:{color:tc,font:{size:10},callback:opts.yfmt||(v=>v)},grid:{color:gc}}
+  };
+  charts[id]=new Chart(document.getElementById(id),{
+    type,data:{labels,datasets},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:opts.tooltip||{}},scales,...(opts.extra||{})}
+  });
+}
+const fmtBRL=v=>v==null?'-':'R$ '+Math.round(v).toLocaleString('pt-BR');
+const fmtN=v=>v==null?'-':Math.round(v).toLocaleString('pt-BR');
+const fmtK=v=>{if(v==null||v===0)return'R$ 0';return v>=1000000?'R$'+(v/1000000).toFixed(2)+'M':'R$'+(v/1000).toFixed(0)+'k'};
+function pdvTotal(key,i){return PDVKEYS.reduce((s,k)=>s+PDV[k][key][i],0);}
+function pdvTotalAll(key){return PDVKEYS.reduce((s,k)=>s+PDV[k][key].reduce((a,b)=>a+b,0),0);}
+
+// ===== PDV =====
+function updatePDV(){
+  const mi=document.getElementById('pdv-mes').value, all=mi==='all';
+  const labels=all?MESES:[MESES[+mi]];
+  const get=(k,key)=>all?PDV[k][key]:[PDV[k][key][+mi]];
+  mk('c-pdv-leads','bar',labels,PDVKEYS.map(k=>({label:k,data:get(k,'leads'),backgroundColor:PDV[k].color+'99',borderColor:PDV[k].color,borderWidth:1,borderRadius:3})),{yfmt:fmtN});
+  mk('c-pdv-inv','bar',labels,PDVKEYS.map(k=>({label:k,data:get(k,'inv'),backgroundColor:PDV[k].color+'99',borderColor:PDV[k].color,borderWidth:1,borderRadius:3})),{yfmt:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)});
+  const totals=PDVKEYS.map(k=>{
+    if(all)return{leads:PDV[k].leads.reduce((a,b)=>a+b,0),inv:PDV[k].inv.reduce((a,b)=>a+b,0),fat:PDV[k].fat.reduce((a,b)=>a+b,0),vendas:PDV[k].vendas.reduce((a,b)=>a+b,0)};
+    return{leads:PDV[k].leads[+mi],inv:PDV[k].inv[+mi],fat:PDV[k].fat[+mi],vendas:PDV[k].vendas[+mi]};
+  });
+  const tL=totals.reduce((a,b)=>a+b.leads,0),tI=totals.reduce((a,b)=>a+b.inv,0),tF=totals.reduce((a,b)=>a+b.fat,0),tV=totals.reduce((a,b)=>a+b.vendas,0);
+  const sub=all?'acumulado':'mês selecionado';
+  document.getElementById('pdv-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Leads PDV</div><div class="kpi-value">${fmtN(tL)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Investimento</div><div class="kpi-value">${fmtBRL(tI)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Fat. Kommo</div><div class="kpi-value">${fmtK(tF)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Vendas Kommo</div><div class="kpi-value">${fmtN(tV)}</div><div class="kpi-sub">${sub}</div></div>`;
+  document.getElementById('tabela-mes-label').textContent=all?'todos os meses':MESES[+mi];
+  const rows=PDVKEYS.map((k,i)=>{const d=totals[i];const cpl=d.inv>0&&d.leads>0?'R$'+(d.inv/d.leads).toFixed(0):'-';const roas=d.inv>0&&d.fat>0?(d.fat/d.inv).toFixed(1)+'x':'-';
+    return`<tr><td><span class="badge ${BADGES[k]}">${PDVLABELS[k]}</span></td><td>${fmtN(d.leads)}</td><td>${fmtBRL(d.inv)}</td><td>${cpl}</td><td>${fmtN(d.vendas)}</td><td>${fmtBRL(d.fat)}</td><td>${roas}</td></tr>`;}).join('');
+  document.getElementById('pdv-summary-table').innerHTML=`<thead><tr><th>PDV</th><th>Leads</th><th>Investimento</th><th>CPL</th><th>Vendas</th><th>Fat. Kommo</th><th>ROAS</th></tr></thead><tbody>${rows}</tbody>`;
+}
+
+// ===== CAMPANHA GERAL =====
+function updateCampanha(){
+  const mi=document.getElementById('cg-mes').value, all=mi==='all';
+  const labels=all?MESES:[MESES[+mi]];
+  const getArr=arr=>all?arr:[arr[+mi]];
+  const pdvLeads=MESES.map((_,i)=>pdvTotal('leads',i));
+  const pdvInv=MESES.map((_,i)=>pdvTotal('inv',i));
+  mk('c-cg-inv','bar',labels,[
+    {label:'Geral',data:getArr(CG.inv),backgroundColor:'#534AB799',borderColor:'#534AB7',borderWidth:1,borderRadius:3},
+    {label:'PDVs',data:getArr(pdvInv),backgroundColor:'#185FA599',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+  ],{yfmt:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)});
+  mk('c-cg-leads','bar',labels,[
+    {label:'Geral',data:getArr(CG.leads),backgroundColor:'#534AB799',borderColor:'#534AB7',borderWidth:1,borderRadius:3},
+    {label:'PDVs',data:getArr(pdvLeads),backgroundColor:'#1D9E7599',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtN});
+  const cgCPL=CG.inv.map((inv,i)=>CG.leads[i]>0?+(inv/CG.leads[i]).toFixed(2):null);
+  mk('c-cg-cpl','line',MESES,[{data:cgCPL,borderColor:'#D85A30',backgroundColor:'#D85A3022',fill:true,tension:.4,pointRadius:3,pointBackgroundColor:'#D85A30'}],{yfmt:v=>v!=null?'R$'+v.toFixed(0):''});
+
+  const totCGinv=all?CG.inv.reduce((a,b)=>a+b,0):CG.inv[+mi];
+  const totPDVinv=all?pdvInv.reduce((a,b)=>a+b,0):pdvInv[+mi];
+  mk('c-cg-pie','doughnut',['Campanha Geral','PDVs'],[{data:[totCGinv,totPDVinv],backgroundColor:['#534AB7','#185FA5'],borderColor:'#fff',borderWidth:2}],
+    {tooltip:{callbacks:{label:ctx=>{const t=totCGinv+totPDVinv;return ctx.label+': '+fmtBRL(ctx.raw)+' ('+((ctx.raw/t)*100).toFixed(1)+'%)'}}}});
+
+  const totCGleads=all?CG.leads.reduce((a,b)=>a+b,0):CG.leads[+mi];
+  const totPDVleads=all?pdvLeads.reduce((a,b)=>a+b,0):pdvLeads[+mi];
+  const cpl=totCGleads>0?(totCGinv/totCGleads).toFixed(2):'-';
+  const sub=all?'acumulado':'mês selecionado';
+  document.getElementById('cg-kpis').innerHTML=`
+    <div class="kpi accent"><div class="kpi-label">Investimento Geral</div><div class="kpi-value">${fmtBRL(totCGinv)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi accent"><div class="kpi-label">Leads Campanha Geral</div><div class="kpi-value">${fmtN(totCGleads)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi accent"><div class="kpi-label">CPL Campanha Geral</div><div class="kpi-value">R$ ${cpl}</div><div class="kpi-sub">custo por lead</div></div>
+    <div class="kpi"><div class="kpi-label">Investimento PDVs</div><div class="kpi-value">${fmtBRL(totPDVinv)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Leads PDVs</div><div class="kpi-value">${fmtN(totPDVleads)}</div><div class="kpi-sub">${sub}</div></div>`;
+}
+
+// ===== FATURAMENTO =====
+function updateFaturamento(){
+  const mi=document.getElementById('fat-mes').value, all=mi==='all';
+  const labels=all?MESES:[MESES[+mi]];
+  const get=arr=>all?arr:[arr[+mi]];
+  const kommoTotal=MESES.map((_,i)=>PDVKEYS.reduce((s,k)=>s+PDV[k].fat[i],0));
+  const planAligned=MESES.map(m=>{const pi=fatPlanMeses.indexOf(m);return pi>=0?fatPlanValores[pi]:null;});
+  mk('c-fat-comp','bar',labels,[
+    {label:'Kommo',data:get(kommoTotal),backgroundColor:'#185FA5bb',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+    {label:'Planilha',data:get(planAligned),backgroundColor:'#1D9E75bb',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtK});
+  mk('c-fat-pdv','bar',labels,PDVKEYS.map(k=>({label:k,data:get(PDV[k].fat),backgroundColor:PDV[k].color+'99',borderColor:PDV[k].color,borderWidth:1,borderRadius:3,stack:'s'})),
+    {extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10},callback:fmtK},grid:{color:gc}}}}});
+  const totPDV=PDVKEYS.map(k=>all?PDV[k].fat.reduce((a,b)=>a+b,0):PDV[k].fat[+mi]);
+  mk('c-fat-pie','doughnut',['SBC','Santana','Mooca','Vila Olímpia'],[{data:totPDV,backgroundColor:['#378ADD','#639922','#BA7517','#D4537E'],borderColor:'#fff',borderWidth:2}],
+    {tooltip:{callbacks:{label:ctx=>{const t=totPDV.reduce((a,b)=>a+b,0);return ctx.label+': '+fmtBRL(ctx.raw)+' ('+((ctx.raw/t)*100).toFixed(1)+'%)'}}}});
+  const tK=all?kommoTotal.reduce((a,b)=>a+b,0):kommoTotal[+mi];
+  const tP=all?planAligned.filter(v=>v!=null).reduce((a,b)=>a+b,0):(planAligned[+mi]||0);
+  const sub=all?'Jul/25 → Mar/26':MESES[+mi];
+  document.getElementById('fat-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Fat. Kommo</div><div class="kpi-value">${fmtK(tK)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Fat. Planilha</div><div class="kpi-value">${tP>0?fmtK(tP):'-'}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Mooca</div><div class="kpi-sub">${fmtK(PDV.Mooca.fat.reduce((a,b)=>a+b,0))} acum.</div></div>
+    <div class="kpi"><div class="kpi-label">Melhor mês</div><div class="kpi-value">Jul/25</div><div class="kpi-sub">${fmtK(kommoTotal[0])}</div></div>`;
+  document.getElementById('fat-comp-sub').textContent=sub;
+  document.getElementById('fat-pdv-sub').textContent='empilhado — '+sub;
+  document.getElementById('fat-pie-sub').textContent='participação — '+sub;
+}
+
+// ===== VENDAS =====
+function updateVendas(){
+  const mi=document.getElementById('vendas-mes').value, all=mi==='all';
+  const labels=all?MESES:[MESES[+mi]];
+  const get=arr=>all?arr:[arr[+mi]];
+  const kommoTotal=MESES.map((_,i)=>PDVKEYS.reduce((s,k)=>s+PDV[k].vendas[i],0));
+  const planAligned=MESES.map(m=>{const pi=vendasPlanMeses.indexOf(m);return pi>=0?vendasPlanValores[pi]:null;});
+  mk('c-vendas-comp','bar',labels,[
+    {label:'Kommo',data:get(kommoTotal),backgroundColor:'#185FA5bb',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+    {label:'Planilha',data:get(planAligned),backgroundColor:'#1D9E75bb',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtN});
+  mk('c-vendas-pdv','bar',labels,PDVKEYS.map(k=>({label:k,data:get(PDV[k].vendas),backgroundColor:PDV[k].color+'99',borderColor:PDV[k].color,borderWidth:1,borderRadius:3,stack:'s'})),
+    {extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}}}}});
+  const tK=all?kommoTotal.reduce((a,b)=>a+b,0):kommoTotal[+mi];
+  const tP=all?vendasPlanValores.reduce((a,b)=>a+b,0):(planAligned[+mi]||0);
+  const sub=all?'Jul/25 → Mar/26':MESES[+mi];
+  document.getElementById('vendas-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Vendas Kommo</div><div class="kpi-value">${fmtN(tK)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Vendas Planilha</div><div class="kpi-value">${tP>0?fmtN(tP):'-'}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Santana</div><div class="kpi-sub">${fmtN(PDV.Santana.vendas.reduce((a,b)=>a+b,0))} acum.</div></div>
+    <div class="kpi"><div class="kpi-label">Melhor mês</div><div class="kpi-value">Nov/25</div><div class="kpi-sub">${fmtN(kommoTotal[4])} vendas</div></div>`;
+  document.getElementById('vendas-comp-sub').textContent=sub;
+  document.getElementById('vendas-pdv-sub').textContent='empilhado — '+sub;
+  const rows=PDVKEYS.map(k=>{
+    const tV=all?PDV[k].vendas.reduce((a,b)=>a+b,0):PDV[k].vendas[+mi];
+    const tF=all?PDV[k].fat.reduce((a,b)=>a+b,0):PDV[k].fat[+mi];
+    return`<tr><td><span class="badge ${BADGES[k]}">${PDVLABELS[k]}</span></td><td>${fmtN(tV)}</td><td>${fmtBRL(tF)}</td><td>${tV>0?fmtBRL(tF/tV):'-'}</td></tr>`;}).join('');
+  document.getElementById('vendas-table').innerHTML=`<thead><tr><th>PDV</th><th>Vendas</th><th>Fat. Kommo</th><th>Ticket Médio</th></tr></thead><tbody>${rows}</tbody>`;
+}
+
+// ===== COMPARATIVO =====
+function delta(a,b){
+  if(!a||!b)return'';
+  const pct=((a-b)/b*100).toFixed(1);
+  const cls=a>b?'delta-up':a<b?'delta-dn':'delta-eq';
+  const sign=a>b?'+':'';
+  return`<span class="compare-delta ${cls}">${sign}${pct}%</span>`;
+}
+function detailRows(i){
+  const tLeads=pdvTotal('leads',i)+CG.leads[i];
+  const tInv=pdvTotal('inv',i)+CG.inv[i];
+  const tFat=pdvTotal('fat',i);
+  const tVendas=pdvTotal('vendas',i);
+  const cpl=tLeads>0?(tInv/tLeads).toFixed(0):'-';
+  return{leads:tLeads,inv:tInv,fat:tFat,vendas:tVendas,cpl};
+}
+function renderDetail(elId,data,vs){
+  const rows=[
+    ['Investimento total',fmtBRL(data.inv),vs?delta(data.inv,vs.inv):''],
+    ['Leads totais',fmtN(data.leads),vs?delta(data.leads,vs.leads):''],
+    ['CPL','R$ '+data.cpl,vs?delta(vs.cpl,data.cpl):''],
+    ['Vendas Kommo',fmtN(data.vendas),vs?delta(data.vendas,vs.vendas):''],
+    ['Fat. Kommo',fmtBRL(data.fat),vs?delta(data.fat,vs.fat):''],
+  ];
+  document.getElementById(elId).innerHTML=rows.map(r=>`<div class="compare-row"><span class="compare-label">${r[0]}</span><span class="compare-val">${r[1]}${r[2]}</span></div>`).join('');
+}
+function updateComparativo(){
+  const ia=+document.getElementById('cmp-a').value, ib=+document.getElementById('cmp-b').value;
+  const la=MESES[ia], lb=MESES[ib];
+  document.getElementById('cmp-title-a').textContent='Período A — '+la;
+  document.getElementById('cmp-title-b').textContent='Período B — '+lb;
+  const da=detailRows(ia), db=detailRows(ib);
+  renderDetail('cmp-detail-a',da,db);
+  renderDetail('cmp-detail-b',db,da);
+
+  const pdvLabels=PDVKEYS.map(k=>PDVLABELS[k]);
+  const aLeads=PDVKEYS.map(k=>PDV[k].leads[ia]);
+  const bLeads=PDVKEYS.map(k=>PDV[k].leads[ib]);
+  const aInv=PDVKEYS.map(k=>PDV[k].inv[ia]);
+  const bInv=PDVKEYS.map(k=>PDV[k].inv[ib]);
+  const aFat=PDVKEYS.map(k=>PDV[k].fat[ia]);
+  const bFat=PDVKEYS.map(k=>PDV[k].fat[ib]);
+  const aVendas=PDVKEYS.map(k=>PDV[k].vendas[ia]);
+  const bVendas=PDVKEYS.map(k=>PDV[k].vendas[ib]);
+
+  const colors={A:'#185FA5',B:'#1D9E75'};
+  mk('c-cmp-leads','bar',pdvLabels,[
+    {label:la,data:aLeads,backgroundColor:'#185FA599',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+    {label:lb,data:bLeads,backgroundColor:'#1D9E7599',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtN});
+  mk('c-cmp-inv','bar',pdvLabels,[
+    {label:la,data:aInv,backgroundColor:'#185FA599',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+    {label:lb,data:bInv,backgroundColor:'#1D9E7599',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)});
+  mk('c-cmp-fat','bar',pdvLabels,[
+    {label:la,data:aFat,backgroundColor:'#185FA599',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+    {label:lb,data:bFat,backgroundColor:'#1D9E7599',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtK});
+  mk('c-cmp-vendas','bar',pdvLabels,[
+    {label:la,data:aVendas,backgroundColor:'#185FA599',borderColor:'#185FA5',borderWidth:1,borderRadius:3},
+    {label:lb,data:bVendas,backgroundColor:'#1D9E7599',borderColor:'#1D9E75',borderWidth:1,borderRadius:3},
+  ],{yfmt:fmtN});
+
+  document.getElementById('cg-leads-sub') && (document.getElementById('cg-leads-sub').textContent=la+' vs '+lb);
+  document.getElementById('cmp-leads-sub').textContent=la+' (azul) vs '+lb+' (verde)';
+  document.getElementById('cmp-inv-sub').textContent=la+' (azul) vs '+lb+' (verde)';
+
+  const invA=da.inv, invB=db.inv, leadsA=da.leads, leadsB=db.leads, fatA=da.fat, fatB=db.fat, vendA=da.vendas, vendB=db.vendas;
+  document.getElementById('cmp-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Leads A (${la})</div><div class="kpi-value">${fmtN(leadsA)}</div><div class="kpi-sub">vs B: ${fmtN(leadsB)} ${delta(leadsA,leadsB)}</div></div>
+    <div class="kpi"><div class="kpi-label">Investimento A (${la})</div><div class="kpi-value">${fmtBRL(invA)}</div><div class="kpi-sub">vs B: ${fmtBRL(invB)} ${delta(invA,invB)}</div></div>
+    <div class="kpi"><div class="kpi-label">Fat. Kommo A (${la})</div><div class="kpi-value">${fmtK(fatA)}</div><div class="kpi-sub">vs B: ${fmtK(fatB)} ${delta(fatA,fatB)}</div></div>
+    <div class="kpi"><div class="kpi-label">Vendas A (${la})</div><div class="kpi-value">${fmtN(vendA)}</div><div class="kpi-sub">vs B: ${fmtN(vendB)} ${delta(vendA,vendB)}</div></div>`;
+}
+
+// ===== GERAL =====
+function updateGeral(){
+  const v=document.getElementById('geral-mes').value;
+  let idxs,sub;
+  if(v==='all'){idxs=geralMeses.map((_,i)=>i);sub='Jul/24 → Mar/26';}
+  else if(!v.startsWith('g')){const from=+v;idxs=geralMeses.map((_,i)=>i).filter(i=>i>=from);sub=geralMeses[from]+' → Mar/26';}
+  else{const i=+v.slice(1);idxs=[i];sub=geralMeses[i];}
+  const labels=idxs.map(i=>geralMeses[i]);
+  const inv=idxs.map(i=>geralInv[i]);
+  const leads=idxs.map(i=>geralLeads[i]);
+  const cpl=idxs.map(i=>geralCPL[i]);
+  const ri=idxs.filter(i=>geralROAS[i]!=null);
+  mk('c-g-inv','bar',labels,[{data:inv,backgroundColor:'#185FA5bb',borderColor:'#185FA5',borderWidth:1,borderRadius:3}],{yfmt:fmtK});
+  mk('c-g-leads','bar',labels,[{data:leads,backgroundColor:'#1D9E75bb',borderColor:'#1D9E75',borderWidth:1,borderRadius:3}],{yfmt:fmtN});
+  mk('c-g-cpl','line',labels,[{data:cpl,borderColor:'#D85A30',backgroundColor:'#D85A3022',fill:true,tension:.4,pointRadius:3,pointBackgroundColor:'#D85A30'}],{yfmt:v=>'R$'+v.toFixed(0)});
+  if(ri.length)mk('c-g-roas','line',ri.map(i=>geralMeses[i]),[{data:ri.map(i=>geralROAS[i]),borderColor:'#534AB7',backgroundColor:'#534AB722',fill:true,tension:.4,pointRadius:4,pointBackgroundColor:'#534AB7'}],{yfmt:v=>v!=null?v.toFixed(1)+'x':''});
+  const tI=inv.reduce((a,b)=>a+b,0),tL=leads.reduce((a,b)=>a+b,0);
+  const rd=ri.map(i=>geralROAS[i]);
+  document.getElementById('geral-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Total investido</div><div class="kpi-value">${fmtK(tI)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">Total leads</div><div class="kpi-value">${fmtN(tL)}</div><div class="kpi-sub">${sub}</div></div>
+    <div class="kpi"><div class="kpi-label">CPL médio</div><div class="kpi-value">R$ ${tL>0?(tI/tL).toFixed(2):'-'}</div><div class="kpi-sub">custo por lead</div></div>
+    <div class="kpi"><div class="kpi-label">ROAS médio</div><div class="kpi-value">${rd.length?(rd.reduce((a,b)=>a+b,0)/rd.length).toFixed(2)+'x':'-'}</div><div class="kpi-sub">onde disponível</div></div>`;
+  ['g-inv-sub','g-leads-sub','g-cpl-sub','g-roas-sub'].forEach(id=>{if(document.getElementById(id))document.getElementById(id).textContent=sub;});
+}
+
+// ===== TABS =====
+const built={};
+function setTab(tab,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['pdv','campanha','faturamento','vendas','comparativo','geral'].forEach(p=>{
+    document.getElementById('panel-'+p).style.display=p===tab?'':'none';
+  });
+  if(!built[tab]){built[tab]=true;setTimeout(()=>{
+    if(tab==='pdv')updatePDV();
+    if(tab==='campanha')updateCampanha();
+    if(tab==='faturamento')updateFaturamento();
+    if(tab==='vendas')updateVendas();
+    if(tab==='comparativo')updateComparativo();
+    if(tab==='geral')updateGeral();
+  },60);}
+}
+window.addEventListener('DOMContentLoaded',()=>{built.pdv=true;updatePDV();});
+</script>
+</body>
+</html>
