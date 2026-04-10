@@ -76,7 +76,11 @@ footer img{height:36px;opacity:.5}
 </div>
 <!-- PDV -->
 <div id="panel-pdv">
-  <div class="filter-row"><label>Mês:</label><select id="pdv-mes" onchange="updatePDV()"><option value="all">Todos os meses</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select></div>
+  <div class="filter-row">
+    <label>De:</label><select id="pdv-de" onchange="updatePDV()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
+    <label>até:</label><select id="pdv-ate" onchange="updatePDV()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+    <label>mês único:</label><select id="pdv-mes" onchange="updatePDV()"><option value="all">— todos —</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
+  </div>
   <div class="kpi-grid" id="pdv-kpis"></div>
   <div class="chart-grid">
     <div class="box"><p class="box-title">Leads por PDV</p><p class="box-sub">Meta Ads por loja</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>SBC</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Santana</span><span class="leg"><span class="leg-sq" style="background:#C4A882"></span>Mooca</span><span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Vila Olímpia</span></div><div style="position:relative;height:240px"><canvas id="c-pdv-leads" role="img" aria-label="Leads por PDV"></canvas></div></div>
@@ -86,7 +90,11 @@ footer img{height:36px;opacity:.5}
 </div>
 <!-- CAMPANHA GERAL -->
 <div id="panel-campanha" style="display:none">
-  <div class="filter-row"><label>Mês:</label><select id="cg-mes" onchange="updateCampanha()"><option value="all">Todos os meses</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select></div>
+  <div class="filter-row">
+    <label>De:</label><select id="cg-de" onchange="updateCampanha()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
+    <label>até:</label><select id="cg-ate" onchange="updateCampanha()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+    <label>mês único:</label><select id="cg-mes" onchange="updateCampanha()"><option value="all">— todos —</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
+  </div>
   <div class="kpi-grid-5" id="cg-kpis"></div>
   <div class="chart-grid">
     <div class="box"><p class="box-title">Investimento — Geral vs PDVs (R$)</p><p class="box-sub">comparativo por mês</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>Campanha Geral</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>PDVs</span></div><div style="position:relative;height:250px"><canvas id="c-cg-inv" role="img" aria-label="Investimento geral vs PDVs"></canvas></div></div>
@@ -99,7 +107,11 @@ footer img{height:36px;opacity:.5}
 </div>
 <!-- FATURAMENTO -->
 <div id="panel-faturamento" style="display:none">
-  <div class="filter-row"><label>Mês:</label><select id="fat-mes" onchange="updateFaturamento()"><option value="all">Todos os meses</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select></div>
+  <div class="filter-row">
+    <label>De:</label><select id="fat-de" onchange="updateFaturamento()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
+    <label>até:</label><select id="fat-ate" onchange="updateFaturamento()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+    <label>mês único:</label><select id="fat-mes" onchange="updateFaturamento()"><option value="all">— todos —</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
+  </div>
   <div class="kpi-grid" id="fat-kpis"></div>
   <div class="chart-grid full"><div class="box"><p class="box-title">Faturamento Kommo vs Planilha (R$)</p><p class="box-sub" id="fat-comp-sub">Jul/25 → Mar/26</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>Kommo</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Planilha</span></div><div style="position:relative;height:280px"><canvas id="c-fat-comp" role="img" aria-label="Faturamento Kommo vs Planilha"></canvas></div></div></div>
   <div class="chart-grid">
@@ -109,7 +121,11 @@ footer img{height:36px;opacity:.5}
 </div>
 <!-- VENDAS -->
 <div id="panel-vendas" style="display:none">
-  <div class="filter-row"><label>Mês:</label><select id="vendas-mes" onchange="updateVendas()"><option value="all">Todos os meses</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select></div>
+  <div class="filter-row">
+    <label>De:</label><select id="vendas-de" onchange="updateVendas()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
+    <label>até:</label><select id="vendas-ate" onchange="updateVendas()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+    <label>mês único:</label><select id="vendas-mes" onchange="updateVendas()"><option value="all">— todos —</option><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
+  </div>
   <div class="kpi-grid" id="vendas-kpis"></div>
   <div class="chart-grid full"><div class="box"><p class="box-title">Vendas Kommo vs Planilha</p><p class="box-sub" id="vendas-comp-sub">Jul/25 → Mar/26</p><div class="legend"><span class="leg"><span class="leg-sq" style="background:#C4786A"></span>Vendas Kommo</span><span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Vendas Planilha</span></div><div style="position:relative;height:260px"><canvas id="c-vendas-comp" role="img" aria-label="Vendas Kommo vs Planilha"></canvas></div></div></div>
   <div class="chart-grid">
@@ -185,72 +201,88 @@ const fmtN=v=>v==null?"-":Math.round(v).toLocaleString("pt-BR");
 const fmtK=v=>{if(!v)return"R$ 0";return v>=1000000?"R$"+(v/1000000).toFixed(2)+"M":"R$"+(v/1000).toFixed(0)+"k"};
 const pdvTotal=(key,i)=>PDVKEYS.reduce((s,k)=>s+PDV[k][key][i],0);
 const col=(k,a)=>COLORS[k]+(a||"");
+
+function getIdxs(prefix) {
+  const mes = document.getElementById(prefix+"-mes").value;
+  if(mes !== "all") return [+mes];
+  const de = +document.getElementById(prefix+"-de").value;
+  const ate = +document.getElementById(prefix+"-ate").value;
+  const from = Math.min(de,ate), to = Math.max(de,ate);
+  return Array.from({length: to-from+1}, (_,i)=>from+i);
+}
+function getLabels(idxs){ return idxs.map(i=>MESES[i]); }
+function getSub(idxs){ return idxs.length===1?MESES[idxs[0]]:MESES[idxs[0]]+" → "+MESES[idxs[idxs.length-1]]; }
 function updatePDV(){
-  const mi=document.getElementById("pdv-mes").value,all=mi==="all";
-  const labels=all?MESES:[MESES[+mi]];
-  const get=(k,key)=>all?PDV[k][key]:[PDV[k][key][+mi]];
+  const mi=document.getElementById("pdv-mes").value;
+  const idxs=getIdxs("pdv"), all=idxs.length===9;
+  const labels=getLabels(idxs);
+  const get=(k,key)=>idxs.map(i=>PDV[k][key][i]);
   mk("c-pdv-leads","bar",labels,PDVKEYS.map(k=>({label:k,data:get(k,"leads"),backgroundColor:col(k,"99"),borderColor:col(k),borderWidth:1,borderRadius:4})),{yfmt:fmtN});
   mk("c-pdv-inv","bar",labels,PDVKEYS.map(k=>({label:k,data:get(k,"inv"),backgroundColor:col(k,"99"),borderColor:col(k),borderWidth:1,borderRadius:4})),{yfmt:v=>"R$"+(v>=1000?(v/1000).toFixed(0)+"k":v)});
-  const totals=PDVKEYS.map(k=>all?{leads:PDV[k].leads.reduce((a,b)=>a+b,0),inv:PDV[k].inv.reduce((a,b)=>a+b,0),fat:PDV[k].fat.reduce((a,b)=>a+b,0),vendas:PDV[k].vendas.reduce((a,b)=>a+b,0)}:{leads:PDV[k].leads[+mi],inv:PDV[k].inv[+mi],fat:PDV[k].fat[+mi],vendas:PDV[k].vendas[+mi]});
+  const totals=PDVKEYS.map(k=>({leads:idxs.reduce((s,i)=>s+PDV[k].leads[i],0),inv:idxs.reduce((s,i)=>s+PDV[k].inv[i],0),fat:idxs.reduce((s,i)=>s+PDV[k].fat[i],0),vendas:idxs.reduce((s,i)=>s+PDV[k].vendas[i],0)}));
   const tL=totals.reduce((a,b)=>a+b.leads,0),tI=totals.reduce((a,b)=>a+b.inv,0),tF=totals.reduce((a,b)=>a+b.fat,0),tV=totals.reduce((a,b)=>a+b.vendas,0);
-  const sub=all?"acumulado":"mês selecionado";
+  const sub=getSub(idxs);
   document.getElementById("pdv-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Leads PDV</div><div class="kpi-value">${fmtN(tL)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Investimento</div><div class="kpi-value">${fmtBRL(tI)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Fat. Kommo</div><div class="kpi-value">${fmtK(tF)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Vendas Kommo</div><div class="kpi-value">${fmtN(tV)}</div><div class="kpi-sub">${sub}</div></div>`;
-  document.getElementById("tabela-mes-label").textContent=all?"todos os meses":MESES[+mi];
+  document.getElementById("tabela-mes-label").textContent=getSub(idxs);
   const rows=PDVKEYS.map((k,i)=>{const d=totals[i];const cpl=d.inv>0&&d.leads>0?"R$"+(d.inv/d.leads).toFixed(0):"-";const roas=d.inv>0&&d.fat>0?(d.fat/d.inv).toFixed(1)+"x":"-";return`<tr><td><span class="badge ${BADGES[k]}">${PDVLABELS[k]}</span></td><td>${fmtN(d.leads)}</td><td>${fmtBRL(d.inv)}</td><td>${cpl}</td><td>${fmtN(d.vendas)}</td><td>${fmtBRL(d.fat)}</td><td>${roas}</td></tr>`;}).join("");
   document.getElementById("pdv-summary-table").innerHTML=`<thead><tr><th>PDV</th><th>Leads</th><th>Investimento</th><th>CPL</th><th>Vendas</th><th>Fat. Kommo</th><th>ROAS</th></tr></thead><tbody>${rows}</tbody>`;
 }
 function updateCampanha(){
-  const mi=document.getElementById("cg-mes").value,all=mi==="all";
-  const labels=all?MESES:[MESES[+mi]];
-  const get=arr=>all?arr:[arr[+mi]];
+  const mi=document.getElementById("cg-mes").value;
+  const idxs=getIdxs("cg");
+  const labels=getLabels(idxs);
+  const get=arr=>idxs.map(i=>arr[i]);
   const pdvLeads=MESES.map((_,i)=>pdvTotal("leads",i));
   const pdvInv=MESES.map((_,i)=>pdvTotal("inv",i));
   mk("c-cg-inv","bar",labels,[{label:"Geral",data:get(CG.inv),backgroundColor:"#C4786A99",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:"PDVs",data:get(pdvInv),backgroundColor:"#7A9E7E99",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:v=>"R$"+(v>=1000?(v/1000).toFixed(0)+"k":v)});
   mk("c-cg-leads","bar",labels,[{label:"Geral",data:get(CG.leads),backgroundColor:"#C4786A99",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:"PDVs",data:get(pdvLeads),backgroundColor:"#7A9E7E99",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtN});
   const cgCPL=CG.inv.map((inv,i)=>CG.leads[i]>0?+(inv/CG.leads[i]).toFixed(2):null);
   mk("c-cg-cpl","line",MESES,[{data:cgCPL,borderColor:"#C4786A",backgroundColor:"#C4786A22",fill:true,tension:.4,pointRadius:3,pointBackgroundColor:"#C4786A"}],{yfmt:v=>v!=null?"R$"+v.toFixed(0):""});
-  const tCGi=all?CG.inv.reduce((a,b)=>a+b,0):CG.inv[+mi];
-  const tPi=all?pdvInv.reduce((a,b)=>a+b,0):pdvInv[+mi];
+  const tCGi=idxs.reduce((s,i)=>s+CG.inv[i],0);
+  const tPi=idxs.reduce((s,i)=>s+pdvInv[i],0);
   mk("c-cg-pie","doughnut",["Campanha Geral","PDVs"],[{data:[tCGi,tPi],backgroundColor:["#C4786A","#7A9E7E"],borderColor:"#fdf6f3",borderWidth:2}],{tooltip:{callbacks:{label:ctx=>{const t=tCGi+tPi;return ctx.label+": "+fmtBRL(ctx.raw)+" ("+((ctx.raw/t)*100).toFixed(1)+"%)"}}}});
-  const tCGl=all?CG.leads.reduce((a,b)=>a+b,0):CG.leads[+mi];
-  const tPl=all?pdvLeads.reduce((a,b)=>a+b,0):pdvLeads[+mi];
+  const tCGl=idxs.reduce((s,i)=>s+CG.leads[i],0);
+  const tPl=idxs.reduce((s,i)=>s+pdvLeads[i],0);
   const cpl=tCGl>0?(tCGi/tCGl).toFixed(2):"-";
-  const sub=all?"acumulado":"mês selecionado";
+  const sub=getSub(idxs);
   document.getElementById("cg-kpis").innerHTML=`<div class="kpi accent"><div class="kpi-label">Investimento Geral</div><div class="kpi-value">${fmtBRL(tCGi)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi accent"><div class="kpi-label">Leads Campanha Geral</div><div class="kpi-value">${fmtN(tCGl)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi accent"><div class="kpi-label">CPL Campanha Geral</div><div class="kpi-value">R$ ${cpl}</div><div class="kpi-sub">custo por lead</div></div><div class="kpi"><div class="kpi-label">Investimento PDVs</div><div class="kpi-value">${fmtBRL(tPi)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Leads PDVs</div><div class="kpi-value">${fmtN(tPl)}</div><div class="kpi-sub">${sub}</div></div>`;
 }
 function updateFaturamento(){
-  const mi=document.getElementById("fat-mes").value,all=mi==="all";
-  const labels=all?MESES:[MESES[+mi]];
-  const get=arr=>all?arr:[arr[+mi]];
+  const mi=document.getElementById("fat-mes").value;
+  const idxs=getIdxs("fat");
+  const labels=getLabels(idxs);
+  const get=arr=>idxs.map(i=>arr[i]);
   const kommoTotal=MESES.map((_,i)=>PDVKEYS.reduce((s,k)=>s+PDV[k].fat[i],0));
   const planAligned=MESES.map(m=>{const pi=fatPlanMeses.indexOf(m);return pi>=0?fatPlanValores[pi]:null;});
   mk("c-fat-comp","bar",labels,[{label:"Kommo",data:get(kommoTotal),backgroundColor:"#C4786Abb",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:"Planilha",data:get(planAligned),backgroundColor:"#7A9E7Ebb",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtK});
   mk("c-fat-pdv","bar",labels,PDVKEYS.map(k=>({label:k,data:get(PDV[k].fat),backgroundColor:col(k,"99"),borderColor:col(k),borderWidth:1,borderRadius:4,stack:"s"})),{extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10},callback:fmtK},grid:{color:gc}}}}});
-  const totPDV=PDVKEYS.map(k=>all?PDV[k].fat.reduce((a,b)=>a+b,0):PDV[k].fat[+mi]);
+  const totPDV=PDVKEYS.map(k=>idxs.reduce((s,i)=>s+PDV[k].fat[i],0));
   mk("c-fat-pie","doughnut",["SBC","Santana","Mooca","Vila Olímpia"],[{data:totPDV,backgroundColor:["#C4786A","#7A9E7E","#C4A882","#9E7A9E"],borderColor:"#fdf6f3",borderWidth:2}],{tooltip:{callbacks:{label:ctx=>{const t=totPDV.reduce((a,b)=>a+b,0);return ctx.label+": "+fmtBRL(ctx.raw)+" ("+((ctx.raw/t)*100).toFixed(1)+"%)"}}}});
-  const tK=all?kommoTotal.reduce((a,b)=>a+b,0):kommoTotal[+mi];
-  const tP=all?planAligned.filter(v=>v!=null).reduce((a,b)=>a+b,0):(planAligned[+mi]||0);
-  const sub=all?"Jul/25 → Mar/26":MESES[+mi];
-  document.getElementById("fat-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Fat. Kommo</div><div class="kpi-value">${fmtK(tK)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Fat. Planilha</div><div class="kpi-value">${tP>0?fmtK(tP):"-"}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Mooca</div><div class="kpi-sub">${fmtK(PDV.Mooca.fat.reduce((a,b)=>a+b,0))} acum.</div></div><div class="kpi"><div class="kpi-label">ROAS Kommo</div><div class="kpi-value">${(tK/PDVKEYS.reduce((s,k)=>s+PDV[k].inv.reduce((a,b)=>a+b,0),0+CG.inv.reduce((a,b)=>a+b,0))).toFixed(1)+"x"}</div><div class="kpi-sub">fat. Kommo / investimento</div></div>`;
+  const tK=idxs.reduce((s,i)=>s+kommoTotal[i],0);
+  const tP=idxs.reduce((s,i)=>s+(planAligned[i]||0),0);
+  const sub=getSub(idxs);
+  const tInvPeriod=idxs.reduce((s,i)=>s+PDVKEYS.reduce((ss,k)=>ss+PDV[k].inv[i],0)+CG.inv[i],0);
+  document.getElementById("fat-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Fat. Kommo</div><div class="kpi-value">${fmtK(tK)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Fat. Planilha</div><div class="kpi-value">${tP>0?fmtK(tP):"-"}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Mooca</div><div class="kpi-sub">${fmtK(PDV.Mooca.fat.reduce((a,b)=>a+b,0))} acum.</div></div><div class="kpi"><div class="kpi-label">ROAS Kommo</div><div class="kpi-value">${(()=>{return tInvPeriod>0?(tK/tInvPeriod).toFixed(1)+"x":"-";})()}</div><div class="kpi-sub">fat. Kommo / investimento</div></div>`;
   document.getElementById("fat-comp-sub").textContent=sub;
   document.getElementById("fat-pdv-sub").textContent="empilhado — "+sub;
   document.getElementById("fat-pie-sub").textContent="participação — "+sub;
 }
 function updateVendas(){
-  const mi=document.getElementById("vendas-mes").value,all=mi==="all";
-  const labels=all?MESES:[MESES[+mi]];
-  const get=arr=>all?arr:[arr[+mi]];
+  const mi=document.getElementById("vendas-mes").value;
+  const idxs=getIdxs("vendas");
+  const labels=getLabels(idxs);
+  const get=arr=>idxs.map(i=>arr[i]);
   const kommoTotal=MESES.map((_,i)=>PDVKEYS.reduce((s,k)=>s+PDV[k].vendas[i],0));
   const planAligned=MESES.map(m=>{const pi=vendasPlanMeses.indexOf(m);return pi>=0?vendasPlanValores[pi]:null;});
   mk("c-vendas-comp","bar",labels,[{label:"Kommo",data:get(kommoTotal),backgroundColor:"#C4786Abb",borderColor:"#C4786A",borderWidth:1,borderRadius:4},{label:"Planilha",data:get(planAligned),backgroundColor:"#7A9E7Ebb",borderColor:"#7A9E7E",borderWidth:1,borderRadius:4}],{yfmt:fmtN});
   mk("c-vendas-pdv","bar",labels,PDVKEYS.map(k=>({label:k,data:get(PDV[k].vendas),backgroundColor:col(k,"99"),borderColor:col(k),borderWidth:1,borderRadius:4,stack:"s"})),{extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}}}}});
-  const tK=all?kommoTotal.reduce((a,b)=>a+b,0):kommoTotal[+mi];
-  const tP=all?vendasPlanValores.reduce((a,b)=>a+b,0):(planAligned[+mi]||0);
-  const sub=all?"Jul/25 → Mar/26":MESES[+mi];
+  const tK=idxs.reduce((s,i)=>s+kommoTotal[i],0);
+  const tP=idxs.reduce((s,i)=>s+(planAligned[i]||0),0);
+  const sub=getSub(idxs);
   document.getElementById("vendas-kpis").innerHTML=`<div class="kpi"><div class="kpi-label">Vendas Kommo</div><div class="kpi-value">${fmtN(tK)}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Vendas Planilha</div><div class="kpi-value">${tP>0?fmtN(tP):"-"}</div><div class="kpi-sub">${sub}</div></div><div class="kpi"><div class="kpi-label">Maior PDV</div><div class="kpi-value">Mooca</div><div class="kpi-sub">${fmtN(PDV.Mooca.vendas.reduce((a,b)=>a+b,0))} acum.</div></div><div class="kpi"><div class="kpi-label">Ticket Médio Kommo</div><div class="kpi-value">R$ ${tK>0?Math.round(PDVKEYS.reduce((s,k)=>s+PDV[k].fat.reduce((a,b)=>a+b,0),0)/PDVKEYS.reduce((s,k)=>s+PDV[k].vendas.reduce((a,b)=>a+b,0),0)).toLocaleString("pt-BR"):"-"}</div><div class="kpi-sub">por venda Kommo</div></div>`;
   document.getElementById("vendas-comp-sub").textContent=sub;
   document.getElementById("vendas-pdv-sub").textContent="empilhado — "+sub;
-  const rows=PDVKEYS.map(k=>{const tV=all?PDV[k].vendas.reduce((a,b)=>a+b,0):PDV[k].vendas[+mi];const tF=all?PDV[k].fat.reduce((a,b)=>a+b,0):PDV[k].fat[+mi];return`<tr><td><span class="badge ${BADGES[k]}">${PDVLABELS[k]}</span></td><td>${fmtN(tV)}</td><td>${fmtBRL(tF)}</td><td>${tV>0?fmtBRL(tF/tV):"-"}</td></tr>`;}).join("");
+  const rows=PDVKEYS.map(k=>{const tV=idxs.reduce((s,i)=>s+PDV[k].vendas[i],0);const tF=idxs.reduce((s,i)=>s+PDV[k].fat[i],0);return`<tr><td><span class="badge ${BADGES[k]}">${PDVLABELS[k]}</span></td><td>${fmtN(tV)}</td><td>${fmtBRL(tF)}</td><td>${tV>0?fmtBRL(tF/tV):"-"}</td></tr>`;}).join("");
   document.getElementById("vendas-table").innerHTML=`<thead><tr><th>PDV</th><th>Vendas</th><th>Fat. Kommo</th><th>Ticket Médio</th></tr></thead><tbody>${rows}</tbody>`;
 }
 function delta(a,b){if(!a||!b)return"";const pct=((a-b)/b*100).toFixed(1);const cls=a>b?"delta-up":a<b?"delta-dn":"delta-eq";return`<span class="compare-delta ${cls}">${a>b?"+":""}${pct}%</span>`;}
