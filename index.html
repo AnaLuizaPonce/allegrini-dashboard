@@ -9,30 +9,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,sans-serif;background:#f7f3f0;color:#2c2018;min-height:100vh;font-size:14px}
-
 header{background:#fff;border-bottom:3px solid #df9e92;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 header img{height:72px;width:auto}
-header span{font-size:11px;color:#a89880;background:#f7f3f0;padding:4px 14px;border-radius:20px;border:1px solid #e8e0d8;letter-spacing:.04em}
-
+header span{font-size:11px;color:#a89880;background:#f7f3f0;padding:4px 12px;border-radius:20px;border:1px solid #e8e0d8}
 .container{max-width:1080px;margin:0 auto;padding:28px 24px}
-
 .tabs{display:flex;gap:4px;margin-bottom:28px;background:#ede8e2;border-radius:12px;padding:4px}
-.tab{font-size:12px;font-weight:500;padding:8px 22px;border-radius:8px;border:none;background:transparent;color:#8a7060;cursor:pointer;transition:all .2s;letter-spacing:.01em;flex:1}
+.tab{font-size:12px;font-weight:500;padding:8px 22px;border-radius:8px;border:none;background:transparent;color:#8a7060;cursor:pointer;transition:all .2s;flex:1}
 .tab:hover{color:#2c2018;background:rgba(255,255,255,.5)}
 .tab.active{background:#fff;color:#2c2018;font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-
 .filter-row{display:flex;align-items:center;gap:10px;margin-bottom:24px;flex-wrap:wrap}
-.filter-row label{font-size:12px;color:#a89880;font-weight:500;letter-spacing:.02em}
-.filter-row select{font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid #ddd8d0;background:#fff;color:#2c2018;cursor:pointer;outline:none;font-family:inherit}
+.filter-row label{font-size:12px;color:#a89880;font-weight:500}
+.filter-row select{font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid #ddd8d0;background:#fff;color:#2c2018;cursor:pointer;outline:none}
 .filter-row select:focus{border-color:#df9e92}
-
 .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px}
-.kpi-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:24px}
 .kpi{background:#fff;border-radius:12px;padding:20px;border-top:3px solid var(--accent,#df9e92);box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .kpi-label{font-size:10px;color:#a89880;margin-bottom:8px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
 .kpi-value{font-size:26px;font-weight:700;color:#2c2018;line-height:1;letter-spacing:-.02em}
 .kpi-sub{font-size:11px;color:#c4b8a8;margin-top:6px}
-
 .chart-wrap{background:#fff;border-radius:12px;padding:22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .chart-title{font-size:13px;font-weight:600;color:#2c2018;margin-bottom:3px}
 .chart-desc{font-size:11px;color:#c4b8a8;margin-bottom:14px}
@@ -40,47 +33,42 @@ header span{font-size:11px;color:#a89880;background:#f7f3f0;padding:4px 14px;bor
 .leg{display:flex;align-items:center;gap:5px}
 .leg-sq{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-
 .pdv-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .pdv-card{text-decoration:none;color:inherit;border-radius:12px;overflow:hidden;background:#fff;transition:all .2s;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .pdv-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.10)}
 .pdv-card-stripe{height:4px;flex-shrink:0}
 .pdv-card-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:8px}
-.pdv-card-name{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.pdv-card-name{font-size:15px;font-weight:700}
 .pdv-card-stats{font-size:11px;color:#a89880;line-height:2;flex:1}
 .pdv-stat{display:flex;justify-content:space-between}
 .pdv-stat-val{font-weight:600;color:#2c2018}
-.pdv-card-link{font-size:11px;font-weight:600;letter-spacing:.02em;padding-top:8px;border-top:1px solid #f0ece8}
-.section-title{font-size:11px;font-weight:600;color:#a89880;margin-bottom:16px;letter-spacing:.06em;text-transform:uppercase}
-
+.pdv-card-link{font-size:11px;font-weight:600;padding-top:8px;border-top:1px solid #f0ece8}
+.sec-title{font-size:11px;font-weight:600;color:#a89880;margin-bottom:16px;letter-spacing:.06em;text-transform:uppercase}
 footer{text-align:center;padding:20px;font-size:11px;color:#c4b8a8;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
 footer img{height:28px;opacity:.25}
-
-@media(max-width:900px){.pdv-grid{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}header{padding:12px 20px}.container{padding:16px}.tabs{gap:2px}.tab{padding:7px 12px;font-size:11px}}
+@media(max-width:900px){.pdv-grid{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}header{padding:12px 20px}.container{padding:16px}.tab{padding:7px 12px;font-size:11px}}
 </style>
 </head>
 <body>
-
 <header>
   <img src="data:image/png;base64,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" alt="Allegrini" />
   <span>Dashboard · Abr/26</span>
 </header>
-
 <div class="container">
   <div class="tabs">
-    <button class="tab active" id="tab-meta" onclick="setTab('meta')">Meta Ads</button>
-    <button class="tab" id="tab-kommo" onclick="setTab('kommo')">Kommo CRM</button>
-    <button class="tab" id="tab-plan" onclick="setTab('plan')">Planilha</button>
-    <button class="tab" id="tab-pdvs" onclick="setTab('pdvs')">PDVs</button>
+    <button class="tab active" id="tab-meta"  onclick="setTab('meta')">Meta Ads</button>
+    <button class="tab"        id="tab-kommo" onclick="setTab('kommo')">Kommo CRM</button>
+    <button class="tab"        id="tab-plan"  onclick="setTab('plan')">Planilha</button>
+    <button class="tab"        id="tab-pdvs"  onclick="setTab('pdvs')">PDVs</button>
   </div>
 
-  <!-- META ADS -->
+  <!-- META -->
   <div id="panel-meta">
     <div class="filter-row">
-      <label>De</label><select id="meta-de" onchange="renderMeta()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
-      <label>até</label><select id="meta-ate" onchange="renderMeta()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+      <label>De</label><select id="meta-de" onchange="renderMeta()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20">Mar/26</option></select>
+      <label>até</label><select id="meta-ate" onchange="renderMeta()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20" selected>Mar/26</option></select>
     </div>
-    <div class="kpi-grid" id="meta-kpis"></div>
+    <div class="kpi-grid" id="meta-kpis" style="grid-template-columns:repeat(5,minmax(0,1fr))"></div>
     <div class="chart-wrap">
       <div class="chart-title">Investimento por campanha (R$)</div>
       <div class="chart-desc">PDVs + Campanha Geral — empilhado por mês</div>
@@ -93,6 +81,11 @@ footer img{height:28px;opacity:.25}
       </div>
       <div style="position:relative;height:260px"><canvas id="meta-c1" role="img" aria-label="Investimento"></canvas></div>
     </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Leads por mês</div>
+      <div class="chart-desc">Total de leads gerados · Passe o mouse para ver o investimento do mês</div>
+      <div style="position:relative;height:220px"><canvas id="meta-c1b" role="img" aria-label="Leads por mes"></canvas></div>
+    </div>
     <div class="two-col">
       <div class="chart-wrap">
         <div class="chart-title">Leads por origem</div>
@@ -101,7 +94,7 @@ footer img{height:28px;opacity:.25}
           <span class="leg"><span class="leg-sq" style="background:#6a9ec4"></span>Camp. Geral</span>
           <span class="leg"><span class="leg-sq" style="background:#C4786A"></span>PDVs</span>
         </div>
-        <div style="position:relative;height:220px"><canvas id="meta-c2" role="img" aria-label="Leads"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="meta-c2" role="img" aria-label="Leads por origem"></canvas></div>
       </div>
       <div class="chart-wrap">
         <div class="chart-title">CPL — Custo por Lead (R$)</div>
@@ -114,8 +107,8 @@ footer img{height:28px;opacity:.25}
   <!-- KOMMO -->
   <div id="panel-kommo" style="display:none">
     <div class="filter-row">
-      <label>De</label><select id="kommo-de" onchange="renderKommo()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
-      <label>até</label><select id="kommo-ate" onchange="renderKommo()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+      <label>De</label><select id="kommo-de" onchange="renderKommo()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20">Mar/26</option></select>
+      <label>até</label><select id="kommo-ate" onchange="renderKommo()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20" selected>Mar/26</option></select>
     </div>
     <div class="kpi-grid" id="kommo-kpis"></div>
     <div class="chart-wrap">
@@ -142,9 +135,9 @@ footer img{height:28px;opacity:.25}
         <div style="position:relative;height:220px"><canvas id="kommo-c2" role="img" aria-label="Vendas Kommo"></canvas></div>
       </div>
       <div class="chart-wrap">
-        <div class="chart-title">ROAS Kommo</div>
-        <div class="chart-desc">Faturamento Kommo ÷ Investimento</div>
-        <div style="position:relative;height:220px"><canvas id="kommo-c3" role="img" aria-label="ROAS"></canvas></div>
+        <div class="chart-title">ROAS Kommo consolidado</div>
+        <div class="chart-desc">Faturamento Kommo ÷ Investimento total</div>
+        <div style="position:relative;height:220px"><canvas id="kommo-c3" role="img" aria-label="ROAS Kommo"></canvas></div>
       </div>
     </div>
   </div>
@@ -152,8 +145,8 @@ footer img{height:28px;opacity:.25}
   <!-- PLANILHA -->
   <div id="panel-plan" style="display:none">
     <div class="filter-row">
-      <label>De</label><select id="plan-de" onchange="renderPlan()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
-      <label>até</label><select id="plan-ate" onchange="renderPlan()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+      <label>De</label><select id="plan-de" onchange="renderPlan()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20">Mar/26</option></select>
+      <label>até</label><select id="plan-ate" onchange="renderPlan()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20" selected>Mar/26</option></select>
     </div>
     <div class="kpi-grid" id="plan-kpis"></div>
     <div class="chart-wrap">
@@ -175,231 +168,282 @@ footer img{height:28px;opacity:.25}
           <span class="leg"><span class="leg-sq" style="background:#C4A882"></span>Mooca</span>
           <span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Vila Olímpia</span>
         </div>
-        <div style="position:relative;height:220px"><canvas id="plan-c2" role="img" aria-label="Fat. Planilha por PDV"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="plan-c2" role="img" aria-label="Fat por PDV"></canvas></div>
       </div>
       <div class="chart-wrap">
-        <div class="chart-title">Vendas — Planilha vs Kommo</div>
-        <div class="chart-desc">Volume de vendas por fonte</div>
-        <div class="legend">
-          <span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Planilha</span>
-          <span class="leg"><span class="leg-sq" style="background:#C4786A"></span>Kommo</span>
-        </div>
-        <div style="position:relative;height:220px"><canvas id="plan-c3" role="img" aria-label="Vendas"></canvas></div>
+        <div class="chart-title">Vendas Planilha — total por mês</div>
+        <div class="chart-desc">Volume de vendas confirmadas financeiramente</div>
+        <div style="position:relative;height:220px"><canvas id="plan-c3" role="img" aria-label="Vendas planilha"></canvas></div>
       </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Ticket M&#233;dio Planilha (R$)</div>
+      <div class="chart-desc">Faturamento Planilha &#247; Vendas Planilha por m&#234;s</div>
+      <div style="position:relative;height:220px"><canvas id="plan-c4" role="img" aria-label="Ticket medio"></canvas></div>
     </div>
   </div>
 
   <!-- PDVs -->
   <div id="panel-pdvs" style="display:none">
-    <p class="section-title">Selecione um PDV para ver o dashboard completo</p>
-    <div class="pdv-grid">
-    <a href="sbc.html" class="pdv-card">
-      <div class="pdv-card-stripe" style="background:#C4786A"></div>
-      <div class="pdv-card-body">
-        <div class="pdv-card-name" style="color:#C4786A">SBC</div>
-        <div class="pdv-card-stats" id="card-SBC"></div>
-        <div class="pdv-card-link" style="color:#C4786A">Ver dashboard →</div>
-      </div>
-    </a>
-    <a href="santana.html" class="pdv-card">
-      <div class="pdv-card-stripe" style="background:#7A9E7E"></div>
-      <div class="pdv-card-body">
-        <div class="pdv-card-name" style="color:#7A9E7E">Santana</div>
-        <div class="pdv-card-stats" id="card-Santana"></div>
-        <div class="pdv-card-link" style="color:#7A9E7E">Ver dashboard →</div>
-      </div>
-    </a>
-    <a href="mooca.html" class="pdv-card">
-      <div class="pdv-card-stripe" style="background:#C4A882"></div>
-      <div class="pdv-card-body">
-        <div class="pdv-card-name" style="color:#C4A882">Mooca</div>
-        <div class="pdv-card-stats" id="card-Mooca"></div>
-        <div class="pdv-card-link" style="color:#C4A882">Ver dashboard →</div>
-      </div>
-    </a>
-    <a href="vila-olimpia.html" class="pdv-card">
-      <div class="pdv-card-stripe" style="background:#9E7A9E"></div>
-      <div class="pdv-card-body">
-        <div class="pdv-card-name" style="color:#9E7A9E">Vila Olímpia</div>
-        <div class="pdv-card-stats" id="card-Vila_Olimpia"></div>
-        <div class="pdv-card-link" style="color:#9E7A9E">Ver dashboard →</div>
-      </div>
-    </a></div>
+    <p class="sec-title">Selecione um PDV para ver o dashboard completo</p>
+    <div class="pdv-grid"><a href="sbc.html" class="pdv-card"><div class="pdv-card-stripe" style="background:#C4786A"></div><div class="pdv-card-body"><div class="pdv-card-name" style="color:#C4786A">SBC</div><div class="pdv-card-stats" id="card-SBC"></div><div class="pdv-card-link" style="color:#C4786A">Ver dashboard &rarr;</div></div></a><a href="santana.html" class="pdv-card"><div class="pdv-card-stripe" style="background:#7A9E7E"></div><div class="pdv-card-body"><div class="pdv-card-name" style="color:#7A9E7E">Santana</div><div class="pdv-card-stats" id="card-Santana"></div><div class="pdv-card-link" style="color:#7A9E7E">Ver dashboard &rarr;</div></div></a><a href="mooca.html" class="pdv-card"><div class="pdv-card-stripe" style="background:#C4A882"></div><div class="pdv-card-body"><div class="pdv-card-name" style="color:#C4A882">Mooca</div><div class="pdv-card-stats" id="card-Mooca"></div><div class="pdv-card-link" style="color:#C4A882">Ver dashboard &rarr;</div></div></a><a href="vila-olimpia.html" class="pdv-card"><div class="pdv-card-stripe" style="background:#9E7A9E"></div><div class="pdv-card-body"><div class="pdv-card-name" style="color:#9E7A9E">Vila Olímpia</div><div class="pdv-card-stats" id="card-Vila"></div><div class="pdv-card-link" style="color:#9E7A9E">Ver dashboard &rarr;</div></div></a></div>
   </div>
-
 </div>
 
 <footer>
   <img src="data:image/png;base64,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" alt="Allegrini" />
   Dashboard de Performance · Meta Ads + Kommo CRM
 </footer>
-
-<script>
-const MESES = ['Jul/25', 'Ago/25', 'Set/25', 'Out/25', 'Nov/25', 'Dez/25', 'Jan/26', 'Fev/26', 'Mar/26'];
-const gc = "rgba(0,0,0,0.05)", tc = "#c4b8a8";
-const PDVS = {
-  "SBC": {
-    name:"SBC", color:"#C4786A", color2:"#2a1410", color3:"#f0a090", file:"sbc.html",
-    inv:[2051.75,2140.71,1006.92,1437,1659,1516,1153.91,1342.44,1572.24], leadsCamp:[112,61,26,134,68,147,98,36,52],
-    leadsKommo:[5,12,112,272,132,null,null,null,null], oport:[null,null,null,null,null,null,null,null,null],
-    vendasK:[10,5,6,5,15,9,2,8,11], fatK:[58593,13564,23542,14730,32597,34355,8957,25485,34258],
-    vendasP:[null,null,null,82,101,47,70,75,62], fatP:[null,null,null,268835,283892,121607,206221,277234,213993]
-  },
-  "Santana": {
-    name:"Santana", color:"#7A9E7E", color2:"#141a14", color3:"#a0d4a4", file:"santana.html",
-    inv:[1998.91,1761.69,131.87,1445.42,1478,1530.41,1208.94,1343.12,1452.9], leadsCamp:[23,20,1,54,26,81,41,21,24],
-    leadsKommo:[85,60,57,178,365,null,null,null,null], oport:[17,29,43,null,null,null,null,null,null],
-    vendasK:[12,20,4,8,6,9,4,6,8], fatK:[58636,53492,7957,35313,24122,42988,7409,32638,28796],
-    vendasP:[null,null,null,28,60,44,61,57,55], fatP:[null,null,null,105167,232954,150527,187491,221709,171659]
-  },
-  "Mooca": {
-    name:"Mooca", color:"#C4A882", color2:"#1e1810", color3:"#e8cc9a", file:"mooca.html",
-    inv:[1981.47,2207.6,730.18,1634.81,1828,1534.61,1144,1343.12,1329.12], leadsCamp:[103,134,16,152,105,126,117,43,31],
-    leadsKommo:[84,40,161,433,333,null,null,null,null], oport:[84,40,75,null,null,null,null,null,null],
-    vendasK:[5,6,8,17,2,23,6,15,12], fatK:[36035,9113,38513,69373,28355,88844,15222,55225,44050],
-    vendasP:[null,null,null,114,104,56,121,98,105], fatP:[null,null,null,402273,338597,163109,490575,342956,387746]
-  },
-  "Vila_Olimpia": {
-    name:"Vila Olímpia", color:"#9E7A9E", color2:"#1a1420", color3:"#cca0cc", file:"vila-olimpia.html",
-    inv:[2024,2164.32,282.02,1428,1672,1532.82,1217,1049.52,1511.09], leadsCamp:[70,45,2,94,49,124,90,14,37],
-    leadsKommo:[167,112,101,251,103,null,null,null,null], oport:[65,51,82,null,null,null,null,null,null],
-    vendasK:[7,1,8,3,1,3,3,10,5], fatK:[25768,2487,25776,14581,8345,9147,9147,46223,32037],
-    vendasP:[null,null,null,30,45,12,38,29,22], fatP:[null,null,null,123398,158389,34055,167966,130861,114024]
-  },
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>const PDVS = {
+  "SBC": {name:"SBC",color:"#C4786A",color2:"#fde8e4",color3:"#8B3A2A",file:"sbc.html",inv:[null,null,null,null,null,null,null,null,null,null,null,null,2051.75,2140.71,1006.92,1437,1659,1516,1153.91,1342.44,1572.24],lc:[null,null,null,null,null,null,null,null,null,null,null,null,112,61,26,134,68,147,98,36,52],vk:[null,null,null,null,null,null,null,null,null,null,null,null,10,5,6,5,15,9,2,8,11],fk:[null,null,null,null,null,null,null,null,null,null,null,null,58593,13564,23542,14730,32597,34355,8957,25485,34258],vp:[87,80,75,65,81,65,99,70,92,37,93,71,80,55,64,82,101,47,70,75,62],fp:[284724,211272,264378,249610,262884,86256,300807,203204,298724,134593,325172,236642,244024,279828,194988,268835,283892,121608,206222,277235,213993]},
+  "Santana": {name:"Santana",color:"#7A9E7E",color2:"#e8f0e4",color3:"#3A5A2A",file:"santana.html",inv:[null,null,null,null,null,null,null,null,null,null,null,null,1998.91,1761.69,131.87,1445.42,1478,1530.41,1208.94,1343.12,1452.9],lc:[null,null,null,null,null,null,null,null,null,null,null,null,23,20,1,54,26,81,41,21,24],vk:[null,null,null,null,null,null,null,null,null,null,null,null,12,20,4,8,6,9,4,6,8],fk:[null,null,null,null,null,null,null,null,null,null,null,null,58636,53492,7957,35313,24122,42988,7409,32638,28796],vp:[18,12,20,20,15,4,59,53,62,57,55,51,63,60,55,28,60,44,61,57,55],fp:[16067,10158,22766,30727,8450,2360,195848,138765,199478,153583,168642,190940,195409,164410,207797,105167,232954,150528,187492,221709,171659]},
+  "Mooca": {name:"Mooca",color:"#C4A882",color2:"#fdf0e0",color3:"#7A4A10",file:"mooca.html",inv:[null,null,null,null,null,null,null,null,null,null,null,null,1981.47,2207.6,730.18,1634.81,1828,1534.61,1144,1343.12,1329.12],lc:[null,null,null,null,null,null,null,null,null,null,null,null,103,134,16,152,105,126,117,43,31],vk:[null,null,null,null,null,null,null,null,null,null,null,null,5,6,8,17,2,23,6,15,12],fk:[null,null,null,null,null,null,null,null,null,null,null,null,36035,9113,38513,69373,28355,88844,15222,55225,44050],vp:[148,111,99,90,98,54,124,94,119,84,86,99,108,102,103,114,104,56,121,98,105],fp:[587567,361886,300575,347844,415355,198851,464578,386306,463434,339166,328644,353400,411996,383592,381338,402273,338598,163109,490576,342957,387747]},
+  "Vila": {name:"Vila Olímpia",color:"#9E7A9E",color2:"#f5e8f0",color3:"#6A2A5A",file:"vila-olimpia.html",inv:[null,null,null,null,null,null,null,null,null,null,null,null,2024,2164.32,282.02,1428,1672,1532.82,1217,1049.52,1511.09],lc:[null,null,null,null,null,null,null,null,null,null,null,null,70,45,2,94,49,124,90,14,37],vk:[null,null,null,null,null,null,null,null,null,null,null,null,7,1,8,3,1,3,3,10,5],fk:[null,null,null,null,null,null,null,null,null,null,null,null,25768,2487,25776,14581,8345,9147,9147,46223,32037],vp:[31,35,37,32,38,13,35,20,40,24,35,36,33,18,27,30,45,12,38,29,22],fp:[91868,105523,119835,98740,160544,31268,143630,65476,166588,96087,148356,152045,130222,48887,90029,123398,158390,34055,167966,130862,114024]},
 };
-const CG = { inv:[2051.75,2140.71,1006.92,6018.52,5200,6277,2513,4592.83,3415.27], leads:[112,61,26,845,474,1087,201,231,235] };
+const META_LEADS = [369, 338, 374, 867, 824, 219, 527, 379, 686, 509, 506, 432, 997, 428, 412, 1285, 735, 1577, 563, 355, 382];
+const META_INV   = [6317, 7223, 6818, 6460, 5817, 3043, 6436, 5845, 7890, 6800, 14484, 15197, 15724, 17460, 9851, 14033, 14948, 14452, 10294, 11864, 11932];
+const CG = {inv:[null,null,null,null,null,null,null,null,null,null,null,null,2051.75,2140.71,1006.92,6018.52,5200,6277,2513,4592.83,3415.27],leads:[null,null,null,null,null,null,null,null,null,null,null,null,112,61,26,845,474,1087,201,231,235]};
 
+const MESES = ["Jul/24", "Ago/24", "Set/24", "Out/24", "Nov/24", "Dez/24", "Jan/25", "Fev/25", "Mar/25", "Abr/25", "Mai/25", "Jun/25", "Jul/25", "Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26"];
+const gc = "rgba(0,0,0,0.05)", tc = "#c4b8a8";
 const PDVKEYS = Object.keys(PDVS);
-
 const charts = {};
-function mk(id,type,labels,datasets,opts={}){
-  if(charts[id])charts[id].destroy();
-  const scales = type==="doughnut"||type==="pie"?{}:{
-    x:{ticks:{color:tc,font:{size:10},maxRotation:45,autoSkip:false},grid:{color:gc}},
-    y:{ticks:{color:tc,font:{size:10},callback:opts.yfmt||(v=>v)},grid:{color:gc}}
+
+function mk(id, type, labels, datasets, opts) {
+  opts = opts || {};
+  if (charts[id]) charts[id].destroy();
+  var scales = (type === "doughnut" || type === "pie") ? {} : {
+    x: {ticks: {color: tc, font: {size: 10}, maxRotation: 45, autoSkip: false}, grid: {color: gc}},
+    y: {ticks: {color: tc, font: {size: 10}, callback: opts.yfmt || function(v){return v;}}, grid: {color: gc}}
   };
-  charts[id]=new Chart(document.getElementById(id),{type,data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:opts.tooltip|{}},scales,...(opts.extra||{})}});
-}
-
-const fmtBRL=v=>v==null?"-":"R$ "+Math.round(v).toLocaleString("pt-BR");
-const fmtK=v=>{if(!v&&v!==0)return"-";return v>=1000000?"R$"+(v/1000000).toFixed(2)+"M":v>=1000?"R$"+(v/1000).toFixed(0)+"k":"R$"+Math.round(v);};
-const fmtN=v=>v==null?"-":Math.round(v).toLocaleString("pt-BR");
-const fmtPct=v=>v==null?"-":(v*100).toFixed(1)+"%";
-const sum=(arr,idxs)=>idxs.reduce((s,i)=>s+(arr[i]||0),0);
-
-function kpi(label,value,sub,accent="#df9e92"){
-  return `<div class="kpi" style="--accent:${accent}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div>`;
-}
-
-function getIdxs(p){
-  const de=+document.getElementById(p+"-de").value;
-  const ate=+document.getElementById(p+"-ate").value;
-  const from=Math.min(de,ate),to=Math.max(de,ate);
-  return Array.from({length:to-from+1},(_,i)=>from+i);
-}
-function getSub(idxs){return idxs.length===1?MESES[idxs[0]]:MESES[idxs[0]]+" → "+MESES[idxs[idxs.length-1]];}
-
-function renderMeta(){
-  const idxs=getIdxs("meta"),sub=getSub(idxs),labels=idxs.map(i=>MESES[i]);
-  const tInv=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].inv,idxs),0)+sum(CG.inv,idxs);
-  const tLC=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].leadsCamp,idxs),0)+sum(CG.leads,idxs);
-  const tVK=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].vendasK,idxs),0);
-  document.getElementById("meta-kpis").innerHTML=
-    kpi("Investimento Total",fmtBRL(tInv),sub,"#C4786A")+
-    kpi("Leads Totais",fmtN(tLC),"Camp. Geral + PDVs","#7A9E7E")+
-    kpi("CPL Médio",tLC>0?fmtBRL(tInv/tLC):"-","invest. ÷ leads totais","#C4A882")+
-    kpi("Tx. Conv. Lead → Venda",tLC>0?fmtPct(tVK/tLC):"-","leads → vendas Kommo","#9E7A9E");
-  mk("meta-c1","bar",labels,[
-    ...PDVKEYS.map(k=>({label:k,data:idxs.map(i=>PDVS[k].inv[i]),backgroundColor:PDVS[k].color+"cc",borderColor:PDVS[k].color,borderWidth:0,borderRadius:3,stack:"s"})),
-    {label:"CG",data:idxs.map(i=>CG.inv[i]),backgroundColor:"#6a9ec4cc",borderColor:"#6a9ec4",borderWidth:0,borderRadius:3,stack:"s"}
-  ],{extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10},callback:v=>"R$"+(v>=1000?(v/1000).toFixed(0)+"k":v)},grid:{color:gc}}}}});
-  mk("meta-c2","bar",labels,[
-    {label:"CG",data:idxs.map(i=>CG.leads[i]),backgroundColor:"#6a9ec4cc",borderColor:"#6a9ec4",borderWidth:0,borderRadius:3,stack:"s"},
-    {label:"PDVs",data:idxs.map(i=>PDVKEYS.reduce((s,k)=>s+(PDVS[k].leadsCamp[i]||0),0)),backgroundColor:"#C4786Acc",borderColor:"#C4786A",borderWidth:0,borderRadius:3,stack:"s"}
-  ],{extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}}}}});
-  mk("meta-c3","line",labels,[
-    {data:idxs.map(i=>{const l=PDVKEYS.reduce((s,k)=>s+(PDVS[k].leadsCamp[i]||0),0)+(CG.leads[i]||0);const inv=PDVKEYS.reduce((s,k)=>s+(PDVS[k].inv[i]||0),0)+(CG.inv[i]||0);return l>0?+(inv/l).toFixed(2):null;}),
-      borderColor:"#C4786A",backgroundColor:"#C4786A18",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#C4786A",borderWidth:2}
-  ],{yfmt:v=>v!=null?"R$"+v.toFixed(0):""});
-}
-
-function renderKommo(){
-  const idxs=getIdxs("kommo"),sub=getSub(idxs),labels=idxs.map(i=>MESES[i]);
-  const tFK=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].fatK,idxs),0);
-  const tVK=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].vendasK,idxs),0);
-  const tInv=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].inv,idxs),0)+sum(CG.inv,idxs);
-  document.getElementById("kommo-kpis").innerHTML=
-    kpi("Faturamento Kommo",fmtK(tFK),sub,"#C4786A")+
-    kpi("Vendas Kommo",fmtN(tVK),sub,"#7A9E7E")+
-    kpi("ROAS Kommo",tInv>0?(tFK/tInv).toFixed(1)+"x":"-","fat. Kommo ÷ invest.","#C4A882")+
-    kpi("Ticket Médio",tVK>0?fmtBRL(tFK/tVK):"-","fat. Kommo ÷ vendas","#9E7A9E");
-  mk("kommo-c1","bar",labels,PDVKEYS.map(k=>({label:k,data:idxs.map(i=>PDVS[k].fatK[i]),backgroundColor:PDVS[k].color+"cc",borderColor:PDVS[k].color,borderWidth:0,borderRadius:3,stack:"s"})),
-    {extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10},callback:fmtK},grid:{color:gc}}}}});
-  mk("kommo-c2","bar",labels,PDVKEYS.map(k=>({label:k,data:idxs.map(i=>PDVS[k].vendasK[i]),backgroundColor:PDVS[k].color+"cc",borderColor:PDVS[k].color,borderWidth:0,borderRadius:3,stack:"s"})),
-    {extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}}}}});
-  mk("kommo-c3","line",labels,[
-    {data:idxs.map(i=>{const inv=PDVKEYS.reduce((s,k)=>s+(PDVS[k].inv[i]||0),0)+(CG.inv[i]||0);const fat=PDVKEYS.reduce((s,k)=>s+(PDVS[k].fatK[i]||0),0);return inv>0?+(fat/inv).toFixed(2):null;}),
-      borderColor:"#7A9E7E",backgroundColor:"#7A9E7E18",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#7A9E7E",borderWidth:2}
-  ],{yfmt:v=>v!=null?v.toFixed(1)+"x":""});
-}
-
-function renderPlan(){
-  const idxs=getIdxs("plan"),sub=getSub(idxs),labels=idxs.map(i=>MESES[i]);
-  const tFP=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].fatP,idxs),0);
-  const tVP=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].vendasP,idxs),0);
-  const tInv=PDVKEYS.reduce((s,k)=>s+sum(PDVS[k].inv,idxs),0)+sum(CG.inv,idxs);
-  document.getElementById("plan-kpis").innerHTML=
-    kpi("Faturamento Planilha",tFP>0?fmtK(tFP):"-",sub,"#7A9E7E")+
-    kpi("Vendas Planilha",tVP>0?fmtN(tVP):"-",sub,"#C4786A")+
-    kpi("ROAS Planilha",tInv>0&&tFP>0?(tFP/tInv).toFixed(1)+"x":"-","fat. Plan. ÷ invest.","#C4A882")+
-    kpi("Ticket Médio Planilha",tVP>0?fmtBRL(tFP/tVP):"-","fat. Plan. ÷ vendas Plan.","#9E7A9E");
-  const kommoTotal=idxs.map(i=>PDVKEYS.reduce((s,k)=>s+(PDVS[k].fatK[i]||0),0));
-  const planTotal=idxs.map(i=>PDVKEYS.reduce((s,k)=>s+(PDVS[k].fatP[i]||0),0));
-  mk("plan-c1","bar",labels,[
-    {label:"Planilha",data:planTotal,backgroundColor:"#7A9E7Ecc",borderColor:"#7A9E7E",borderWidth:0,borderRadius:3},
-    {label:"Kommo",data:kommoTotal,backgroundColor:"#C4786Acc",borderColor:"#C4786A",borderWidth:0,borderRadius:3}
-  ],{yfmt:fmtK});
-  mk("plan-c2","bar",labels,PDVKEYS.map(k=>({label:k,data:idxs.map(i=>PDVS[k].fatP[i]),backgroundColor:PDVS[k].color+"cc",borderColor:PDVS[k].color,borderWidth:0,borderRadius:3,stack:"s"})),
-    {extra:{scales:{x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10},callback:fmtK},grid:{color:gc}}}}});
-  const kommoVendas=idxs.map(i=>PDVKEYS.reduce((s,k)=>s+(PDVS[k].vendasK[i]||0),0));
-  const planVendas=idxs.map(i=>PDVKEYS.reduce((s,k)=>s+(PDVS[k].vendasP[i]||0),0));
-  mk("plan-c3","bar",labels,[
-    {label:"Planilha",data:planVendas,backgroundColor:"#7A9E7Ecc",borderColor:"#7A9E7E",borderWidth:0,borderRadius:3},
-    {label:"Kommo",data:kommoVendas,backgroundColor:"#C4786Acc",borderColor:"#C4786A",borderWidth:0,borderRadius:3}
-  ],{yfmt:fmtN});
-}
-
-function renderPDVCards(){
-  PDVKEYS.forEach(k=>{
-    const d=PDVS[k];
-    const tVK=d.vendasK.reduce((s,v)=>s+(v||0),0);
-    const tFK=d.fatK.reduce((s,v)=>s+(v||0),0);
-    const tInv=d.inv.reduce((s,v)=>s+(v||0),0);
-    const tLC=d.leadsCamp.reduce((s,v)=>s+(v||0),0);
-    const roas=tInv>0?(tFK/tInv).toFixed(1)+"x":"-";
-    const el=document.getElementById("card-"+k);
-    if(el)el.innerHTML=
-      `<div class="pdv-stat"><span>Leads campanha</span><span class="pdv-stat-val">${fmtN(tLC)}</span></div>`+
-      `<div class="pdv-stat"><span>Vendas Kommo</span><span class="pdv-stat-val">${fmtN(tVK)}</span></div>`+
-      `<div class="pdv-stat"><span>Fat. Kommo</span><span class="pdv-stat-val">${fmtK(tFK)}</span></div>`+
-      `<div class="pdv-stat"><span>ROAS</span><span class="pdv-stat-val">${roas}</span></div>`;
+  if (opts.extra && opts.extra.scales) scales = opts.extra.scales;
+  charts[id] = new Chart(document.getElementById(id), {
+    type: type,
+    data: {labels: labels, datasets: datasets},
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {legend: {display: false}, tooltip: opts.tooltip || {}},
+      scales: scales
+    }
   });
 }
 
-const built={};
-function setTab(tab){
-  ["meta","kommo","plan","pdvs"].forEach(t=>{
-    document.getElementById("panel-"+t).style.display=t===tab?"":"none";
-    document.getElementById("tab-"+t).classList.toggle("active",t===tab);
-  });
-  if(!built[tab]){built[tab]=true;setTimeout(()=>{
-    if(tab==="meta")renderMeta();
-    if(tab==="kommo")renderKommo();
-    if(tab==="plan")renderPlan();
-    if(tab==="pdvs")renderPDVCards();
-  },60);}
+function fmtBRL(v) { return v == null ? "-" : "R$ " + Math.round(v).toLocaleString("pt-BR"); }
+function fmtK(v) { if (!v && v !== 0) return "-"; return v >= 1000000 ? "R$" + (v/1000000).toFixed(2) + "M" : v >= 1000 ? "R$" + (v/1000).toFixed(0) + "k" : "R$" + Math.round(v); }
+function fmtN(v) { return v == null ? "-" : Math.round(v).toLocaleString("pt-BR"); }
+function fmtPct(v) { return v == null ? "-" : (v * 100).toFixed(1) + "%"; }
+function sum(arr, idxs) { return idxs.reduce(function(s,i){ return s + (arr[i] || 0); }, 0); }
+function kpi(label, value, sub, accent) {
+  accent = accent || "#df9e92";
+  return '<div class="kpi" style="--accent:' + accent + '"><div class="kpi-label">' + label + '</div><div class="kpi-value">' + value + '</div><div class="kpi-sub">' + sub + '</div></div>';
 }
-window.addEventListener("DOMContentLoaded",()=>{built.meta=true;renderMeta();});
+
+function getIdxs(p) {
+  var de = +document.getElementById(p + "-de").value;
+  var ate = +document.getElementById(p + "-ate").value;
+  var from = Math.min(de, ate), to = Math.max(de, ate);
+  var out = [];
+  for (var i = from; i <= to; i++) out.push(i);
+  return out;
+}
+function getSub(idxs) {
+  return idxs.length === 1 ? MESES[idxs[0]] : MESES[idxs[0]] + " → " + MESES[idxs[idxs.length-1]];
+}
+
+function renderMeta() {
+  var idxs = getIdxs("meta"), sub = getSub(idxs);
+  var labels = idxs.map(function(i){ return MESES[i]; });
+  var tInv = sum(META_INV,   idxs);
+  var tLC  = sum(META_LEADS, idxs);
+  var tVK  = PDVKEYS.reduce(function(s,k){ return s + sum(PDVS[k].vk, idxs); }, 0);
+
+  var cpv = tVK > 0 ? fmtBRL(tInv / tVK) : "-";
+  document.getElementById("meta-kpis").innerHTML =
+    kpi("Investimento Total", fmtBRL(tInv), sub, "#C4786A") +
+    kpi("Leads Totais", fmtN(tLC), "Camp. Geral + PDVs", "#7A9E7E") +
+    kpi("CPL Médio", tLC > 0 ? fmtBRL(tInv/tLC) : "-", "invest. ÷ leads totais", "#C4A882") +
+    kpi("Tx. Conv. Lead→Venda", tLC > 0 ? fmtPct(tVK/tLC) : "-", "leads → vendas Kommo", "#9E7A9E") +
+    kpi("Custo por Venda", cpv, "invest. ÷ vendas Kommo", "#C4786A");
+
+  // C1: investimento empilhado por campanha
+  var datasetsC1 = PDVKEYS.map(function(k) {
+    return {label: k, data: idxs.map(function(i){ return PDVS[k].inv[i]; }), backgroundColor: PDVS[k].color + "cc", borderColor: PDVS[k].color, borderWidth: 0, borderRadius: 3, stack: "s"};
+  });
+  datasetsC1.push({label: "CG", data: idxs.map(function(i){ return CG.inv[i]; }), backgroundColor: "#6a9ec4cc", borderColor: "#6a9ec4", borderWidth: 0, borderRadius: 3, stack: "s"});
+  mk("meta-c1", "bar", labels, datasetsC1, {extra: {scales: {
+    x: {stacked: true, ticks: {color: tc, font: {size: 10}, maxRotation: 45}, grid: {color: gc}},
+    y: {stacked: true, ticks: {color: tc, font: {size: 10}, callback: function(v){ return "R$" + (v >= 1000 ? (v/1000).toFixed(0) + "k" : v); }}, grid: {color: gc}}
+  }}});
+
+  // C1b: leads e investimento direto do bd Meta Ads (fonte única, todos os meses)
+  var leadsB = idxs.map(function(i) { return META_LEADS[i] || 0; });
+  var invB   = idxs.map(function(i) { return META_INV[i]   || 0; });
+  if (charts["meta-c1b"]) charts["meta-c1b"].destroy();
+  charts["meta-c1b"] = new Chart(document.getElementById("meta-c1b"), {
+    type: "bar",
+    data: {labels: labels, datasets: [{
+      label: "Leads",
+      data: leadsB,
+      backgroundColor: "#C4786Acc",
+      borderColor: "#C4786A",
+      borderWidth: 0,
+      borderRadius: 4
+    }]},
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {display: false},
+        tooltip: {callbacks: {
+          label: function(item) { return "Leads: " + Math.round(item.raw).toLocaleString("pt-BR"); },
+          afterLabel: function(item) {
+            var v = invB[item.dataIndex];
+            return v > 0 ? "Investimento: R$" + Math.round(v).toLocaleString("pt-BR") : "Investimento: sem dados";
+          }
+        }}
+      },
+      scales: {
+        x: {ticks: {color: tc, font: {size: 10}, maxRotation: 45, autoSkip: false}, grid: {color: gc}},
+        y: {ticks: {color: tc, font: {size: 10}}, grid: {color: gc}}
+      }
+    }
+  });
+
+  // C2: leads por origem
+  mk("meta-c2", "bar", labels, [
+    {label: "CG",   data: idxs.map(function(i){ return CG.leads[i]; }), backgroundColor: "#6a9ec4cc", borderColor: "#6a9ec4", borderWidth: 0, borderRadius: 3, stack: "s"},
+    {label: "PDVs", data: idxs.map(function(i){ return PDVKEYS.reduce(function(s,k){ return s+(PDVS[k].lc[i]||0);},0); }), backgroundColor: "#C4786Acc", borderColor: "#C4786A", borderWidth: 0, borderRadius: 3, stack: "s"}
+  ], {extra: {scales: {
+    x: {stacked: true, ticks: {color: tc, font: {size: 10}, maxRotation: 45}, grid: {color: gc}},
+    y: {stacked: true, ticks: {color: tc, font: {size: 10}}, grid: {color: gc}}
+  }}});
+
+  // C3: CPL linha — usa META_LEADS e META_INV como fonte única
+  mk("meta-c3", "line", labels, [{
+    data: idxs.map(function(i) {
+      var l   = META_LEADS[i] || 0;
+      var inv = META_INV[i]   || 0;
+      return l > 0 ? +(inv/l).toFixed(2) : null;
+    }),
+    borderColor: "#C4786A", backgroundColor: "#C4786A18", fill: true, tension: .4, pointRadius: 4, pointBackgroundColor: "#C4786A", borderWidth: 2
+  }], {yfmt: function(v){ return v != null ? "R$" + v.toFixed(0) : ""; }});
+}
+
+function renderKommo() {
+  var idxs = getIdxs("kommo"), sub = getSub(idxs);
+  var labels = idxs.map(function(i){ return MESES[i]; });
+  var tFK = PDVKEYS.reduce(function(s,k){ return s + sum(PDVS[k].fk, idxs); }, 0);
+  var tVK = PDVKEYS.reduce(function(s,k){ return s + sum(PDVS[k].vk, idxs); }, 0);
+  var tInv = PDVKEYS.reduce(function(s,k){ return s + sum(PDVS[k].inv, idxs); }, 0) + sum(CG.inv, idxs);
+
+  document.getElementById("kommo-kpis").innerHTML =
+    kpi("Faturamento Kommo", fmtK(tFK), sub, "#C4786A") +
+    kpi("Vendas Kommo", fmtN(tVK), sub, "#7A9E7E") +
+    kpi("ROAS Kommo", tInv > 0 ? (tFK/tInv).toFixed(1) + "x" : "-", "fat. Kommo ÷ invest.", "#C4A882") +
+    kpi("Ticket Médio", tVK > 0 ? fmtBRL(tFK/tVK) : "-", "fat. Kommo ÷ vendas", "#9E7A9E");
+
+  mk("kommo-c1", "bar", labels, PDVKEYS.map(function(k) {
+    return {label: k, data: idxs.map(function(i){ return PDVS[k].fk[i]; }), backgroundColor: PDVS[k].color + "cc", borderColor: PDVS[k].color, borderWidth: 0, borderRadius: 3, stack: "s"};
+  }), {extra: {scales: {x: {stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}}, y: {stacked:true,ticks:{color:tc,font:{size:10},callback:fmtK},grid:{color:gc}}}}});
+
+  mk("kommo-c2", "bar", labels, PDVKEYS.map(function(k) {
+    return {label: k, data: idxs.map(function(i){ return PDVS[k].vk[i]; }), backgroundColor: PDVS[k].color + "cc", borderColor: PDVS[k].color, borderWidth: 0, borderRadius: 3, stack: "s"};
+  }), {extra: {scales: {x: {stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}}, y: {stacked:true,ticks:{color:tc,font:{size:10}}            ,grid:{color:gc}}}}});
+
+  mk("kommo-c3", "line", labels, [{
+    data: idxs.map(function(i) {
+      var inv = PDVKEYS.reduce(function(s,k){ return s+(PDVS[k].inv[i]||0);},0)+(CG.inv[i]||0);
+      var fat = PDVKEYS.reduce(function(s,k){ return s+(PDVS[k].fk[i]||0);},0);
+      return inv > 0 ? +(fat/inv).toFixed(2) : null;
+    }),
+    borderColor: "#C4786A", backgroundColor: "#C4786A18", fill: true, tension: .4, pointRadius: 4, pointBackgroundColor: "#C4786A", borderWidth: 2
+  }], {yfmt: function(v){ return v != null ? v.toFixed(1) + "x" : ""; }});
+}
+
+function renderPlan() {
+  var idxs = getIdxs("plan"), sub = getSub(idxs);
+  var prevIdx = idxs[0] > 0 ? [idxs[0]-1] : null;
+  function delta(curr, prev) {
+    if (!prevIdx || !prev || prev === 0) return "";
+    var pct = ((curr - prev) / prev * 100).toFixed(1);
+    var up = curr >= prev;
+    return ' <span style="font-size:11px;padding:2px 7px;border-radius:10px;background:' + (up?'#eaf3de':'#fceae8') + ';color:' + (up?'#3A6A1A':'#922') + '">' + (up?'▲':'▼') + ' ' + Math.abs(pct) + '%</span>';
+  }
+  var labels = idxs.map(function(i){ return MESES[i]; });
+  var tFP  = PDVKEYS.reduce(function(s,k){ return s + sum(PDVS[k].fp, idxs); }, 0);
+  var tVP  = PDVKEYS.reduce(function(s,k){ return s + sum(PDVS[k].vp, idxs); }, 0);
+  var tInv = PDVKEYS.reduce(function(s,k){ return s + sum(PDVS[k].inv, idxs); }, 0) + sum(CG.inv, idxs);
+
+  document.getElementById("plan-kpis").innerHTML =
+    kpi("Faturamento Planilha", fmtK(tFP), sub, "#7A9E7E") +
+    kpi("Vendas Planilha", fmtN(tVP), sub, "#C4786A") +
+    kpi("ROAS Planilha", tInv > 0 && tFP > 0 ? (tFP/tInv).toFixed(1) + "x" : "-", "fat. Plan. ÷ invest.", "#C4A882") +
+    kpi("Ticket Médio Planilha", tVP > 0 ? fmtBRL(tFP/tVP) : "-", "fat. Plan. ÷ vendas Plan.", "#9E7A9E");
+
+  var kommoTotal = idxs.map(function(i){ return PDVKEYS.reduce(function(s,k){ return s+(PDVS[k].fk[i]||0);},0); });
+  var planTotal  = idxs.map(function(i){ return PDVKEYS.reduce(function(s,k){ return s+(PDVS[k].fp[i]||0);},0); });
+  mk("plan-c1", "bar", labels, [
+    {label:"Planilha", data:planTotal,  backgroundColor:"#7A9E7Ecc", borderColor:"#7A9E7E", borderWidth:0, borderRadius:3},
+    {label:"Kommo",   data:kommoTotal, backgroundColor:"#C4786Acc", borderColor:"#C4786A", borderWidth:0, borderRadius:3}
+  ], {yfmt: fmtK});
+
+  mk("plan-c2", "bar", labels, PDVKEYS.map(function(k) {
+    return {label:k, data:idxs.map(function(i){ return PDVS[k].fp[i]; }), backgroundColor:PDVS[k].color+"cc", borderColor:PDVS[k].color, borderWidth:0, borderRadius:3, stack:"s"};
+  }), {extra: {scales: {x:{stacked:true,ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{stacked:true,ticks:{color:tc,font:{size:10},callback:fmtK},grid:{color:gc}}}}});
+
+  var vpTotal = idxs.map(function(i){ return PDVKEYS.reduce(function(s,k){ return s+(PDVS[k].vp[i]||0);},0); });
+  mk("plan-c3", "bar", labels, [
+    {label:"Vendas", data:vpTotal, backgroundColor:"#7A9E7Ecc", borderColor:"#7A9E7E", borderWidth:0, borderRadius:3}
+  ], {yfmt: fmtN});
+
+  // Ticket Médio linha
+  mk("plan-c4", "line", labels, [{
+    data: idxs.map(function(i) {
+      var fp = PDVKEYS.reduce(function(s,k){ return s+(PDVS[k].fp[i]||0);},0);
+      var vp = PDVKEYS.reduce(function(s,k){ return s+(PDVS[k].vp[i]||0);},0);
+      return vp > 0 ? Math.round(fp/vp) : null;
+    }),
+    borderColor:"#7A9E7E", backgroundColor:"#7A9E7E18", fill:true, tension:.4, pointRadius:4, pointBackgroundColor:"#7A9E7E", borderWidth:2
+  }], {yfmt: function(v){ return v ? "R$"+v.toLocaleString("pt-BR") : ""; }});
+
+}
+
+function renderPDVCards() {
+  PDVKEYS.forEach(function(k) {
+    var d = PDVS[k];
+    var tFP  = d.fp.reduce(function(s,v){ return s+(v||0);},0);
+    var tVP  = d.vp.reduce(function(s,v){ return s+(v||0);},0);
+    var tFK  = d.fk.reduce(function(s,v){ return s+(v||0);},0);
+    var tInv = d.inv.reduce(function(s,v){ return s+(v||0);},0);
+    var roas = tInv > 0 ? (tFP/tInv).toFixed(1) + "x" : "-";
+    var el = document.getElementById("card-" + k);
+    if (el) el.innerHTML =
+      '<div class="pdv-stat"><span>Fat. Planilha acum.</span><span class="pdv-stat-val">' + fmtK(tFP) + '</span></div>' +
+      '<div class="pdv-stat"><span>Vendas Planilha</span><span class="pdv-stat-val">' + fmtN(tVP) + '</span></div>' +
+      '<div class="pdv-stat"><span>Fat. Kommo acum.</span><span class="pdv-stat-val">' + fmtK(tFK) + '</span></div>' +
+      '<div class="pdv-stat"><span>ROAS Planilha</span><span class="pdv-stat-val">' + roas + '</span></div>';
+  });
+}
+
+var built = {};
+function setTab(tab) {
+  ["meta","kommo","plan","pdvs"].forEach(function(t) {
+    document.getElementById("panel-" + t).style.display = t === tab ? "" : "none";
+    document.getElementById("tab-" + t).classList.toggle("active", t === tab);
+  });
+  if (!built[tab]) {
+    built[tab] = true;
+    setTimeout(function() {
+      if (tab === "meta")  renderMeta();
+      if (tab === "kommo") renderKommo();
+      if (tab === "plan")  renderPlan();
+      if (tab === "pdvs")  renderPDVCards();
+    }, 60);
+  }
+}
+window.addEventListener("DOMContentLoaded", function() { built.meta = true; renderMeta(); });
 </script>
 </body>
 </html>

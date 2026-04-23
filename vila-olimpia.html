@@ -9,32 +9,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,sans-serif;background:#f7f3f0;color:#2c2018;min-height:100vh;font-size:14px}
-
 header{background:#fff;border-bottom:3px solid #df9e92;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 header img{height:72px;width:auto}
 .header-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
 .pdv-badge{font-size:13px;font-weight:700;background:#f5e8f0;color:#6A2A5A;padding:5px 16px;border-radius:20px;border:2px solid #9E7A9E}
 header span{font-size:11px;color:#a89880;background:#f7f3f0;padding:3px 10px;border-radius:20px;border:1px solid #e8e0d8}
-
 .container{max-width:1080px;margin:0 auto;padding:28px 24px}
-
 .tabs{display:flex;gap:4px;margin-bottom:28px;background:#ede8e2;border-radius:12px;padding:4px}
-.tab{font-size:12px;font-weight:500;padding:8px 22px;border-radius:8px;border:none;background:transparent;color:#8a7060;cursor:pointer;transition:all .2s;letter-spacing:.01em;flex:1}
+.tab{font-size:12px;font-weight:500;padding:8px 22px;border-radius:8px;border:none;background:transparent;color:#8a7060;cursor:pointer;transition:all .2s;flex:1}
 .tab:hover{color:#2c2018;background:rgba(255,255,255,.5)}
 .tab.active{background:#fff;color:#2c2018;font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-
 .filter-row{display:flex;align-items:center;gap:10px;margin-bottom:24px;flex-wrap:wrap}
 .filter-row label{font-size:12px;color:#a89880;font-weight:500}
 .filter-row select{font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid #ddd8d0;background:#fff;color:#2c2018;cursor:pointer;outline:none;font-family:inherit}
 .filter-row select:focus{border-color:#9E7A9E}
-
 .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px}
 .kpi-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:24px}
 .kpi{background:#fff;border-radius:12px;padding:20px;border-top:3px solid var(--accent,#9E7A9E);box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .kpi-label{font-size:10px;color:#a89880;margin-bottom:8px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
 .kpi-value{font-size:26px;font-weight:700;color:#2c2018;line-height:1;letter-spacing:-.02em}
 .kpi-sub{font-size:11px;color:#c4b8a8;margin-top:6px}
-
 .chart-wrap{background:#fff;border-radius:12px;padding:22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .chart-title{font-size:13px;font-weight:600;color:#2c2018;margin-bottom:3px}
 .chart-desc{font-size:11px;color:#c4b8a8;margin-bottom:14px}
@@ -42,15 +36,12 @@ header span{font-size:11px;color:#a89880;background:#f7f3f0;padding:3px 10px;bor
 .leg{display:flex;align-items:center;gap:5px}
 .leg-sq{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-
 footer{text-align:center;padding:20px;font-size:11px;color:#c4b8a8;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
 footer img{height:28px;opacity:.25}
-
 @media(max-width:760px){.kpi-grid,.kpi-grid-3{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}header{padding:12px 20px}.container{padding:16px}.tab{padding:7px 10px;font-size:11px}}
 </style>
 </head>
 <body>
-
 <header>
   <img src="data:image/png;base64,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" alt="Allegrini" />
   <div class="header-right">
@@ -58,7 +49,6 @@ footer img{height:28px;opacity:.25}
     <span>Dashboard · Abr/26</span>
   </div>
 </header>
-
 <div class="container">
   <div class="tabs">
     <button class="tab active" id="tab-meta" onclick="setTab('meta')">Meta Ads</button>
@@ -66,77 +56,74 @@ footer img{height:28px;opacity:.25}
     <button class="tab" id="tab-plan" onclick="setTab('plan')">Planilha</button>
   </div>
 
-  <!-- META ADS -->
   <div id="panel-meta">
     <div class="filter-row">
-      <label>De</label><select id="meta-de" onchange="renderMeta()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
-      <label>até</label><select id="meta-ate" onchange="renderMeta()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+      <label>De</label><select id="meta-de" onchange="renderMeta()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20">Mar/26</option></select>
+      <label>até</label><select id="meta-ate" onchange="renderMeta()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20" selected>Mar/26</option></select>
     </div>
     <div class="kpi-grid" id="meta-kpis"></div>
     <div class="chart-wrap">
       <div class="chart-title">Investimento vs Leads Campanha</div>
-      <div class="chart-desc">Barras = investimento Meta Ads (R$) · Linha = leads gerados pela campanha PDV Vila Olímpia</div>
+      <div class="chart-desc">Barras = investimento Meta Ads (R$) · Linha = leads gerados pela campanha PDV</div>
       <div class="legend">
-        <span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Investimento (R$)</span>
+        <span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Investimento</span>
         <span class="leg"><span class="leg-sq" style="background:#6a9ec4"></span>Leads campanha</span>
       </div>
-      <div style="position:relative;height:260px"><canvas id="meta-c1" role="img" aria-label="Investimento e leads"></canvas></div>
+      <div style="position:relative;height:260px"><canvas id="meta-c1"></canvas></div>
     </div>
     <div class="two-col">
       <div class="chart-wrap">
         <div class="chart-title">CPL — Custo por Lead (R$)</div>
-        <div class="chart-desc">Evolução do custo por lead da campanha PDV Vila Olímpia</div>
-        <div style="position:relative;height:220px"><canvas id="meta-c2" role="img" aria-label="CPL"></canvas></div>
+        <div class="chart-desc">Investimento ÷ leads da campanha PDV</div>
+        <div style="position:relative;height:220px"><canvas id="meta-c2"></canvas></div>
       </div>
       <div class="chart-wrap">
-        <div class="chart-title">Tx. de Conversão — Lead → Venda (%)</div>
-        <div class="chart-desc">Leads da campanha que se tornaram vendas no Kommo</div>
-        <div style="position:relative;height:220px"><canvas id="meta-c3" role="img" aria-label="Taxa de conversão"></canvas></div>
+        <div class="chart-title">Tx. Conversão Lead → Venda (%)</div>
+        <div class="chart-desc">Leads campanha que viraram vendas Kommo</div>
+        <div style="position:relative;height:220px"><canvas id="meta-c3"></canvas></div>
       </div>
     </div>
   </div>
 
-  <!-- KOMMO -->
   <div id="panel-kommo" style="display:none">
     <div class="filter-row">
-      <label>De</label><select id="kommo-de" onchange="renderKommo()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
-      <label>até</label><select id="kommo-ate" onchange="renderKommo()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+      <label>De</label><select id="kommo-de" onchange="renderKommo()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20">Mar/26</option></select>
+      <label>até</label><select id="kommo-ate" onchange="renderKommo()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20" selected>Mar/26</option></select>
     </div>
     <div class="kpi-grid" id="kommo-kpis"></div>
     <div class="chart-wrap">
-      <div class="chart-title">Faturamento Kommo por mês (R$)</div>
-      <div class="chart-desc">Faturamento registrado no CRM quando a negociação é fechada</div>
-      <div style="position:relative;height:260px"><canvas id="kommo-c1" role="img" aria-label="Faturamento Kommo"></canvas></div>
+      <div class="chart-title">Faturamento Kommo (R$)</div>
+      <div class="chart-desc">Faturamento registrado no CRM por mês</div>
+      <div style="position:relative;height:260px"><canvas id="kommo-c1"></canvas></div>
     </div>
     <div class="two-col">
       <div class="chart-wrap">
-        <div class="chart-title">Vendas Kommo por mês</div>
-        <div class="chart-desc">Quantidade de vendas fechadas no Kommo CRM</div>
-        <div style="position:relative;height:220px"><canvas id="kommo-c2" role="img" aria-label="Vendas Kommo"></canvas></div>
+        <div class="chart-title">Vendas Kommo</div>
+        <div class="chart-desc">Negociações fechadas no CRM por mês</div>
+        <div style="position:relative;height:220px"><canvas id="kommo-c2"></canvas></div>
       </div>
       <div class="chart-wrap">
-        <div class="chart-title">ROAS Kommo por mês</div>
+        <div class="chart-title">ROAS Kommo</div>
         <div class="chart-desc">Faturamento Kommo ÷ Investimento Meta Ads</div>
-        <div style="position:relative;height:220px"><canvas id="kommo-c3" role="img" aria-label="ROAS Kommo"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="kommo-c3"></canvas></div>
       </div>
     </div>
   </div>
 
-  <!-- PLANILHA -->
   <div id="panel-plan" style="display:none">
     <div class="filter-row">
-      <label>De</label><select id="plan-de" onchange="renderPlan()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8">Mar/26</option></select>
-      <label>até</label><select id="plan-ate" onchange="renderPlan()"><option value="0">Jul/25</option><option value="1">Ago/25</option><option value="2">Set/25</option><option value="3">Out/25</option><option value="4">Nov/25</option><option value="5">Dez/25</option><option value="6">Jan/26</option><option value="7">Fev/26</option><option value="8" selected>Mar/26</option></select>
+      <label>De</label><select id="plan-de" onchange="renderPlan()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20">Mar/26</option></select>
+      <label>até</label><select id="plan-ate" onchange="renderPlan()"><option value="0">Jul/24</option><option value="1">Ago/24</option><option value="2">Set/24</option><option value="3">Out/24</option><option value="4">Nov/24</option><option value="5">Dez/24</option><option value="6">Jan/25</option><option value="7">Fev/25</option><option value="8">Mar/25</option><option value="9">Abr/25</option><option value="10">Mai/25</option><option value="11">Jun/25</option><option value="12">Jul/25</option><option value="13">Ago/25</option><option value="14">Set/25</option><option value="15">Out/25</option><option value="16">Nov/25</option><option value="17">Dez/25</option><option value="18">Jan/26</option><option value="19">Fev/26</option><option value="20" selected>Mar/26</option></select>
     </div>
     <div class="kpi-grid" id="plan-kpis"></div>
     <div class="chart-wrap">
       <div class="chart-title">Faturamento — Planilha vs Kommo (R$)</div>
-      <div class="chart-desc">Planilha = recebimento financeiro confirmado · Kommo = fechamento no CRM · A diferença revela a defasagem entre fechamento e pagamento</div>
+      <div class="chart-desc">Planilha = recebimento confirmado · Kommo = fechamento no CRM</div>
       <div class="legend">
         <span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Planilha</span>
         <span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Kommo</span>
       </div>
-      <div style="position:relative;height:260px"><canvas id="plan-c1" role="img" aria-label="Faturamento"></canvas></div>
+      <div style="position:relative;height:260px"><canvas id="plan-c1"></canvas></div>
     </div>
     <div class="two-col">
       <div class="chart-wrap">
@@ -146,12 +133,12 @@ footer img{height:28px;opacity:.25}
           <span class="leg"><span class="leg-sq" style="background:#7A9E7E"></span>Planilha</span>
           <span class="leg"><span class="leg-sq" style="background:#9E7A9E"></span>Kommo</span>
         </div>
-        <div style="position:relative;height:220px"><canvas id="plan-c2" role="img" aria-label="Vendas"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="plan-c2"></canvas></div>
       </div>
       <div class="chart-wrap">
-        <div class="chart-title">ROAS Planilha por mês</div>
+        <div class="chart-title">ROAS Planilha</div>
         <div class="chart-desc">Faturamento Planilha ÷ Investimento Meta Ads</div>
-        <div style="position:relative;height:220px"><canvas id="plan-c3" role="img" aria-label="ROAS Planilha"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="plan-c3"></canvas></div>
       </div>
     </div>
   </div>
@@ -163,15 +150,12 @@ footer img{height:28px;opacity:.25}
 </footer>
 
 <script>
-const MESES=['Jul/25', 'Ago/25', 'Set/25', 'Out/25', 'Nov/25', 'Dez/25', 'Jan/26', 'Fev/26', 'Mar/26'];
+const MESES=['Jul/24', 'Ago/24', 'Set/24', 'Out/24', 'Nov/24', 'Dez/24', 'Jan/25', 'Fev/25', 'Mar/25', 'Abr/25', 'Mai/25', 'Jun/25', 'Jul/25', 'Ago/25', 'Set/25', 'Out/25', 'Nov/25', 'Dez/25', 'Jan/26', 'Fev/26', 'Mar/26'];
 const gc="rgba(0,0,0,0.05)",tc="#c4b8a8";
 const D={
-  inv:[2024,2164.32,282.02,1428,1672,1532.82,1217,1049.52,1511.09],leadsCamp:[70,45,2,94,49,124,90,14,37],
-  leadsKommo:[167,112,101,251,103,null,null,null,null],oport:[65,51,82,null,null,null,null,null,null],
-  vendasK:[7,1,8,3,1,3,3,10,5],fatK:[25768,2487,25776,14581,8345,9147,9147,46223,32037],
-  vendasP:[null,null,null,30,45,12,38,29,22],fatP:[null,null,null,123398,158389,34055,167966,130861,114024]
+  inv:[null,null,null,null,null,null,null,null,null,null,null,null,2024,2164.32,282.02,1428,1672,1532.82,1217,1049.52,1511.09],lc:[null,null,null,null,null,null,null,null,null,null,null,null,70,45,2,94,49,124,90,14,37],lk:[null,null,null,null,null,null,null,null,null,null,null,null,167,112,101,251,103,null,null,null,null],
+  vk:[null,null,null,null,null,null,null,null,null,null,null,null,7,1,8,3,1,3,3,10,5],fk:[null,null,null,null,null,null,null,null,null,null,null,null,25768,2487,25776,14581,8345,9147,9147,46223,32037],vp:[31,35,37,32,38,13,35,20,40,24,35,36,33,18,27,30,45,12,38,29,22],fp:[91868,105523,119835,98740,160544,31268,143630,65476,166588,96087,148356,152045,130222,48887,90029,123398,158390,34055,167966,130862,114024]
 };
-
 const charts={};
 function mk(id,type,labels,datasets,opts={}){
   if(charts[id])charts[id].destroy();
@@ -181,20 +165,14 @@ function mk(id,type,labels,datasets,opts={}){
   };
   charts[id]=new Chart(document.getElementById(id),{type,data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:opts.tooltip|{}},scales,...(opts.extra||{})}});
 }
-
 const fmtBRL=v=>v==null?"-":"R$ "+Math.round(v).toLocaleString("pt-BR");
 const fmtK=v=>{if(!v&&v!==0)return"-";return v>=1000000?"R$"+(v/1000000).toFixed(2)+"M":v>=1000?"R$"+(v/1000).toFixed(0)+"k":"R$"+Math.round(v);};
 const fmtN=v=>v==null?"-":Math.round(v).toLocaleString("pt-BR");
 const fmtPct=v=>v==null?"-":(v*100).toFixed(1)+"%";
 const sum=(arr,idxs)=>idxs.reduce((s,i)=>s+(arr[i]||0),0);
-
-function kpi(label,value,sub,accent="#9E7A9E"){
-  return `<div class="kpi" style="--accent:${accent}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div>`;
-}
-
+function kpi(label,value,sub,accent="#9E7A9E"){return`<div class="kpi" style="--accent:${accent}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div>`;}
 function getIdxs(p){
-  const de=+document.getElementById(p+"-de").value;
-  const ate=+document.getElementById(p+"-ate").value;
+  const de=+document.getElementById(p+"-de").value,ate=+document.getElementById(p+"-ate").value;
   const from=Math.min(de,ate),to=Math.max(de,ate);
   return Array.from({length:to-from+1},(_,i)=>from+i);
 }
@@ -202,71 +180,50 @@ function getSub(idxs){return idxs.length===1?MESES[idxs[0]]:MESES[idxs[0]]+" →
 
 function renderMeta(){
   const idxs=getIdxs("meta"),sub=getSub(idxs),labels=idxs.map(i=>MESES[i]);
-  const tInv=sum(D.inv,idxs),tLC=sum(D.leadsCamp,idxs),tVK=sum(D.vendasK,idxs);
+  const tInv=sum(D.inv,idxs),tLC=sum(D.lc,idxs),tVK=sum(D.vk,idxs);
   document.getElementById("meta-kpis").innerHTML=
     kpi("Investimento",fmtBRL(tInv),sub)+
     kpi("Leads Campanha PDV",fmtN(tLC),sub)+
-    kpi("CPL — Custo por Lead",tLC>0?fmtBRL(tInv/tLC):"-","invest. ÷ leads campanha")+
-    kpi("Tx. Conv. Lead → Venda",tLC>0?fmtPct(tVK/tLC):"-","leads camp. → vendas Kommo");
+    kpi("CPL",tLC>0?fmtBRL(tInv/tLC):"-","invest. ÷ leads campanha")+
+    kpi("Tx. Conv. Lead→Venda",tLC>0?fmtPct(tVK/tLC):"-","leads → vendas Kommo");
   mk("meta-c1","bar",labels,[
-    {label:"Inv",data:idxs.map(i=>D.inv[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3,yAxisID:"y"},
-    {label:"Leads",data:idxs.map(i=>D.leadsCamp[i]),type:"line",borderColor:"#6a9ec4",backgroundColor:"transparent",borderWidth:2,pointRadius:4,pointBackgroundColor:"#6a9ec4",tension:.4,yAxisID:"y2"}
-  ],{extra:{scales:{
-    x:{ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},
-    y:{ticks:{color:tc,font:{size:10},callback:v=>"R$"+(v>=1000?(v/1000).toFixed(0)+"k":v)},grid:{color:gc},position:"left"},
-    y2:{ticks:{color:tc,font:{size:10}},grid:{display:false},position:"right"}
-  }}});
-  mk("meta-c2","line",labels,[
-    {data:idxs.map(i=>D.leadsCamp[i]>0?+(D.inv[i]/D.leadsCamp[i]).toFixed(2):null),
-      borderColor:"#9E7A9E",backgroundColor:"#9E7A9E18",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#9E7A9E",borderWidth:2}
-  ],{yfmt:v=>v!=null?"R$"+v.toFixed(0):""});
-  mk("meta-c3","line",labels,[
-    {data:idxs.map(i=>D.leadsCamp[i]>0?+(D.vendasK[i]/D.leadsCamp[i]*100).toFixed(1):null),
-      borderColor:"#6a9ec4",backgroundColor:"#6a9ec418",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#6a9ec4",borderWidth:2}
-  ],{yfmt:v=>v!=null?v.toFixed(1)+"%":""});
+    {data:idxs.map(i=>D.inv[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3,yAxisID:"y",label:"Inv"},
+    {data:idxs.map(i=>D.lc[i]),type:"line",borderColor:"#6a9ec4",backgroundColor:"transparent",borderWidth:2,pointRadius:4,pointBackgroundColor:"#6a9ec4",tension:.4,yAxisID:"y2",label:"LC"}
+  ],{extra:{scales:{x:{ticks:{color:tc,font:{size:10},maxRotation:45},grid:{color:gc}},y:{ticks:{color:tc,font:{size:10},callback:v=>"R$"+(v>=1000?(v/1000).toFixed(0)+"k":v)},grid:{color:gc},position:"left"},y2:{ticks:{color:tc,font:{size:10}},grid:{display:false},position:"right"}}}});
+  mk("meta-c2","line",labels,[{data:idxs.map(i=>D.lc[i]>0?+(D.inv[i]/D.lc[i]).toFixed(2):null),borderColor:"#9E7A9E",backgroundColor:"#9E7A9E18",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#9E7A9E",borderWidth:2}],{yfmt:v=>v!=null?"R$"+v.toFixed(0):""});
+  mk("meta-c3","line",labels,[{data:idxs.map(i=>D.lc[i]>0?+(D.vk[i]/D.lc[i]*100).toFixed(1):null),borderColor:"#6a9ec4",backgroundColor:"#6a9ec418",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#6a9ec4",borderWidth:2}],{yfmt:v=>v!=null?v.toFixed(1)+"%":""});
 }
 
 function renderKommo(){
   const idxs=getIdxs("kommo"),sub=getSub(idxs),labels=idxs.map(i=>MESES[i]);
-  const tInv=sum(D.inv,idxs),tLK=sum(D.leadsKommo,idxs),tOp=sum(D.oport,idxs);
-  const tVK=sum(D.vendasK,idxs),tFK=sum(D.fatK,idxs);
+  const tInv=sum(D.inv,idxs),tLK=sum(D.lk,idxs),tVK=sum(D.vk,idxs),tFK=sum(D.fk,idxs);
   document.getElementById("kommo-kpis").innerHTML=
-    kpi("Leads Entrada Kommo",tLK>0?fmtN(tLK):"-","leads que entraram no CRM")+
+    kpi("Leads Entrada Kommo",tLK>0?fmtN(tLK):"-","leads no CRM")+
     kpi("Vendas Kommo",fmtN(tVK),sub)+
     kpi("Faturamento Kommo",fmtK(tFK),sub)+
-    kpi("ROAS Kommo",tInv>0?(tFK/tInv).toFixed(1)+"x":"-","fat. Kommo ÷ investimento");
-  mk("kommo-c1","bar",labels,[
-    {data:idxs.map(i=>D.fatK[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3}
-  ],{yfmt:fmtK});
-  mk("kommo-c2","bar",labels,[
-    {data:idxs.map(i=>D.vendasK[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3}
-  ],{yfmt:fmtN});
-  mk("kommo-c3","line",labels,[
-    {data:idxs.map(i=>D.inv[i]>0?+(D.fatK[i]/D.inv[i]).toFixed(2):null),
-      borderColor:"#9E7A9E",backgroundColor:"#9E7A9E18",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#9E7A9E",borderWidth:2}
-  ],{yfmt:v=>v!=null?v.toFixed(1)+"x":""});
+    kpi("ROAS Kommo",tInv>0?(tFK/tInv).toFixed(1)+"x":"-","fat. Kommo ÷ invest.");
+  mk("kommo-c1","bar",labels,[{data:idxs.map(i=>D.fk[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3}],{yfmt:fmtK});
+  mk("kommo-c2","bar",labels,[{data:idxs.map(i=>D.vk[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3}],{yfmt:fmtN});
+  mk("kommo-c3","line",labels,[{data:idxs.map(i=>D.inv[i]>0?+(D.fk[i]/D.inv[i]).toFixed(2):null),borderColor:"#9E7A9E",backgroundColor:"#9E7A9E18",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#9E7A9E",borderWidth:2}],{yfmt:v=>v!=null?v.toFixed(1)+"x":""});
 }
 
 function renderPlan(){
   const idxs=getIdxs("plan"),sub=getSub(idxs),labels=idxs.map(i=>MESES[i]);
-  const tInv=sum(D.inv,idxs),tVP=sum(D.vendasP,idxs),tFP=sum(D.fatP,idxs),tVK=sum(D.vendasK,idxs),tFK=sum(D.fatK,idxs);
+  const tInv=sum(D.inv,idxs),tVP=sum(D.vp,idxs),tFP=sum(D.fp,idxs),tVK=sum(D.vk,idxs),tFK=sum(D.fk,idxs);
   document.getElementById("plan-kpis").innerHTML=
-    kpi("Vendas Planilha",tVP>0?fmtN(tVP):"-",sub,"#7A9E7E")+
-    kpi("Faturamento Planilha",tFP>0?fmtK(tFP):"-",sub,"#7A9E7E")+
-    kpi("ROAS Planilha",tInv>0&&tFP>0?(tFP/tInv).toFixed(1)+"x":"-","fat. Plan. ÷ investimento","#7A9E7E")+
+    kpi("Vendas Planilha",fmtN(tVP),sub,"#7A9E7E")+
+    kpi("Faturamento Planilha",fmtK(tFP),sub,"#7A9E7E")+
+    kpi("ROAS Planilha",tInv>0&&tFP>0?(tFP/tInv).toFixed(1)+"x":"-","fat. Plan. ÷ invest.","#7A9E7E")+
     kpi("Ticket Médio Planilha",tVP>0?fmtBRL(tFP/tVP):"-","fat. Plan. ÷ vendas Plan.","#7A9E7E");
   mk("plan-c1","bar",labels,[
-    {label:"Planilha",data:idxs.map(i=>D.fatP[i]),backgroundColor:"#7A9E7Ecc",borderColor:"#7A9E7E",borderWidth:0,borderRadius:3},
-    {label:"Kommo",data:idxs.map(i=>D.fatK[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3}
+    {data:idxs.map(i=>D.fp[i]),backgroundColor:"#7A9E7Ecc",borderColor:"#7A9E7E",borderWidth:0,borderRadius:3,label:"Plan"},
+    {data:idxs.map(i=>D.fk[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3,label:"Kommo"}
   ],{yfmt:fmtK});
   mk("plan-c2","bar",labels,[
-    {label:"Planilha",data:idxs.map(i=>D.vendasP[i]),backgroundColor:"#7A9E7Ecc",borderColor:"#7A9E7E",borderWidth:0,borderRadius:3},
-    {label:"Kommo",data:idxs.map(i=>D.vendasK[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3}
+    {data:idxs.map(i=>D.vp[i]),backgroundColor:"#7A9E7Ecc",borderColor:"#7A9E7E",borderWidth:0,borderRadius:3,label:"Plan"},
+    {data:idxs.map(i=>D.vk[i]),backgroundColor:"#9E7A9Ecc",borderColor:"#9E7A9E",borderWidth:0,borderRadius:3,label:"Kommo"}
   ],{yfmt:fmtN});
-  mk("plan-c3","line",labels,[
-    {data:idxs.map(i=>D.inv[i]>0&&D.fatP[i]?+(D.fatP[i]/D.inv[i]).toFixed(2):null),
-      borderColor:"#7A9E7E",backgroundColor:"#7A9E7E18",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#7A9E7E",borderWidth:2}
-  ],{yfmt:v=>v!=null?v.toFixed(1)+"x":""});
+  mk("plan-c3","line",labels,[{data:idxs.map(i=>D.inv[i]>0&&D.fp[i]?+(D.fp[i]/D.inv[i]).toFixed(2):null),borderColor:"#7A9E7E",backgroundColor:"#7A9E7E18",fill:true,tension:.4,pointRadius:4,pointBackgroundColor:"#7A9E7E",borderWidth:2}],{yfmt:v=>v!=null?v.toFixed(1)+"x":""});
 }
 
 const built={};
